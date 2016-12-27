@@ -1,0 +1,252 @@
+#addCrowdFund,#updateCrowdFund {
+    padding: 0 40px 30px;
+    margin: 40px auto;
+    background-color: #FFFFFF;
+    .top-menu {
+        width: 100%;
+        margin-bottom: 30px;
+        ul {
+            font-size: 0;
+            text-align: center;
+            li {
+                width: auto;
+                padding: 0 30px;
+                display: inline-block;
+                border: 1px solid @color-line-gray2;
+                vertical-align: top;
+                font-size: 16px;
+                line-height: 48px;
+                height: 50px;
+                margin-left: -1px;
+                background: #FFFFFF;
+                .border-radius(4px);
+                position: relative;
+                z-index: 1;
+                .iconfont {
+                    margin-right: 5px;
+                    color: #BBBBBB;
+                }
+                &.active {
+                    background: #EEEEEE;
+                    border-color: @color-green-1;
+                    z-index: 2;
+                    .iconfont {
+                        color: @color-green-1;
+                    }
+                }
+                /*&.last-item {
+                    border: 0;
+                    background: none;
+                    .button,
+                    .button2 {
+                        font-size: 16px;
+                        vertical-align: middle;
+                        height: 50px;
+                        width: 110px;
+                    }
+                }*/
+            }
+        }
+    }
+    .main-panel {
+        margin: 0 auto;
+        width: auto;
+        //共用：多个界面共用的样式
+        .input-box {
+            margin-bottom: 0;
+            &>label {
+                width: 100px;
+                font-size: 14px;
+                color: @main-color;
+            }
+            .right-input-container {
+                margin-left: 120px;
+            }
+        }
+        //共用：地址输入框，下拉列表组
+        .address-box {
+            .right-input-container {
+                .select-box {
+                    select {
+                        float: left;
+                        width: 90px;
+                        margin-right: 10px;
+                    }
+                    .input-text {
+                        float: left;
+                        width: 280px;
+                    }
+                    .error-tip {
+                        text-align: right;
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+            }
+        }
+    }
+}
+//项目信息
+#crowd-main-panel1 {
+    //项目类型
+    .project {
+        .select-project-content {
+            padding-bottom: 10px;
+            padding-left: 20px;
+            ul {
+                width: 100%;
+                li {
+                    float: left;
+                    width: 130px;
+                    margin-bottom: 20px;
+                    margin-right: 20px;
+                    div {
+                        position: relative;
+                        text-align: center;
+                        background: #FFFFFF;
+                        font-size: 14px;
+                        width: 100%;
+                        border: 1px solid @color-line-gray2;
+                        line-height: 40px;
+                        height: 40px;
+                        cursor: pointer;
+                        overflow: hidden;
+                        .iconfont {
+                            position: absolute;
+                            bottom: -1px;
+                            right: -1px;
+                            font-size: 24px;
+                            line-height: 24px;
+                            color: @color-green-1;
+                            display: none;
+                        }
+                        &.active {
+                            border-color: @color-green-1;
+                            .iconfont {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+                &:after {
+                    .after();
+                }
+            }
+        }
+    }
+    //创建你的项目
+    .creat-project {
+        padding: 0 200px;
+        //设置封面
+        .idCard-box2 {
+            &>label {
+                top: ( 225px - 20px ) / 2;
+            }
+            .right-input-container {
+                width: 300px;
+                .img {
+                    width: 300px;
+                    height: 225px;
+                }
+            }
+        }
+    }
+}
+#crowd-main-panel2 {
+    ul.repay-list {
+        margin: 0 -35px 0 0;
+        li.repay-item {
+            width: 310px;
+            height: 270px;
+            position: relative;
+            .border-radius(5px);
+            float: left;
+            margin: 0 35px 30px 0;
+            .box-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+            .info-content {
+                padding: 10px 20px;
+                p {
+                    height: 30px;
+                    line-height: 30px;
+                    &>span {
+                        font-size: 14px;
+                        display: block;
+                        float: left;
+                        width: 75px;
+                    }
+                    strong {
+                        width: 195px;
+                        margin-left: 75px;
+                        display: block;
+                        font-size: 14px;
+                        font-weight: 400;
+                        .overflow-ellipsis();
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+                p.two {
+                    height: auto;
+                    strong {
+                        max-height: 60px;
+                        white-space: normal;
+                        width: 195px;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                    }
+                }
+            }
+            .footer {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                cursor: pointer;
+                border-top: 1px dashed #eeeeee;
+                height: 40px;
+                background-color: #EEEEEE;
+                color: rgba(41, 181, 59, 0.98);
+                text-align: center;
+                line-height: 39px;
+                font-size: 14px;
+            }
+        }
+        li.last-item {
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed @color-green-1;
+            padding-top: 85px;
+            .box-shadow(none);
+            .iconfont {
+                font-size: 48px;
+                color: #BBBBBB;
+            }
+            span {
+                font-size: 14px;
+                line-height: 30px;
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+}
+#add_repay_dialog {
+    .alert-dialog-panner {
+        width: 800px;
+        .input-box {
+            &>label {
+                width: 100px;
+                font-size: 14px;
+                color: @main-color;
+            }
+            .right-input-container {
+                margin-left: 120px;
+            }
+        }
+    }
+}

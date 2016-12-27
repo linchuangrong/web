@@ -1,0 +1,122 @@
+<div id="examineDetail" class="container add-active-panel big-page">
+	<h1 class="title">{{examineDetail.title}}<span>（{{examineDetail.reviewInfo.score_title}}）</span></h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<p class="p-title">
+		<span>为确保xx项目评审工作顺利开展，加强对项目的规范化管理，提供对项目的评价依据，现就项目评审特制定项目评分表。希望你能根据自己的实际情况认真填写。</span>
+		<a class="color-red" ng-click="examineDetail.setPanel('1')" ng-show="examineDetail.showPanel=='2'">查看流程指引（通知）</a>
+	</p>
+	<!--流程指引 begin-->
+	<div class="broadcast" ng-show="examineDetail.showPanel=='1'">
+		<p class="text-align-center">{{examineDetail.reviewInfo.review_title}}</p>
+		<div ng-bind-html="examineDetail.reviewInfo.review_content | toHtml"></div>
+		<div class="text-align-center" style="padding: 20px;">
+			<button type="button" class="button padding-left-right-30" ng-click="examineDetail.setPanel('2')">开始评分</button>
+		</div>
+
+	</div>
+	<!--流程指引 end-->
+
+	<!--评分 begin-->
+	<div class="main-panner" ng-show="examineDetail.showPanel=='2'">
+		<div class="examine-people">
+			<div class="input-box not-margin-bottom">
+				<!--<label style="font-size: 14px;color: #333333;">选择评审项目</label>-->
+				<div class="input-container right-input-container width-50">
+					<div class="table-row-input-content" ng-repeat="item in examineDetail.projectArray">
+						<div class="left-input-content">
+							<input class="input-text" type="text" readonly="readonly" value="{{item.project_name}}">
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button not-hover disabled" value="已评分" ng-if="item.status=='1'">
+							<input type="button" class="button not-hover disabled" value="未评分" ng-if="item.status=='0' && item.id != examineDetail.activeProject.id ">
+							<input type="button" class="button" value="评分中" ng-if="item.id == examineDetail.activeProject.id">
+						</div>
+					</div>
+					<!--<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" readonly="readonly" value="2016年度综合项目组织能力评分表A">
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button not-hover" value="评分中">
+						</div>
+					</div>
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" readonly="readonly" value="2016年度综合项目组织能力评分表B">
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button not-hover disabled" value="未评分">
+						</div>
+					</div>
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" readonly="readonly" value="2016年度综合项目组织能力评分表C">
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button not-hover disabled" value="未评分">
+						</div>
+					</div>-->
+				</div>
+			</div>
+			<!--<ul>
+				<li>
+					<label>
+						<input type="checkbox" class="hidden-checkbox"/>
+						<i class="iconfont">&#xe608;</i>
+						<span>申报人1</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<input type="checkbox" class="hidden-checkbox" />
+						<i class="iconfont">&#xe608;</i>
+						<span>申报人2</span>
+					</label>
+				</li>
+				<li>
+					<label>
+						<input type="checkbox" class="hidden-checkbox"/>
+						<i class="iconfont">&#xe608;</i>
+						<span>申报人2</span>
+					</label>
+				</li>
+			</ul>-->
+		</div>
+		<div class="main-content">
+			<div ng-repeat="item1 in examineDetail.designJson">
+				<p class="p-first-title" ng-show="examineDetail.review_template=='3'">
+					<span>{{$index+1}} {{item1.first_title}}</span>
+				</p>
+				<ul class="big-list">
+					<li class="big-item" ng-repeat="item2 in item1.data">
+						<div class="list-title" ng-show="examineDetail.review_template=='2'"><span>{{$index+1}} {{item2.second_title}}</span></div>
+						<div class="list-title" ng-show="examineDetail.review_template=='3'"><span>{{ ($parent.$index+1) + "." + ($index+1) }} {{item2.second_title}}</span></div>
+						<ul class="small-list">
+							<li class="small-item" ng-repeat="item3 in item2.data">
+								<p class="title">
+									<span ng-show="examineDetail.review_template=='3'">{{ ($parent.$parent.$index+1) + "." + ($parent.$index + 1) + "." + ($index + 1) }}</span>
+									<span ng-show="examineDetail.review_template=='2'">{{ ($parent.$index + 1) + "." + ($index + 1) }}</span>
+									<span ng-show="examineDetail.review_template=='1'">{{ ($index + 1) }}</span>
+									<span> {{item3.third_title}}（0-{{item3.score}}分）</span>
+								</p>
+								<div class="alert alert-success" ng-show="!!item3.remark">{{item3.remark}}</div>
+								<div class="people-box">
+									<!--<span class="name">申报人1</span>-->
+									<div class="select-span-box" ng-mouse-over sibling-dom="span" valid-points="examineDetail.designJson[$parent.$parent.$index].data[$parent.$index].data[$index]['valid_points']">
+										<span class="active hidden"></span>
+										<span ng-repeat="item in examineDetail.getArray(item3.score)">{{item}}</span>
+									</div>
+								</div>
+
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="text-align-center" style="padding: 20px;">
+				<button type="button" class="button padding-left-right-20" ng-click="examineDetail.showAlertDialog()">提交评分</button>
+			</div>
+		</div>
+	</div>
+	<!--评分 end-->
+</div>

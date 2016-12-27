@@ -1,0 +1,72 @@
+<div id="personal-moneyAccount">
+	<h1 class="title">收款帐户设置<a class="right" ui-sref="personal.addMoneyAccount">设置支付宝收款帐户</a></h1>
+
+	<!--收款帐户  begin-->
+	<div class="account-panner">
+		<ul>
+			<!--<li>
+				<div class="left-content">真实姓名</div>
+				<div class="center-content">
+					<span>欧阳疯&nbsp;&nbsp;|&nbsp;&nbsp;4****************5</span>
+					<span>已认证</span>
+				</div>
+				<div class="right-content">
+					<a></a>
+				</div>
+			</li>-->
+			<li>
+				<div class="left-content">支付宝</div>
+				<div class="center-content">
+					<span ng-show="!moneyAccount.alipay_user">未设置</span>
+					<span ng-show="!!moneyAccount.alipay_user">{{moneyAccount.alipay_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{moneyAccount.alipay_user}}</span>
+				</div>
+				<!--<div class="right-content">
+					<a>管理</a>
+				</div>-->
+			</li>
+			<li>
+				<div class="left-content">银行卡</div>
+				<div class="center-content">
+					<span>已绑定</span>
+					<span class="color-green" ng-bind="moneyAccount.card_num"></span>
+					<span>张银行卡</span>
+				</div>
+				<div class="right-content">
+					<a ui-sref="personal.addBank">添加</a> |
+					<a ui-sref="personal.myBankCard">管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="left-content">微信</div>
+				<div class="center-content">
+					<span>查看你名下的微信帐户</span>
+				</div>
+				<div class="right-content">
+					<a>添加</a> |
+					<a>管理</a>
+				</div>
+			</li>
+			<!--<li>
+				<div class="left-content">登录密码</div>
+				<div class="center-content">
+					<span>登录收款帐户时需要输入的密码</span>
+				</div>
+				<div class="right-content">
+					<a>设置</a> | 
+					<a>重置</a>
+				</div>
+			</li>-->
+			<!--<li>
+				<div class="left-content">支付密码</div>
+				<div class="center-content">
+					<span>在帐户资金变动，修改帐户信息时需要输入的密码</span>
+				</div>
+				<div class="right-content">
+					<a>设置</a> | 
+					<a>修改</a>
+				</div>
+			</li>-->
+		</ul>
+	</div>
+	<!--收款帐户  end-->
+</div>

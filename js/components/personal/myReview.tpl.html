@@ -1,0 +1,55 @@
+<div id="personal-myReview">
+	<h1 class="title">我的评审</h1>
+	<ul class="review-list">
+		<li class="review-item" ng-repeat="item in myReview.reviewArray" repeat-done="myReview.setCopy()">
+			<div class="input-box not-margin-bottom">
+				<div class="title">评审<span ng-show="true">({{item.score_title || "暂无"}})</span></div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>下单时间：</label>
+				<div class="input-container right-input-container color-orange">{{item.create_time | toTime}}</div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>订单号：</label>
+				<div class="input-container right-input-container">{{item.order_sn}}</div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>表单编号：</label>
+				<div class="input-container right-input-container">
+					<span>{{item.review_sn}}</span>
+					<a class="float-right color-green" ui-sref="payMoney({'id':item.order_sn,'price':item.price,'num':'1','Project_type':'1','url':'personal.myReview'})" ng-show="item.order_status=='0'">待付款</a>
+					<a class="float-right color-green" ui-sref="addExamine{{item.review_template}}({'order_sn':item.order_sn,'review_sn':item.review_sn,'type':'0'})" ng-show="item.order_status=='1' && item.review_status==null">设计表单</a>
+					<a class="float-right color-green" ng-show="item.review_status=='1'">待审核</a>
+					<a class="float-right color-green" ng-show="item.review_status=='2'" ng-click="myReview.open(item.review_sn)">开评</a>
+					<a class="float-right color-green" ng-show="item.review_status=='3'" ng-click="myReview.closeDialog(item.review_sn)">结束评审</a>
+					<a class="float-right color-green" ui-sref="examineDetail({'order_sn':item.order_sn,'review_sn':item.review_sn,'review_template':item.review_template,'type':'0'})" ng-show="item.review_status=='3'">查看表单</a>
+					<a class="float-right color-green" ui-sref="examineResult({'review_id':item.id,'review_sn':item.review_sn,'type':'0'})" ng-show="item.review_status=='4'">查看结果</a>
+				</div>
+			</div>
+			<div class="input-box not-margin-bottom link-box">
+				<label>表单链接：</label>
+				<div class="input-container right-input-container">
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" value="{{myReview.baseUrl}}/#/examineDetail/{{item.order_sn}}/{{item.review_sn}}/{{item.review_template}}/0" ng-show="item.review_status=='3'">
+							<input class="input-text" type="text" value="" ng-hide="item.review_status=='3'">
+						</div>
+						<div class="right-button-content">
+							<button type="button" ng-show="item.review_status=='3'" class="button copy-button" data-clipboard-text="{{myReview.baseUrl}}/#/examineDetail/{{item.order_sn}}/{{item.review_sn}}/{{item.review_template}}/0">复制链接</button>
+							<button type="button" ng-hide="item.review_status=='3'" class="button">复制链接</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<!--分页条 begin-->
+	<div ng-show="myReview.reviewArray.length!='0'">
+		<page-bar page-change="myReview.pageParams.pageChange()" page-count="myReview.pageParams.page_count" current="myReview.pageParams.current" show-page="{{myReview.pageParams.showPage}}"></page-bar>
+	</div>
+	<!--分页条 end-->
+	<div class="not-data ng-hide" ng-show="myReview.reviewArray.length=='0' && myReview.loaded">
+		<i class="iconfont">&#xe627;</i>
+		<div>无记录</div>
+	</div>
+</div>

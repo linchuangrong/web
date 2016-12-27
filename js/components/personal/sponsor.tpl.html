@@ -1,0 +1,108 @@
+<div id="personal-dataSetSponsor">
+	<h1 class="title">主办方</h1>
+	<!--资料设置  begin-->
+	<form name="setSponsorForm" novalidate="novalidate" ng-submit="sponsor.submit()">
+		<div class="dataSet-panner">
+			<div class="left">
+				<p class="title">LOGO</p>
+				<div class="img">
+					<img ng-src="{{sponsor.setSponsorForm.head_image}}" />
+				</div>
+				<div class="button-box text-align-center">
+					<button type="button" id="head_image" class="button" img-upload btn-id="head_image" img-src="sponsor.setSponsorForm.head_image">修改头像</button>
+				</div>
+				<p>支持JPG，JPEG，GIF，PNG，且小于2M</p>
+			</div>
+			<div class="right">
+				<!--主办方单位 begin-->
+				<div class="input-box">
+					<label>主办方单位：</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" disabled="disabled" ng-model="userInfo.identify_bs_name" />
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">单位名称不可超过8个字符</div>
+						</div>
+					</div>
+				</div>
+				<!--主办方单位 end-->
+				<!--联系人 begin-->
+				<div class="input-box">
+					<label>联系人：</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" placeholder="请输入联系人姓名" name="company_user" ng-model="sponsor.setSponsorForm.company_user" required />
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="setSponsorForm.company_user.$dirty && setSponsorForm.company_user.$invalid">联系人不可为空</div>
+						</div>
+					</div>
+				</div>
+				<!--联系人 end-->
+				<!--联系电话 begin-->
+				<div class="input-box">
+					<label>联系电话：</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" placeholder="请输入联系电话" name="company_phone" ng-model="sponsor.setSponsorForm.company_phone" required ng-pattern="/^(1[0-9]{10})$/" />
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="setSponsorForm.company_phone.$dirty && setSponsorForm.company_phone.$invalid">电话号码格式错误</div>
+						</div>
+					</div>
+				</div>
+				<!--联系电话 end-->
+				<!--联系邮箱 begin-->
+				<div class="input-box">
+					<label>联系邮箱：</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" placeholder="请输入电子邮箱" name="company_email" ng-model="sponsor.setSponsorForm.company_email" required ng-pattern="/^((\w)+(\.\w+)*@(\w)+((\.\w+)+))$/">
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="setSponsorForm.company_email.$dirty && setSponsorForm.company_email.$invalid">电子邮箱格式错误</div>
+						</div>
+					</div>
+				</div>
+				<!--联系邮箱 end-->
+				<!--所在地区 begin-->
+				<div class="input-box">
+					<label>公司地址：</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" name="company" ng-model="sponsor.setSponsorForm.company" required />
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="setSponsorForm.company.$dirty && setSponsorForm.company.$invalid">地区不可为空</div>
+						</div>
+					</div>
+				</div>
+				<!--所在地区 end-->
+				<!--安全验证 begin-->
+				<div class="input-box">
+					<label>安全验证：</label>
+					<div class="input-container right-input-container">
+						<div class="table-row-input-content">
+							<div class="left-input-content">
+								<input class="input-text" type="text" placeholder="请输入短信验证码" name="verify_coder" ng-model="sponsor.setSponsorForm.verify_coder" required>
+							</div>
+							<div class="right-button-content">
+								<input type="button" class="button" value="获取验证码" canclick="true" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+							</div>
+						</div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="setSponsorForm.verify_coder.$dirty && setSponsorForm.verify_coder.$invalid">不可为空</div>
+						</div>
+					</div>
+				</div>
+				<!--安全验证 end-->
+				<!--所在地区 begin-->
+				<div class="input-box">
+					<label>主办方简介：</label>
+					<div class="input-container right-input-container">
+						<textarea class="input-text" placeholder="200字以内" name="company_desc" ng-model="sponsor.setSponsorForm.company_desc" ng-maxlength="200"></textarea>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="setSponsorForm.company_desc.$dirty && setSponsorForm.company_desc.$invalid">不可超过200字</div>
+						</div>
+					</div>
+				</div>
+				<!--所在地区 end-->
+				<div class="button-box text-align-center">
+					<input type="submit" class="button" value="&nbsp;保&nbsp;&nbsp;&nbsp;存&nbsp;" ng-disabled="setSponsorForm.$invalid" />
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--资料设置  end-->
+</div>

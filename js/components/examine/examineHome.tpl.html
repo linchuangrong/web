@@ -1,0 +1,89 @@
+<div id="examineHome">
+	<div class="container" style="min-height: 100px;">
+		<ul>
+			<!--1个卡片 begin-->
+			<li>
+				<div class="panel">
+					<div class="panel-title">
+						<div class="image">
+							<img ng-src="{{public.imgUrl}}/examine/examineHome01.png" />
+						</div>
+						<div class="text">
+							<p class="one"><strong>服务系统</strong><span>提供评审/评估服务</span></p>
+							<p class="two">提供评审评估服务专业机构专业机构</p>
+						</div>
+					</div>
+					<div class="panel-content">
+						<div class="img-box">
+							<div class="image-item image-item-1" ng-class="{'active':examineHome.show1}" ng-mouseover="examineHome.show1=true"></div>
+							<div class="image-item image-item-2" ng-class="{'active':!examineHome.show1}" ng-mouseover="examineHome.show1=false"></div>
+						</div>
+						<div class="button-box" ng-class="{'active-2':!examineHome.show1}">
+							<div class="big-button big-button-1" ui-sref="companyList">机构名录</div>
+							<div class="big-button big-button-1" ui-sref="joinList">加入名录</div>
+						</div>
+
+					</div>
+				</div>
+			</li>
+			<!--1个卡片 end-->
+			<!--1个卡片 begin-->
+			<li>
+				<div class="panel">
+					<div class="panel-title">
+						<div class="image">
+							<img ng-src="{{public.imgUrl}}/examine/examineHome02.png" />
+						</div>
+						<div class="text">
+							<p class="one"><strong>预约系统</strong><span>预约评审/评估功能</span></p>
+							<p class="two">提供评审评估服务专业机构专业机构</p>
+						</div>
+					</div>
+					<div class="panel-content">
+						<div class="img-box">
+							<div class="image-item image-item-3" ng-class="{'active':examineHome.show2}" ng-mouseover="examineHome.show2=true"></div>
+							<div class="image-item image-item-4" ng-class="{'active':!examineHome.show2}" ng-mouseover="examineHome.show2=false"></div>
+						</div>
+						<div class="button-box" ng-class="{'active-2':!examineHome.show2}">
+							<div class="big-button big-button-2" ui-sref="order({'type':'0'})">预约评审</div>
+							<div class="big-button big-button-2" ui-sref="order({'type':'1'})">预约评估</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<!--1个卡片 end-->
+			<!--1个卡片 begin-->
+			<li>
+				<div class="panel">
+					<div class="panel-title">
+						<div class="image">
+							<img ng-src="{{public.imgUrl}}/examine/examineHome03.png" />
+						</div>
+						<div class="text">
+							<p class="one"><strong>开评系统</strong><span>提供评审/评估服务</span></p>
+							<p class="two">提供评审评估服务专业机构专业机构</p>
+						</div>
+					</div>
+					<div class="panel-content">
+						<div class="img-box">
+							<div class="image-item image-item-5" ng-class="{'active':examineHome.show3}" ng-mouseover="examineHome.show3=true"></div>
+							<div class="image-item image-item-6" ng-class="{'active':!examineHome.show3}" ng-mouseover="examineHome.show3=false"></div>
+						</div>
+						<div class="button-box" ng-class="{'active-2':!examineHome.show3}">
+							<div class="big-button big-button-3" ui-sref="selectExamine">设计表单</div>
+							<div class="big-button big-button-3" ui-sref="personal.myReview">生成链接</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<!--1个卡片 end-->
+			<!--1个卡片 begin-->
+			<li>
+				<div class="panel last">
+					敬请期待
+				</div>
+			</li>
+			<!--1个卡片 end-->
+		</ul>
+	</div>
+</div>

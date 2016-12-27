@@ -1,0 +1,95 @@
+<div id="personal-myEstimate">
+	<h1 class="title">我的评估</h1>
+	<ul class="review-list">
+		<li class="review-item" ng-repeat="item in myEstimate.estimateArray" repeat-done="myEstimate.setCopy()">
+			<div class="input-box not-margin-bottom">
+				<div class="title">评估<span ng-show="true">({{item.score_title || "暂无"}})</span></div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>下单时间：</label>
+				<div class="input-container right-input-container color-orange">{{item.create_time | toTime}}</div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>订单号：</label>
+				<div class="input-container right-input-container">{{item.order_sn}}</div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>表单编号：</label>
+				<div class="input-container right-input-container">
+					<span>{{item.review_sn}}</span>
+					<a class="float-right color-green" ui-sref="payMoney({'id':item.order_sn,'price':item.price,'num':'1','Project_type':'1','url':'personal.myEstimate'})" ng-show="item.order_status=='0'">待付款</a>
+					<a class="float-right color-green" ui-sref="addExamine{{item.review_template}}({'order_sn':item.order_sn,'review_sn':item.review_sn,'type':'1'})" ng-show="item.order_status=='1' && item.review_status==null">设计表单</a>
+					<a class="float-right color-green" ng-show="item.review_status=='1'">待审核</a>
+					<a class="float-right color-green" ng-show="item.review_status=='2'" ng-click="myEstimate.open(item.review_sn)">开评</a>
+					<a class="float-right color-green" ng-show="item.review_status=='3'" ng-click="myEstimate.closeDialog(item.review_sn)">结束评审</a>
+					<a class="float-right color-green" ui-sref="examineDetail({'order_sn':item.order_sn,'review_sn':item.review_sn,'review_template':item.review_template,'type':'1'})" ng-show="item.review_status=='3'">查看表单</a>
+					<a class="float-right color-green" ng-show="item.review_status=='4'" ng-click="myEstimate.showDialog(item.review_sn)">申请报告</a>
+					<a class="float-right color-green" ui-sref="examineResult({'review_id':item.id,'review_sn':item.review_sn,'type':'1'})" ng-show="item.review_status=='4' || item.review_status=='5' || item.review_status=='6'">查看结果</a>
+					<a class="float-right color-green" ui-sref="editReport({'review_sn':item.review_sn,'report_type':item.report_type})" ng-show="item.review_status=='5'">编辑报告</a>
+					<a class="float-right color-green" ng-show="item.review_status=='6'" target="_blank" href="/phalapi/public/yiapp/?service=ToWord.getWordDocument&user_id={{userInfo.id}}&review_sn={{item.review_sn}}">导出报告</a>
+
+				</div>
+			</div>
+			<div class="input-box not-margin-bottom link-box">
+				<label>表单链接：</label>
+				<div class="input-container right-input-container">
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" value="{{myEstimate.baseUrl}}/#/examineDetail/{{item.order_sn}}/{{item.review_sn}}/{{item.review_template}}/1" ng-show="item.review_status=='3'">
+							<input class="input-text" type="text" value="" ng-hide="item.review_status=='3'">
+						</div>
+						<div class="right-button-content">
+							<button type="button" ng-show="item.review_status=='3'" class="button copy-button" data-clipboard-text="{{myEstimate.baseUrl}}/#/examineDetail/{{item.order_sn}}/{{item.review_sn}}/{{item.review_template}}/1">复制链接</button>
+							<button type="button" ng-hide="item.review_status=='3'" class="button">复制链接</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<!--分页条 begin-->
+	<div ng-show="myEstimate.estimateArray.length!='0'">
+		<page-bar page-change="myEstimate.pageParams.pageChange()" page-count="myEstimate.pageParams.page_count" current="myEstimate.pageParams.current" show-page="{{myEstimate.pageParams.showPage}}"></page-bar>
+	</div>
+	<!--分页条 end-->
+	<div class="not-data ng-hide" ng-show="myEstimate.estimateArray.length=='0' && myEstimate.loaded">
+		<i class="iconfont">&#xe627;</i>
+		<div>无记录</div>
+	</div>
+
+	<!--弹框 begin-->
+	<div class="mask-div" ng-class="{'showDom':myEstimate.editReportDialog,'hideDom':!myEstimate.editReportDialog}"></div>
+	<div class="alert-dialog hideDom" id="editReportDialog" ng-class="{'showDom':myEstimate.editReportDialog,'hideDom':!myEstimate.editReportDialog}">
+		<div class="alert-dialog-panner">
+			<div class="dialog-title">
+				<span>选择报告类型</span>
+				<i class="iconfont" ng-click="myEstimate.alertDialogCancel()">&#xe616;</i>
+			</div>
+			<div class="dialog-content">
+				<div class="input-box not-margin-bottom">
+					<div class="input-container right-input-container" style="margin-left: 0;">
+						<div class="radio-box">
+							<label>
+								<input class="hidden-radio" type="radio" name="reportType" ng-model="myEstimate.selectReportType" value="0" ng-click="myEstimate.getReportPrice('0')">
+								<span class="circle"><span></span></span>电子报告</label>
+							<label>
+								<input class="hidden-radio" type="radio" name="reportType" ng-model="myEstimate.selectReportType" value="1" ng-click="myEstimate.getReportPrice('1')">
+								<span class="circle"><span></span></span>纸质报告</label>
+						</div>
+					</div>
+				</div>
+				<div class="input-box not-margin-bottom">
+					<div>
+						<label>价格：</label>
+						<strong class="color-red">{{myEstimate.reportPrice}} 元</strong>
+					</div>
+				</div>
+			</div>
+			<div class="dialog-footer has-two-button">
+				<button type="button" class="button button-36 padding-left-right-20" ng-click="myEstimate.alertDialogConfirm()">确定</button>
+				<button type="button" class="button2 button-36 padding-left-right-20" ng-click="myEstimate.alertDialogCancel()">取消</button>
+			</div>
+		</div>
+	</div>
+	<!--弹框 end-->
+</div>

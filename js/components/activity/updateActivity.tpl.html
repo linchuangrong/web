@@ -1,0 +1,379 @@
+<div id="updateActivity" class="container add-active-panel big-page">
+	<h1 class="title">编辑活动<span>（以下所有信息均为必填项）</span></h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+
+	<form name="submitForm" novalidate="novalidate" ng-submit="updateActivity.addActivitySubmit()">
+		<div class="main-panner">
+			<!--基本信息 begin-->
+			<div class="base-data">
+				<h2 class="has-left-line-title"><span>基本信息填写</span></h2>
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>活动标题</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="输入活动标题" name="title" ng-model="updateActivity.submitForm.title" required ng-maxlength="30" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="submitForm.title.$dirty && submitForm.title.$invalid">活动标题不可为空且不超过30个字</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>活动人数</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="不可小于1" name="people" ng-model="updateActivity.submitForm.people" required limit-size min-size="1" integer />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="submitForm.people.$dirty && submitForm.people.$invalid">请输入大于1的正整数</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="clearfix"></div>
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>活动时间</label>
+						<div class="input-container right-input-container">
+							<input id="startTime" class="input-text" type="text" placeholder="开始时间" ng-model="updateActivity.submitForm.startTime" ng-focus="updateActivity.setStartTime()" readonly="readonly" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">不可为空</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>结束时间</label>
+						<div class="input-container right-input-container">
+							<input id="endTime" class="input-text" type="text" placeholder="结束时间" ng-model="updateActivity.submitForm.endTime" ng-focus="updateActivity.setEndTime()" readonly="readonly" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">不可为空</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="clearfix"></div>
+				<!---->
+				<div class="input-box address-box">
+					<label>项目地点</label>
+					<div class="input-container right-input-container">
+						<div class="select-box">
+							<select class="province" ng-model="updateActivity.submitForm.address.province" ng-options="item.name as item.name for item in updateActivity.provinceArray" ng-change="updateActivity.getCityList(updateActivity.submitForm.address.province,'cityArray')">
+								<option value="">请选择</option>
+							</select>
+							<select class="city" ng-model="updateActivity.submitForm.address.city" ng-options="item.name as item.name for item in updateActivity.cityArray">
+								<option value="">请选择</option>
+							</select>
+							<input type="text" class="input-text" placeholder="详细地址，如：XX区XX街道XX号" name="location" ng-model="updateActivity.submitForm.address.location" required>
+						</div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="submitForm.location.$dirty && submitForm.location.$invalid">请填写地址</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="width-33">
+					<div class="input-box">
+						<label>活动类别</label>
+						<div class="input-container right-input-container">
+							<div class="select-box">
+								<select class="province" ng-model="updateActivity.submitForm.cat_id" ng-options="item.name as item.name for item in updateActivity.cat_id_array">
+								</select>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请选择活动类别</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="width-33">
+					<div class="input-box">
+						<label>活动形式</label>
+						<div class="input-container right-input-container">
+							<div class="select-box">
+								<select class="province" ng-model="updateActivity.submitForm.cat_way" ng-options="item.name as item.name for item in updateActivity.cat_way_array">
+								</select>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请选择活动形式</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<!--活动标签 begin-->
+				<div class="input-box" id="tags">
+					<label>活动标签</label>
+					<div class="input-container right-input-container">
+						<ul style="min-height: 40px;">
+							<li ng-repeat="item in updateActivity.cat_tag_array" ng-click="item.active=!item.active" ng-class="{'active':item.active}" data-id="{{item.id}}" data-name="{{item.name}}">{{item.name}}</li>
+						</ul>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">请选择活动形式</div>
+						</div>
+					</div>
+				</div>
+				<!--活动标签 end-->
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>活动简介</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="请输入活动简介描述" name="brief" ng-model="updateActivity.submitForm.brief" required ng-minlength="10" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="submitForm.brief.$dirty && submitForm.brief.$invalid">请输入至少10个文字的简介描述</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<!---->
+				<div class="input-box edit-box">
+					<label style="line-height: 30px;">活动详情</label>
+					<div class="input-container right-input-container">
+						<div id="editText" contenteditable="true" ng-model="updateActivity.submitForm.description" style="height: 600px;"></div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">描述字数过少</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="select-ticket">
+					<div class="input-box">
+						<label><span>选择票种</span></label>
+						<div class="input-container right-input-container">
+							<div class="ticket-box">
+								<div class="tag">免费票</div>
+								<button class="button" type="button" ng-click="updateActivity.showAddFreeDialog()" ng-show="updateActivity.freeTicketArray.length==0"><i class="iconfont">&#xe635;</i>添加</button>
+								<ul ng-show="updateActivity.freeTicketArray.length>0">
+									<li ng-repeat="item in updateActivity.freeTicketArray">
+										<div class="active" tooltip tooltip-data="<p>免费票数量：{{item.ticket_num}}</p>"><span>免费票</span><i class="iconfont">&#xe61c;</i></div>
+										<i class="iconfont delete" ng-click="updateActivity.removeFreeTicket()">&#xe63a;</i>
+									</li>
+								</ul>
+							</div>
+							<div class="ticket-box">
+								<div class="tag">收费票</div>
+								<button class="button" type="button" ng-click="updateActivity.showAddTicketDialog()"><i class="iconfont">&#xe635;</i>添加</button>
+								<ul>
+									<li ng-repeat="item in updateActivity.chargeTicketArray track by item.id">
+										<div class="active" tooltip tooltip-data="<p>票价类型：{{item.ticket_name}}</p><p>报名截止时间：{{item.ticket_time | toTime }}</p><p>单价：{{item.ticket_price}}</p><p>数量：{{item.ticket_num}}</p><p>费用说明：{{item.ticket_decription}}</p>">￥<span>{{item.ticket_price}}</span><i class="iconfont">&#xe61c;</i></div>
+										<i class="iconfont delete" ng-click="updateActivity.removeChargeTicket($index)">&#xe63a;</i>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="mask-div hideDom" id="add_ticket_mask" ng-class="{'showDom':updateActivity.add_ticket_mask,'hideDom':!updateActivity.add_ticket_mask}"></div>
+				<!--添加免费票 begin-->
+				<div class="alert-dialog hideDom" id="add_free_dialog" ng-class="{'showDom':updateActivity.add_free_dialog,'hideDom':!updateActivity.add_free_dialog}">
+					<div class="alert-dialog-panner">
+						<div class="dialog-title">
+							<span>添加票种</span>
+							<i class="iconfont" ng-click="updateActivity.addFreeDialogCancel()">&#xe616;</i>
+						</div>
+						<div class="dialog-content">
+							<div class="input-box">
+								<label>免费票数量</label>
+								<div class="input-container right-input-container">
+									<div class="table-row-input-content">
+										<div class="left-input-content">
+											<input class="input-text" type="number" ng-model="updateActivity.freeTicket_num">
+										</div>
+										<div class="right-button-content">
+											<input type="button" class="button not-hover" value="张">
+										</div>
+									</div>
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">请输入数量</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="dialog-footer text-align-right">
+							<button type="button" class="button button-36 padding-left-right-20" ng-click="updateActivity.addFreeDialogConfirm()">确定</button>
+							<button type="button" class="button2 button-36 padding-left-right-20" ng-click="updateActivity.addFreeDialogCancel()">取消</button>
+						</div>
+					</div>
+				</div>
+				<!--添加免费票 begin-->
+				<!--添加收费票 begin-->
+				<div class="alert-dialog hideDom" id="add_ticket_dialog" ng-class="{'showDom':updateActivity.add_ticket_dialog,'hideDom':!updateActivity.add_ticket_dialog}">
+					<div class="alert-dialog-panner">
+						<div class="dialog-title">
+							<span>添加票种</span>
+							<i class="iconfont" ng-click="updateActivity.addTicketDialogCancel()">&#xe616;</i>
+						</div>
+						<div class="dialog-content">
+							<div class="input-box">
+								<label>票价类型</label>
+								<div class="input-container right-input-container">
+									<input type="text" class="input-text" placeholder="例如普通票、VIP" ng-model="updateActivity.chargeTicketForm.ticket_name" />
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">不可为空</div>
+									</div>
+								</div>
+							</div>
+							<div class="input-box">
+								<label>报名截止时间</label>
+								<div class="input-container right-input-container">
+									<input type="text" class="input-text" id="ticketEndTime" ng-model="updateActivity.chargeTicketForm.ticket_time" ng-focus="updateActivity.setTicketEndTime()" readonly="readonly" />
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">不可为空</div>
+									</div>
+								</div>
+							</div>
+							<div class="input-box">
+								<label>单价</label>
+								<div class="input-container right-input-container">
+									<div class="table-row-input-content">
+										<div class="left-input-content">
+											<input class="input-text" type="number" ng-model="updateActivity.chargeTicketForm.ticket_price">
+										</div>
+										<div class="right-button-content">
+											<input type="button" class="button not-hover" value="元 / 张">
+										</div>
+									</div>
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">请输入单价</div>
+									</div>
+								</div>
+							</div>
+							<div class="input-box">
+								<label>收费票数量</label>
+								<div class="input-container right-input-container">
+									<div class="table-row-input-content">
+										<div class="left-input-content">
+											<input class="input-text" type="number" ng-model="updateActivity.chargeTicketForm.ticket_num">
+										</div>
+										<div class="right-button-content">
+											<input type="button" class="button not-hover" value="张">
+										</div>
+									</div>
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">请输入数量</div>
+									</div>
+								</div>
+							</div>
+							<!--<div class="input-box">
+								<label>套票设置</label>
+								<div class="input-container right-input-container">
+									<div class="select-box">
+										<select class="province" ng-model="updateActivity.chargeTicketForm.ticket_set" ng-options="item.id as item.name for item in updateActivity.chargeTicketSetArray">
+										</select>
+									</div>
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">&nbsp;</div>
+									</div>
+								</div>
+							</div>-->
+							<div class="input-box">
+								<label>费用说明</label>
+								<div class="input-container right-input-container">
+									<textarea class="input-text" placeholder="如：费用提供的服务，单人使用等......" ng-model="updateActivity.chargeTicketForm.ticket_decription"></textarea>
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="dialog-footer text-align-right">
+							<button type="button" class="button button-36 padding-left-right-20" ng-click="updateActivity.addTicketDialogConfirm()">确定</button>
+							<button type="button" class="button2 button-36 padding-left-right-20" ng-click="updateActivity.addTicketDialogCancel()">取消</button>
+						</div>
+					</div>
+				</div>
+				<!--添加收费票 end-->
+				<!---->
+				<!--<div class="width-100">
+					<div class="input-box" id="joinForm">
+						<label>报名表设置</label>
+						<div class="input-container right-input-container">
+							<div class="color-red">（选中即设置为报名必填项）</div>
+							<ul style="min-height: 40px;">
+								<li ng-repeat="item in updateActivity.cat_tag_array" ng-click="item.active=!item.active" ng-class="{'active':item.active}" data-id="{{item.id}}">{{item.name}}</li>
+							</ul>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请选择活动形式</div>
+							</div>
+						</div>
+					</div>
+				</div>-->
+				<div class="clearfix"></div>
+				<!---->
+				<div class="width-50">
+					<div class="input-box idCard-box idCard-box2">
+						<label>上传海报</label>
+						<div class="input-container right-input-container">
+							<div class="img">
+								<img ng-src="{{updateActivity.submitForm.poster_img}}" ng-show="!!updateActivity.submitForm.poster_img">
+								<span class="upload-tips">支持JPEG，JPG，PNG，GIF，BMP，建议图片大小<span class="color-red">1080*640</span>且小于2M</span>
+							</div>
+							<button type="button" id="poster_img_button" class="button padding-left-right-30" img-upload btn-id="poster_img_button" img-src="updateActivity.submitForm.poster_img">上传图片</button>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="submitForm.poster_img.$invalid">请上传图片</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<!--基本信息 end-->
+
+			<div class="sponsor-info">
+				<h2 class="has-left-line-title"><span>主办方信息填写</span></h2>
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" placeholder="验证码" name="verify_coder" ng-model="updateActivity.submitForm.verify_coder" required ng-pattern="/^([0-9]){4}$/">
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="true" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="submitForm.verify_coder.$dirty && submitForm.verify_coder.$invalid">验证码为4位数字</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="width-50">
+					<div class="input-box">
+						<label>活动网址</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="http://" ng-model="updateActivity.submitForm.activ_index" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">不可为空</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="clearfix"></div>
+
+			</div>
+		</div>
+		<p class="agree" onselectstart="return false;"><i class="iconfont" ng-class="{'active':updateActivity.agree}" ng-click="updateActivity.agree=!updateActivity.agree">&#xe608;</i>&nbsp;同意
+			<a class="color-blue">《活动服务条款》</a>
+		</p>
+		<div class="bottom-button">
+			<input class="button padding-left-right-30" type="submit" ng-class="{'disabled': (!updateActivity.agree || submitForm.$invalid || (updateActivity.submitFlag==false))}" value="发&nbsp;&nbsp;布" ng-disabled="!updateActivity.agree || submitForm.$invalid || (updateActivity.submitFlag==false)">
+			<!--发布按钮可点击的条件：1.同意规则；2.表单校验通过；3.不属于连续点击-->
+			<button class="button2 padding-left-right-30" type="button">存为草稿</button>
+		</div>
+	</form>
+</div>

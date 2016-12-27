@@ -1,0 +1,174 @@
+#examineList {
+    padding-bottom: 50px;
+    .examineList-title {
+        margin: 30px 0 0;
+        padding-bottom: 10px;
+    }
+    .examineList-panner {
+        width: 100%;
+        margin-right: 50px;
+        min-height: 500px;
+        //选项模块
+        .select-panner {
+            width: 100%;
+            height: auto;
+            padding: 20px 20px 10px;
+            margin-bottom: 20px;
+            background: #FFFFFF;
+            .select-panner-item {
+                padding-bottom: 10px;
+                span.select-list-left-title {
+                    color: #666666 !important;
+                    float: left;
+                    line-height: 24px;
+                    font-size: 14px;
+                }
+                ul.select-list {
+                    .select-item {
+                        .not-select();
+                        float: left;
+                        display: block;
+                        line-height: 24px;
+                        font-size: 12px;
+                        margin: 0 4px;
+                        a {
+                            display: block;
+                            padding: 0 10px;
+                            height: 100%;
+                            color: #888888;
+                            .border-radius(3px);
+                            overflow: hidden;
+                            .transition(all .3s);
+                            &:hover,
+                            &.active {
+                                color: #FFFFFF;
+                                background-color: @color-green-1;
+                            }
+                        }
+                        .jiantou {
+                            font-size: 14px;
+                            top: 1px;
+                        }
+                        .rotate {
+                            .transform(rotate(180deg));
+                            top: 0;
+                        }
+                        &.select-date {
+                            position: relative;
+                            input {
+                                position: absolute;
+                                left: 0;
+                                top: 5px;
+                                //top: 100%;
+                                height: 100%;
+                                z-index: -1;
+                            }
+                        }
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+            }
+        }
+        //列表模块
+        .examineList-list-panner {
+            width: 100%;
+            .examineList-ul {
+                width: 100%;
+                margin-bottom: 20px;
+                li {
+                    position: relative;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    background-color: #FFFFFF;
+                    border-bottom: 1px solid @color-line-gray;
+                    padding: 20px;
+                    line-height: 30px;
+                    color: #888888;
+                    .transition(all .3s);
+                    &.going:before {
+                        content: ' ';
+                        position: absolute;
+                        left: 5px;
+                        top: 5px;
+                        width: 55px;
+                        height: 55px;
+                        background-image: url("../img/examine-going.png");
+                        background-repeat: no-repeat;
+                    }
+                    &.stop:before {
+                        content: ' ';
+                        position: absolute;
+                        left: 5px;
+                        top: 5px;
+                        width: 55px;
+                        height: 55px;
+                        background-image: url("../img/examine-stop.png");
+                        background-repeat: no-repeat;
+                    }
+                    &:first-child {
+                        border-top: 1px solid @color-line-gray;
+                    }
+                    &.active,
+                    &:hover {
+                        background-color: #EFEFEF;
+                    }
+                    .left-img {
+                        float: left;
+                        width: 60px;
+                        height: 60px;
+                        margin-right: 20px;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                        }
+                    }
+                    .right-content {
+                        margin-left: 80px;
+                        & > div {
+                            float: left;
+                        }
+                        p {
+                            height: 30px;
+                            overflow: hidden;
+                        }
+                        p.title {
+                            color: @color-green-1;
+                            font-size: 14px;
+                        }
+                        p.desc {
+                            width: 80%;
+                            .overflow-ellipsis();
+                            font-size: 12px;
+                        }
+                        p.username {
+                            font-size: 12px;
+                            .iconfont {
+                                margin-right: 5px;
+                            }
+                        }
+                        p.time {
+                            font-size: 12px;
+                            .iconfont {
+                                margin-right: 5px;
+                            }
+                        }
+                        &:after {
+                            font-size: 12px;
+                            .after();
+                        }
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+            }
+        }
+    }
+    &:after {
+        .after();
+    }
+}

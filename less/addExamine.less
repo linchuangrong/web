@@ -1,0 +1,160 @@
+#addExamine {
+    h2.has-left-line-title {
+        margin-bottom: 20px;
+    }
+    .input-box {
+        margin-bottom: 20px;
+        font-size: 14px;
+        &>label {
+            width: 80px;
+        }
+        .right-input-container {
+            margin-left: 90px;
+        }
+    }
+    //基本信息
+    .edit-database-panel {
+        .people-box {
+            .input-text{
+                margin-bottom: 5px;
+                margin-right: 5px;
+            }
+            .iconfont {
+                width: 40px;
+                display: inline-block;
+                font-size: 20px;
+                line-height: 40px;
+                color: #999;
+                text-align: center;
+                cursor: pointer;
+                vertical-align: top;
+                .transition(color .3s);
+                .not-select();
+                &:hover {
+                    color: @color-green-1;
+                }
+            }
+        }
+    }
+    //动态表单
+    .add-form-panel {
+        position: relative;
+        //左侧表单
+        .left-float-content {
+            padding-bottom: 20px;
+            float: left;
+            width: 700px;
+        }
+        //右侧浮动框
+        .right-float-content {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            padding-bottom: 20px;
+            width: 260px;
+            .alert{
+                line-height: 30px;
+                font-size: 14px;
+                .iconfont{
+                    float: right;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    //公用的表单格式
+    ul.table-list {
+        padding-top: 0;
+        li.table-item {
+            background-color: #FFFFFF;
+            overflow: hidden;
+            .border-radius(6px);
+            width: 100%;
+            .content-panel {
+                padding: 20px 20px 10px;
+                width: 100%;
+            }
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+    //彩色面板
+    .panel-box {
+        border: 1px solid #bce8f1;
+        overflow: hidden;
+        .border-radius(5px);
+        & > .biaoti {
+            height: 40px;
+            line-height: 40px;
+            width: 100%;
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-bottom: 1px solid #d6e9c6;
+            padding-left: 20px;
+            font-size: 14px;
+            padding-right: 10px;
+            .iconfont {
+                display: inline-block;
+                float: right;
+                width: 30px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 18px;
+                position: relative;
+                cursor: pointer;
+                .opacity(.4);
+                .transition(all .3s);
+                &:hover {
+                    .opacity(1);
+                }
+                &.add {
+                    font-size: 20px;
+                }
+                &.delete {
+                    font-size: 16px;
+                }
+                &.top {}
+                &.bottom {}
+                &.pen{
+                    top: -1px;
+                }
+            }
+        }
+        & > .panel-content {
+            padding: 20px;
+            .input-box:last-child {
+                margin-bottom: 0;
+            }
+        }
+        &.panel-box-green {
+            border-color: #d6e9c6;
+            & > .biaoti {
+                color: #3c763d;
+                background-color: #dff0d8;
+                border-color: #d6e9c6;
+            }
+        }
+        &.panel-box-blue {
+            border-color: #bce8f1;
+            & > .biaoti {
+                color: #31708f;
+                background-color: #d9edf7;
+                border-color: #bce8f1;
+            }
+        }
+        &.panel-box-orange {
+            border-color: #faebcc;
+            & > .biaoti {
+                color: #8a6d3b;
+                background-color: #faebcc;
+                border-color: #faebcc;
+            }
+        }
+    }
+    .panel-box + .panel-box{
+        margin-top: 20px;
+    }
+}

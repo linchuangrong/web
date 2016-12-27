@@ -1,0 +1,153 @@
+#payMoney {
+    padding: 10px 30px 30px;
+    margin: 40px auto;
+    background-color: #FFFFFF;
+    min-height: 200px;
+    .order-info {
+        line-height: 40px;
+        border-bottom: 1px dashed @color-line-gray2;
+        .message {
+            font-size: 14px;
+            font-weight: bold;
+            float: left;
+        }
+        .money {
+            font-size: 14px;
+            float: left;
+            text-align: right;
+            strong {
+                margin: 0 5px;
+                font-size: 18px;
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+    .pay-type-panel {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        //进度条
+        .order-status-box {
+            padding-bottom: 30px;
+            ul {
+                width: 100%;
+                li {
+                    width: 50%;
+                    padding: 0 2px;
+                    float: left;
+                    .circle-line {
+                        position: relative;
+                        text-align: center;
+                        width: 100%;
+                        height: 20px;
+                        .circle {
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            line-height: 20px;
+                            .border-radius(50%);
+                            overflow: hidden;
+                            background-color: #CCCCCC;
+                            color: #FFFFFF;
+                            text-align: center;
+                            position: relative;
+                            z-index: 2;
+                        }
+                        &:before {
+                            content: ' ';
+                            width: 100%;
+                            position: absolute;
+                            z-index: 1;
+                            height: 5px;
+                            left: 0;
+                            top: 8px;
+                            background-color: #CCCCCC;
+                        }
+                    }
+                    p {
+                        color: #CCCCCC;
+                        line-height: 40px;
+                        text-align: center;
+                        font-size: 14px;
+                    }
+                }
+                li.active {
+                    .circle-line {
+                        .circle {
+                            background-color: @color-green-1;
+                        }
+                        &:before {
+                            background-color: @color-green-1;
+                        }
+                    }
+                    p {
+                        color: @color-green-1;
+                    }
+                }
+                &:after {
+                    .after();
+                }
+            }
+        }
+        &>ul {
+            padding-top: 20px;
+            li {
+                width: 300px;
+                margin: 0 20px;
+                float: left;
+                text-align: center;
+                cursor: pointer;
+                div {
+                    padding: 10px;
+                    border: 5px solid #FFFFFF;
+                    img {
+                        vertical-align: middle;
+                        height: 60px;
+                    }
+                    &.active {
+                        border: 5px solid @color-green-1;
+                    }
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+    .code-img-panel {
+        padding-top: 40px;
+        text-align: center;
+        p {
+            font-size: 14px;
+            line-height: 30px;
+        }
+    }
+    //支付成功
+    .order-success {
+        min-height: 100px;
+        //background-color: #fbfbfb;
+        padding: 50px 0;
+        text-align: center;
+        p {
+            font-size: 18px;
+            line-height: 50px;
+            text-align: center;
+            .iconfont {
+                display: inline-block;
+                font-size: 24px;
+                color: @color-green-1;
+                margin-right: 10px;
+                position: relative;
+                top: 1px;
+            }
+            label {
+                vertical-align: middle;
+            }
+        }
+        h5 {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    }
+}

@@ -1,0 +1,83 @@
+<div id="personal-addMoneyAccount">
+	<h1 class="title">
+		<a class="left" ui-sref="personal.moneyAccount"><i class="iconfont">&#xe61a;</i>返回</a>
+		<span>添加支付宝帐号</span>
+		<a class="right" target="_blank" href="https://www.alipay.com/">没有支付宝帐户？点我新增支付宝收款帐户</a>
+	</h1>
+
+	<!--收款帐户  begin-->
+	<form name="setAliPayForm" novalidate="novalidate" ng-submit="addMoneyAccount.setAliPaySubmit()">
+		<div class="addMoneyAccount-panner">
+			<!--支付宝帐号 begin-->
+			<div class="input-box">
+				<label><span class="color-red">*</span>支付宝帐号</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="支付宝帐号" name="alipay_user" ng-model="addMoneyAccount.setAliPayForm.alipay_user" required />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="setAliPayForm.alipay_user.$dirty && setAliPayForm.alipay_user.$invalid">不可以空</div>
+					</div>
+				</div>
+			</div>
+			<!--支付宝帐号 end-->
+			<!--支付宝帐号 begin-->
+			<div class="input-box">
+				<label><span class="color-red">*</span>再次输入帐号</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="支付宝帐号" name="rep_alipay_user" ng-model="addMoneyAccount.setAliPayForm.rep_alipay_user" required />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="setAliPayForm.rep_alipay_user.$dirty && (setAliPayForm.rep_alipay_user.$invalid || addMoneyAccount.setAliPayForm.alipay_user!=addMoneyAccount.setAliPayForm.rep_alipay_user)">两次帐号不一致</div>
+					</div>
+				</div>
+			</div>
+			<!--支付宝帐号 end-->
+			<!--真实姓名 begin-->
+			<div class="input-box">
+				<label><span class="color-red">*</span>真实姓名</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="支付宝绑定的真实用户姓名" name="real_name" ng-model="addMoneyAccount.setAliPayForm.real_name" required />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="setAliPayForm.real_name.$dirty && setAliPayForm.real_name.$invalid">不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!--真实姓名 end-->
+			<!--身份证照片 begin-->
+			<!--<div class="input-box idCard-box">
+			<label><span class="color-red">*</span>身份证或公<br>司营业登记证</label>
+			<div class="input-container right-input-container">
+				<input class="hidden" type="file" id="file" name="file" />
+				<div class="img">
+					<img src="./img/example-slide-4.jpg" />
+				</div>
+				<button type="button" class="button" ng-click="public.triggerClick('file')">选择文件</button>
+				<div class="error-tip">
+					<div class="alert alert-danger ng-hide">请上传图片</div>
+				</div>
+			</div>
+		</div>-->
+			<!--身份证照片 end-->
+			<!--安全验证 begin-->
+			<div class="input-box">
+				<label><span class="color-red">*</span>安全验证</label>
+				<div class="input-container right-input-container">
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" placeholder="请输入短信验证码" name="verify_coder" ng-model="addMoneyAccount.setAliPayForm.verify_coder" required>
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button" value="获取验证码" canclick="true" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+						</div>
+					</div>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="setAliPayForm.verify_coder.$dirty && setAliPayForm.verify_coder.$invalid">不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!--安全验证 end-->
+			<div class="button-box text-align-center">
+				<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="setAliPayForm.$invalid" value="保存">
+			</div>
+		</div>
+	</form>
+	<!--收款帐户  end-->
+</div>

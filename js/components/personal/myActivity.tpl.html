@@ -1,0 +1,52 @@
+<div id="personal-myActivity">
+	<h1 class="title">我的活动</h1>
+	<div class="tab-menu">
+		<ul>
+			<li class="active">已经发布</li>
+			<!--<li>已结束</li>-->
+		</ul>
+	</div>
+	<!--时间轴 begin-->
+	<div class="time-list-panner ng-hide" ng-show="myActivity.activityArray.length!='0'">
+		<ul>
+			<li class="time-item" ng-repeat="item in myActivity.activityArray">
+				<div class="time" ng-hide="myActivity.activityArray[$index].year_month == myActivity.activityArray[$index-1].year_month">
+					<div class="left-circle"><span></span></div>
+					<p>{{item.year_month}}</p>
+				</div>
+				<div class="content">
+					<div class="left-image background-cover hover-pointer" ng-style="{ 'background-image': 'url(' + item.image+'?imageslim)' }" ui-sref="activityDetail({'activityId':item.id})"></div>
+					<div class="right-content">
+						<h3 ui-sref="activityDetail({'activityId':item.id})">
+							<p title="{{item.name}}">{{item.name}}</p>
+							<div class="right-money">已收入 <strong class="color-orange">￥{{item.support_amount}}</strong></div>
+						</h3>
+						<p class="text">开始时间：<span ng-bind="item.begin_time | toDate"></span>
+							<span class="ready" ng-if="item.is_effect=='0'">审核中</span>
+							<span class="overtime" ng-if="item.is_effect=='1' && myActivity.setActivityStop(item.end_time)">已结束</span>
+							<span class="continue" ng-if="item.is_effect=='1' && !myActivity.setActivityStop(item.end_time)">进行中</span>
+						</p>
+						<div class="text">
+							<span class="text-button" ui-sref="updateActivity({id:{{item.id}}})"><i class="iconfont">&#xe626;</i> 活动管理</span>
+							<span class="text-button" ui-sref="peopleList({id:{{item.id}}})"><i class="iconfont">&#xe628;</i> 名单管理</span>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--时间轴 begin-->
+	<div ng-show="myActivity.activityArray.length!='0'">
+		<page-bar page-change="myActivity.pageParams.pageChange()" page-count="myActivity.pageParams.page_count" current="myActivity.pageParams.current" show-page="{{myActivity.pageParams.showPage}}"></page-bar>
+	</div>
+
+	<!--无数据 begin-->
+	<div class="not-data ng-hide" ng-show="myActivity.activityArray.length=='0' && myActivity.loaded">
+		<i class="iconfont">&#xe627;</i>
+		<div>您还未发布过活动</div>
+		<div>
+			<button class="button button-36" ui-sref="addActivity">去发布</button>
+		</div>
+	</div>
+	<!--无数据 begin-->
+</div>

@@ -1,0 +1,43 @@
+<div id="finalScore" class="container add-active-panel big-page">
+	<h1 class="title">评分结果<span>（个人）</span></h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+
+	<!--begin-->
+	<div class="max-score-box">
+		<p class="width-50 float-left">
+			<span>最高分项目</span>
+			<strong class="color-orange">{{finalScore.maxScore}}（项目A）</strong>
+		</p>
+		<p class="width-30 float-left">
+			<span>表单平均分</span>
+			<strong class="color-orange">86</strong>
+		</p>
+	</div>
+	<!--end-->
+	<!--begin-->
+	<div class="input-box">
+		<label>查看项目</label>
+		<div class="input-container right-input-container">
+			<div class="select-box">
+				<select class="width-40" ng-model="finalScore.project_id" ng-options="item.id as item.project_name for item in finalScore.projectArray" ng-change="finalScore.getProjectScore()"></select>
+			</div>
+		</div>
+	</div>
+	<!--end-->
+	<div class="result-title">评分结果</div>
+	<ul class="subject-list">
+		<li class="subject-item">
+			<p class="float-left width-40">项目名称：<span class="color-orange">{{finalScore.thisProjectName}}</span></p>
+			<p class="float-left width-20">评分总分：<span class="color-orange">{{finalScore.thisProjectScore}}</span></p>
+			<p class="float-left width-20">满分总分：<span class="color-blue">{{finalScore.thisProjectAllScore}}</span></p>
+		</li>
+	</ul>
+	<div class="result-title">题目评分详情</div>
+	<ul class="subject-list">
+		<li class="subject-item" ng-repeat="item in finalScore.projectDetailArray">
+			<p class="subject-title">{{$index+1}}、{{item.title}}</p>
+			<p class="float-left width-20">评分：<span class="color-orange">{{item.valid_points}}</span></p>
+			<p class="float-left width-20">满分：<span class="color-blue">{{item.score}}</span></p>
+		</li>
+	</ul>
+</div>

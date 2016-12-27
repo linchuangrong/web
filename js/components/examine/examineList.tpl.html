@@ -1,0 +1,142 @@
+<div id="examineList" class="container">
+	<h1 class="title examineList-title">项目评审</h1>
+	<div class="examineList-panner">
+		<div class="select-panner">
+			<!--类型 begin-->
+			<div class="select-panner-item" id="type">
+				<span class="select-list-left-title">行业筛选：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','全部')" class="active">全部</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','公益')">公益</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','创业')">创业</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','休闲')">休闲</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','社交')">社交</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','娱乐')">娱乐</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','体育')">体育</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','文化')">文化</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectType','其他')">其他</a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--类型 begin-->
+			<div class="select-panner-item" id="progress">
+				<span class="select-list-left-title">项目进程：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a class="active" ng-click="examineList.setSelectActive($event,'selectProgress','全部')">全部</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectProgress','评审中')">评审中</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectProgress','将要结束')">将要结束</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectProgress','成功结束')">成功结束</a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--类型 begin-->
+			<div class="select-panner-item" id="sort">
+				<span class="select-list-left-title">项目排序：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectSort','默认')" class="active">默认</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectSort','最新上线')">最新上线<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-click="examineList.setSelectActive($event,'selectSort','评审分数')">评审分数<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+		</div>
+		<!--活动列表 begin-->
+		<div class="examineList-list-panner">
+			<ul class="examineList-ul">
+				<!-- 1条评审 begin-->
+				<li ng-repeat="item in [1,2,3,4,5,6,7,8,9]" class="going">
+					<div class="left-img">
+						<img src="img/example-slide-2.jpg" />
+					</div>
+					<div class="right-content">
+						<div class="width-60">
+							<p class="title"><a ui-sref="examineDetail({'id':'123'})">这是一个项目评审名称</a></p>
+							<p class="desc">这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介</p>
+						</div>
+						<div class="width-25">
+							<p class="username">
+								<i class="iconfont">&#xe606;</i>
+								<span>发布人或机构名称</span>
+							</p>
+							<p class="time">
+								<i class="iconfont">&#xe632;</i>
+								<span>发布时间：</span><span>2016-10-20</span>
+							</p>
+						</div>
+						<div class="width-15">
+							<p></p>
+							<p class="time-long">
+								<span>活动时长：</span><span class="color-orange">30</span>天
+							</p>
+						</div>
+					</div>
+				</li>
+				<!-- 1条评审 end-->
+				<!-- 1条评审 begin-->
+				<li ng-repeat="item in [1,2,3,4,5,6,7,8,9]" class="stop">
+					<div class="left-img">
+						<img src="img/example-slide-2.jpg" />
+					</div>
+					<div class="right-content">
+						<div class="width-60">
+							<p class="title"><a ui-sref="examineDetail({'id':'8885566'})">这是一个项目评审名称</a></p>
+							<p class="desc">这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介这是一个项目评审简介</p>
+						</div>
+						<div class="width-25">
+							<p class="username">
+								<i class="iconfont">&#xe606;</i>
+								<span>发布人或机构名称</span>
+							</p>
+							<p class="time">
+								<i class="iconfont">&#xe632;</i>
+								<span>发布时间：</span><span>2016-10-20</span>
+							</p>
+						</div>
+						<div class="width-15">
+							<p></p>
+							<p class="time-long">
+								<span>活动时长：</span><span class="color-orange">30</span>天
+							</p>
+						</div>
+					</div>
+				</li>
+				<!-- 1条评审 end-->
+			</ul>
+			<div class="clearfix"></div>
+			<page-bar page-change="examineList.pageChange()" page-count="examineList.pageCount" current-page="examineList.currentPage" show-page-size="{{examineList.showPageSize}}"></page-bar>
+		</div>
+		<!--活动列表 end-->
+	</div>
+</div>

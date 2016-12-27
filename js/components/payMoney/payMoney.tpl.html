@@ -1,0 +1,66 @@
+<div id="payMoney" class="container">
+	<div class="order-info" ng-show="!payMoney.payStatus">
+		<p class="message width-70">订单提交成功，请您尽快付款！订单号：<span>{{payMoney.orderId}}</span></p>
+		<p class="money width-30">应付金额<strong class="color-red">{{payMoney.price * payMoney.num}}</strong>元</p>
+	</div>
+	<article ng-show="!payMoney.payStatus">
+		<div class="pay-type-panel">
+			<div class="order-status-box">
+				<ul>
+					<li>
+						<div class="circle-line">
+							<span class="circle">1</span>
+						</div>
+						<p>订单信息填写</p>
+					</li>
+					<li class="active">
+						<div class="circle-line">
+							<span class="circle">2</span>
+						</div>
+						<p>付款</p>
+					</li>
+				</ul>
+			</div>
+			<ul>
+				<li>
+					<div ng-click="payMoney.setActive('alipay')" ng-class="{'active':payMoney.selectPayType=='alipay'}">
+						<img ng-src="{{public.imgUrl}}/pay/alipay.png" />
+					</div>
+				</li>
+				<li>
+					<div ng-click="payMoney.setActive('wechat')" ng-class="{'active':payMoney.selectPayType=='wechat'}">
+						<img ng-src="{{public.imgUrl}}/pay/weixin.png" />
+					</div>
+				</li>
+				<!--<li>
+				<div ng-click="payMoney.setActive('bank')" ng-class="{'active':payMoney.selectPayType=='bank'}">
+					<img ng-src="{{public.imgUrl}}/pay/bank.jpg" />
+				</div>
+			</li>-->
+			</ul>
+		</div>
+		<div class="text-align-center">
+			<button type="button" class="button padding-left-right-20" ng-click="payMoney.getOrderPayUrl()">立即付款</button>
+		</div>
+		<div class="code-img-panel" ng-show="!!payMoney.wechatUrl">
+			<div id="code-img">
+				<img ng-src="{{payMoney.wechatUrl}}" width="200" />
+			</div>
+			<p>请使用手机扫描下方二维码进行付款</p>
+		</div>
+	</article>
+
+	<article ng-show="payMoney.payStatus">
+		<!--完成 begin-->
+		<div class="order-success">
+			<p>
+				<i class="iconfont">&#xe636;</i>
+				<label>恭喜您！支付成功！您本次支付的金额为<span class="color-red">{{payMoney.deal_price}}</span>元！</label>
+			</p>
+			<!--<h5>在<span>10</span>秒钟，后页面会自动返回首页</h5>-->
+			<button type="button" class="button padding-left-right-30" ui-sref="{{payMoney.jumpUrl}}">进入个人中心</button>
+		</div>
+		<!--完成 begin-->
+	</article>
+
+</div>

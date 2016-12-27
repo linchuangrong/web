@@ -1,0 +1,55 @@
+<div id="joinCrowdFund">
+	<h1 class="title">我的众筹</h1>
+	<!--时间轴 begin-->
+	<div class="time-list-panner ng-hide" ng-show="joinCrowdFund.crowdFundArray.length!='0'">
+		<ul>
+			<li class="time-item" ng-repeat="item in joinCrowdFund.crowdFundArray">
+				<!--<div class="time" ng-hide="joinCrowdFund.crowdFundArray[$index].year_month == joinCrowdFund.crowdFundArray[$index-1].year_month">
+					<div class="left-circle"><span></span></div>
+					<p>{{item.year_month}}</p>
+				</div>-->
+				<div class="content">
+					<div class="left-image background-cover hover-pointer" ng-style="{ 'background-image': 'url(' + item.image + '?imageslim)' }"  ui-sref="crowdFundDetail({'crowdFundId':item.id})"></div>
+					<div class="right-content">
+						<h3 ui-sref="crowdFundDetail({'crowdFundId':item.id})">{{item.name}}</h3>
+						<p class="text">结束时间：<span ng-bind="(item.deal_days || item.end_time) | toDate"></span>
+							<span class="overtime" ng-if="joinCrowdFund.setActivityStop(item.deal_days || item.end_time)">已结束</span>
+							<span class="continue" ng-if="!joinCrowdFund.setActivityStop(item.deal_days || item.end_time)">进行中</span>
+						</p>
+						<div class="info">
+							<div class="small-item small-item-1 background-cover" ng-if="!!item.item_image" ng-style="{ 'background-image': 'url(' + item.item_image + '?imageslim)' }"></div>
+							<div class="small-item small-item-2">
+								{{item.description || "无私奉献"}}
+							</div>
+							<div class="small-item small-item-3">
+								￥ {{item.deal_price * (item.num || '1')}}
+							</div>
+							<div class="small-item small-item-4">
+								数量：{{item.num || '1'}}
+							</div>
+							<div class="small-item small-item-5">
+								<a class="color-red" ng-show="item.order_status=='0'" ui-sref="payMoney({'id':item.requestNo,'price':item.deal_price,'num':item.num,'Project_type':'0','url':'personal.joinCrowdFund'})">待付款</a>
+								<span class="color-green" ng-show="item.order_status=='1'">已付款</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--时间轴 begin-->
+
+	<div ng-show="joinCrowdFund.crowdFundArray.length!='0'">
+		<page-bar page-change="joinCrowdFund.pageParams.pageChange()" page-count="joinCrowdFund.pageParams.page_count" current="joinCrowdFund.pageParams.current" show-page="{{joinCrowdFund.pageParams.showPage}}"></page-bar>
+	</div>
+
+	<!--无数据 begin-->
+	<div class="not-data" ng-show="joinCrowdFund.crowdFundArray.length=='0' && joinCrowdFund.loaded">
+		<i class="iconfont">&#xe627;</i>
+		<div>您还未参与过众筹</div>
+		<div>
+			<button class="button button-36" ui-sref="crowdFundList">去参与</button>
+		</div>
+	</div>
+	<!--无数据 begin-->
+</div>

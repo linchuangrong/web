@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" media="screen" href="js/libs/formBuilder/form-builder.css">
+<link rel="stylesheet" type="text/css" media="screen" href="js/libs/formBuilder/form-render.min.css">
+
+<div id="addForm" class="container">
+	添加表单
+	<div class="build-wrap"></div>
+	<div class="render-wrap"></div>
+	<button id="edit-form">Edit Form</button>
+</div>
+
+<script src="js/libs/formBuilder/form-builder.js"></script>
+<script src="js/libs/formBuilder/form-render.js"></script>
+<script>
+	$(document).ready(function($) {
+		var buildWrap = document.querySelector('.build-wrap'),
+			renderWrap = document.querySelector('.render-wrap'),
+			editBtn = document.getElementById('edit-form'),
+			formData = window.sessionStorage.getItem('formData'),
+			editing = true,
+			fbOptions = {
+				dataType: 'json'
+			};
+
+		if(formData) {
+			fbOptions.formData = JSON.parse(formData);
+		}
+
+		var toggleEdit = function() {
+			document.body.classList.toggle('form-rendered', editing);
+			editing = !editing;
+		};
+
+		var formBuilder = $(buildWrap).formBuilder(fbOptions).data('formBuilder');
+
+		$('.form-builder-save').click(function(e) {
+			toggleEdit();
+			$(renderWrap).formRender({
+				dataType: 'json',
+				formData: formBuilder.formData
+			});
+
+			window.sessionStorage.setItem('formData', JSON.stringify(formBuilder.formData));
+		});
+
+		editBtn.onclick = function() {
+			toggleEdit();
+		};
+	});
+</script>

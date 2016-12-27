@@ -1,0 +1,179 @@
+#sponsorDetail {
+    margin: 40px auto;
+    .sponsor-info {
+        padding: 20px;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        color: #666666;
+        margin-bottom: 30px;
+        .left-img {
+            float: left;
+            width: 260px;
+            height: 260px;
+            background-image: url("../img/example-slide-4.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .right-content {
+            position: relative;
+            margin-left: 280px;
+            height: 260px;
+            .sponsor-name {
+                font-size: 18px;
+                line-height: 50px;
+                color: @main-color;
+                .overflow-ellipsis();
+                height: 50px;
+            }
+            .sponsor-desc {
+                line-height: 30px;
+                height: 90px;
+                overflow: hidden;
+            }
+            .sponsor-fans {
+                line-height: 20px;
+                padding: 20px 0;
+                span {
+                    font-weight: bold;
+                }
+                strong {
+                    font-weight: normal;
+                    margin: 0 10px;
+                }
+            }
+            div.button-list {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                height: 40px;
+                .button {
+                    float: left;
+                }
+                .share-box {
+                    line-height: 40px;
+                    float: right;
+                    color: #CCCCCC;
+                    span {
+                        margin-right: 5px;
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    &>div {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    /*a {
+                        display: inline-block;
+                        width: 22px;
+                        height: 22px;
+                        margin-right: 5px;
+                        vertical-align: middle;
+                        img {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }*/
+                }
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+    
+    //列表
+    ul.data-list {
+        li.data-item {
+            position: relative;
+            padding: 20px;
+            background: #FFFFFF;
+            border-bottom: 1px solid @color-line-gray;
+            //进行中图标
+            &.going:before {
+                content: ' ';
+                position: absolute;
+                right: 20px;
+                top: 5px;
+                width: 110px;
+                height: 110px;
+                background-image: url("../img/examine-going-big.png");
+                background-repeat: no-repeat;
+            }
+            //已结束图标
+            &.stop:before {
+                content: ' ';
+                position: absolute;
+                right: 20px;
+                top: 5px;
+                width: 110px;
+                height: 110px;
+                background-image: url("../img/examine-stop-big.png");
+                background-repeat: no-repeat;
+            }
+            .left-img {
+                float: left;
+                width: 180px;
+                height: 180px;
+                background-image: url("../img/example-slide-2.jpg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .right-content {
+                margin-left: 200px;
+                color: #666666;
+                font-size: 14px;
+                .title {
+                    line-height: 40px;
+                    height: 40px;
+                    .overflow-ellipsis();
+                    font-size: 16px;
+                }
+                .time,
+                .address,
+                .tags {
+                    line-height: 30px;
+                }
+                .li-sponsor-info {
+                    margin-top: 10px;
+                    line-height: 40px;
+                    .div-img {
+                        display: block;
+                        float: left;
+                        width: 30px;
+                        height: 30px;
+                        margin: 5px 10px 5px 0;
+                        .border-radius(50%);
+                        overflow: hidden;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                        }
+                    }
+                    .li-sponsor-info-right {
+                        float: right;
+                        width: 260px;
+                        height: 40px;
+                        color: #c1c1c1;
+                        span {
+                            display: inline-block;
+                        }
+                        .button,
+                        .button2 {
+                            float: right;
+                            margin-top: 3px;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+}

@@ -1,0 +1,114 @@
+<div id="personal-dataSet">
+	<h1 class="title">资料设置</h1>
+
+	<!--资料设置  begin-->
+	<form novalidate="novalidate" ng-submit="dataSet.submit()" name="submitForm">
+		<div class="dataSet-panner">
+			<div class="left">
+				<p class="title">个人昵称</p>
+				<div class="img">
+					<img ng-src="{{dataSet.submitForm.head_image}}" />
+				</div>
+				<div class="button-box text-align-center">
+					<button type="button" id="head_image" class="button" img-upload btn-id="head_image" img-src="dataSet.submitForm.head_image">修改头像</button>
+				</div>
+				<p>支持JPG，JPEG，GIF，PNG，且小于500KB</p>
+			</div>
+			<div class="right">
+				<!--昵称 begin-->
+				<div class="input-box">
+					<label>昵称：</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" placeholder="请输入您的昵称" ng-maxlength="16" name="nickname" ng-model="dataSet.submitForm.nickname" required/>
+						<div class="error-tip">
+							<div class="alert alert-danger" ng-show="submitForm.nickname.$invalid">请输入昵称，不可超过16个字符</div>
+						</div>
+					</div>
+				</div>
+				<!--性别 begin-->
+				<div class="input-box">
+					<label>性别：</label>
+					<div class="input-container right-input-container">
+						<div class="radio-box">
+							<label>
+							<input class="hidden-radio" type="radio" name="sex" value="1" ng-model="dataSet.submitForm.sex"/>
+							<span class="circle"><span></span></span>男</label>
+							<label>
+							<input class="hidden-radio" type="radio" name="sex" value="0" ng-model="dataSet.submitForm.sex"/>
+							<span class="circle"><span></span></span>女</label>
+							<label>
+							<input class="hidden-radio" type="radio" name="sex" value="2" ng-model="dataSet.submitForm.sex"/>
+							<span class="circle"><span></span></span>保密</label>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请选择性别</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--性别 end-->
+				<!--生日 begin-->
+				<div class="input-box">
+					<label>生日：</label>
+					<div class="input-container right-input-container">
+						<input type="text" class="input-text" ng-model="dataSet.birthday" ng-focus="dataSet.setBirthday()" id="birthday" readonly="readonly" />
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">请选择生日</div>
+						</div>
+						<!--<div class="select-box">
+							<select class="year">
+								<option value="1990">1990</option>
+								<option value="1990">1991</option>
+								<option value="1990">1992</option>
+								<option value="1990">1993</option>
+
+							</select>
+							<span>年</span>
+							<select class="month">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+
+							</select>
+							<span>月</span>
+							<select class="date">
+								<option>1</option>
+								<option>2</option>
+							</select>
+							<span>日</span>
+						</div>-->
+					</div>
+				</div>
+				<!--生日 end-->
+				<!--手机号码 begin-->
+				<div class="input-box">
+					<label>手机号码：</label>
+					<div class="input-container right-input-container">
+						<div ng-show="!!dataSet.submitForm.mobile" style="font-size: 14px;">{{dataSet.submitForm.mobile}}</div>
+						<div ng-show="!dataSet.submitForm.mobile">您还未设置手机号码，去<a class="color-green" ui-sref="personal.safe">安全中心</a>设置</div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">&nbsp</div>
+						</div>
+					</div>
+				</div>
+				<!--手机号码 end-->
+				<!--电子邮箱 begin-->
+				<div class="input-box">
+					<label>电子邮箱：</label>
+					<div class="input-container right-input-container">
+						<div ng-show="!!dataSet.submitForm.email" style="font-size: 14px;">{{dataSet.submitForm.email}}</div>
+						<div ng-show="!dataSet.submitForm.email">您还未设置电子邮箱，去<a class="color-green" ui-sref="personal.safe">安全中心</a>设置</div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">&nbsp</div>
+						</div>
+					</div>
+				</div>
+				<!--电子邮箱 end-->
+				<div class="button-box text-align-center">
+					<input type="submit" class="button padding-left-right-20" value="保&nbsp;&nbsp;存" ng-class="{'disabled':submitForm.$invalid}" ng-disabled="submitForm.$invalid" />
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--资料设置  end-->
+</div>

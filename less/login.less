@@ -1,0 +1,146 @@
+.login-bgk {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    //background: #2F4F4F;
+    background-image: url("../img/login-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 999;
+    overflow-y: auto;
+}
+.login-panner {
+    width: 400px;
+    height: auto;
+    margin: 80px auto;
+    .transition(width 0.5s);
+    /*顶部logo模块*/
+    &.max-width {
+        width: 480px;
+    }
+    .top-logo-panner {
+        width: 100%;
+        //height: 190px;
+        padding-top: 40px;
+        background-image: url("../img/login-small-bgk.jpg");
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        .go-to-home {
+            position: absolute;
+            width: auto;
+            display: inline-block;
+            padding: 0 10px;
+            height: 40px;
+            top: 2px;
+            right: 2px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            .iconfont {
+                width: 16px;
+                font-size: 16px;
+                color: #FFFFFF;
+            }
+        }
+        .logo {
+            width: 86px;
+            height: 70px;
+            //background: #FFFFFF;
+            text-align: center;
+            //.border-radius(35px);
+            margin: 0 auto;
+            overflow: hidden;
+            img {
+                display: block;
+                width: 100%;
+                border: 0;
+                cursor: pointer;
+            }
+            & + p {
+                width: 100%;
+                text-align: center;
+                font-size: 14px;
+                color: @main-color;
+                line-height: 30px;
+                margin-bottom: 10px;
+            }
+        }
+        .login-register-container {
+            height: 42px;
+            background: rgba(0,0,0,.4);
+            a {
+                width: 50%;
+                float: left;
+                position: relative;
+                display: block;
+                line-height: 42px;
+                color: #FFFFFF;
+                font-size: 18px;
+                text-align: center;
+                &.active {
+                    &:after {
+                        content: ' ';
+                        position: absolute;
+                        width: 100%;
+                        background-color: #8abe35;
+                        height: 6px;
+                        left: 0;
+                        bottom: -3px;
+                    }
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+    /*中间内容模块*/
+    .content {
+        width: 100%;
+        min-height: 100px;
+        background-color: @login-panner-background;
+        font-size: 14px;
+        padding: 40px 30px 1px;
+    }
+    /*登录模块*/
+    .login-content {
+        .username-img {
+            top: 1px !important;
+        }
+        .mima-img {
+            top: 1px !important;
+        }
+        .left-button-content {
+            .button {
+                width: 80px;
+            }
+        }
+        .forget-password {
+            color: @color-green-1;
+            float: right;
+        }
+    }
+    /*注册模块*/
+    .register-content {
+        .input-box {
+            label {
+                width: 90px;
+            }
+            .right-input-container {
+                margin-left: 100px;
+            }
+        }
+    }
+    /*登录、注册的提交按钮*/
+    .login-finally-button {
+        width: 100%;
+        display: block;
+        font-size: 20px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,125 @@
+<div id="addExamine" class="container add-active-panel big-page">
+	<h1 class="title">{{addExamine.title}}</h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<!---->
+	<form name="submitForm" novalidate="novalidate" ng-submit="addExamine.submitReviewForm()">
+		<div class="edit-database-panel">
+			<h2 class="has-left-line-title"><span>填写基本信息</span></h2>
+			<div class="input-box not-margin-bottom">
+				<label>评分表标题</label>
+				<div class="input-container right-input-container width-50">
+					<input class="input-text" type="text" maxlength="30" name="score_title" ng-model="addExamine.submitForm.score_title" required />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.score_title.$dirty && submitForm.score_title.$invalid">评分表标题不可为空且小于30个字符</div>
+					</div>
+				</div>
+			</div>
+			<div class="input-box not-margin-bottom">
+				<label>项目编号</label>
+				<div class="input-container right-input-container width-50">
+					<input class="input-text" type="text" maxlength="30" name="project_number" ng-model="addExamine.submitForm.project_number" required />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.project_number.$dirty && submitForm.project_number.$invalid">项目编号不可为空且小于30个字符</div>
+					</div>
+				</div>
+			</div>
+			<div class="people-box">
+				<div class="input-box">
+					<label>项目名称</label>
+					<div class="input-container right-input-container" ng-repeat="item in addExamine.projectNameArray track by $index">
+						<input class="input-text width-35" type="text" ng-model="addExamine.projectNameArray[$index]" />
+						<i class="iconfont" title="删除" ng-click="addExamine.deleteProjectName($index)">&#xe63a;</i>
+						<i class="iconfont" title="添加" ng-click="addExamine.addProjectName($index)">&#xe63c;</i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!---->
+		<div class="set-notify-panel">
+			<h2 class="has-left-line-title"><span>设置评分流程指引（通知）</span></h2>
+			<div class="input-box not-margin-bottom">
+				<label>标题</label>
+				<div class="input-container right-input-container width-50">
+					<input class="input-text" type="text" placeholder="如：xx项目评审流程指引" maxlength="30" name="review_title" ng-model="addExamine.submitForm.review_title" required />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.review_title.$dirty && submitForm.review_title.$invalid">流程指引标题不可为空且小于30个字符</div>
+					</div>
+				</div>
+			</div>
+			<div class="input-box edit-box">
+				<label style="line-height: 30px;">指引内容</label>
+				<div class="input-container right-input-container">
+					<div id="editText" contenteditable="true" ng-model="addExamine.submitForm.review_content" style="height: 600px;"></div>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide">描述字数过少</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!---->
+		<div class="add-form-panel">
+			<h2 class="has-left-line-title">
+			<span>设置表单</span>
+		</h2>
+			<div class="left-float-content">
+				<div class="" ng-repeat="item_1 in addExamine.designJson track by $index" id="{{$index+1}}">
+					<!--1个评审科目 begin-->
+					<div class="" ng-repeat="item_2 in item_1.data track by $index" id="{{$parent.$index+1}}_{{$index+1}}">
+
+						<ul class="table-list">
+							<li class="table-item panel-box panel-box-green panel-box-3" ng-repeat="item_3 in item_2.data track by $index" id="{{$parent.$parent.$index+1}}_{{$parent.$index+1}}_{{$index+1}}">
+								<p class="biaoti biaoti-3">
+									<span>{{$index+1}} -- 指标</span>
+									<i class="iconfont add" title="添加" ng-click="addExamine.addThirdObj($event,$parent.$parent.$index,$parent.$index,$index)" id="add_{{$parent.$parent.$index+1}}_{{$parent.$index+1}}_{{$index+1}}">&#xe609;</i>
+									<i class="iconfont delete" title="删除" ng-hide="$first" ng-click="addExamine.deleteThirdObj($parent.$parent.$index,$parent.$index,$index)">&#xe63a;</i>
+									<i class="iconfont top" title="下移" ng-click="addExamine.moveBottomThird($parent.$parent.$index,$parent.$index,$index)" ng-hide="$last">&#xe648;</i>
+									<i class="iconfont bottom" title="上移" ng-click="addExamine.moveTopThird($parent.$parent.$index,$parent.$index,$index)" ng-hide="$first">&#xe649;</i>
+								</p>
+								<div class="panel-content">
+									<div class="input-box">
+										<label>指标标题</label>
+										<div class="input-container right-input-container">
+											<input class="input-text" type="text" ng-model="addExamine.designJson[$parent.$parent.$index].data[$parent.$index].data[$index].third_title" />
+										</div>
+									</div>
+									<div class="input-box">
+										<label>分值</label>
+										<div class="input-container right-input-container">
+											<input class="input-text" type="number" ng-model="addExamine.designJson[$parent.$parent.$index].data[$parent.$index].data[$index].score" />
+										</div>
+									</div>
+									<div class="input-box">
+										<label>说明</label>
+										<div class="input-container right-input-container">
+											<textarea class="input-text" type="text" ng-model="addExamine.designJson[$parent.$parent.$index].data[$parent.$index].data[$index].remark"></textarea>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+
+					</div>
+					<!--1个评审科目 end-->
+				</div>
+			</div>
+			<div class="right-float-content">
+				<div class="panel-box panel-box-green">
+					<p class="biaoti">
+						<span>自定义栏位（点击添加）</span>
+					</p>
+					<div class="panel-content">
+						<div class="alert alert-warning width-100 hover-pointer" ng-click="addExamine.addLastThirdObj()">
+							<span>指标</span>
+							<i class="iconfont">&#xe609;</i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="green-line" style="margin-bottom:10px"></div>
+		<div class="button-box text-align-center">
+			<button type="submit" class="button padding-left-right-30" ng-disabled="submitForm.$invalid">提交表单</button>
+		</div>
+	</form>
+</div>

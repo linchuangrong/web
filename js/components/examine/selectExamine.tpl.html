@@ -1,0 +1,57 @@
+<div id="selectExamine" class="container add-active-panel big-page">
+	<h1 class="title">选择应用场景</h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<!---->
+	<div class="button-panel">
+		<button type="button" class="padding-left-right-30" ng-repeat="item in selectExamine.typeArray" ng-class="{'button':selectExamine.selectType.id == item.id,'button2':selectExamine.selectType.id != item.id}" ng-click="selectExamine.setSelectType(item)">{{item.name}}</button>
+	</div>
+	<h1 class="title">选择应用模板</h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<!---->
+	<div class="button-panel">
+		<button type="button" class="padding-left-right-30" ng-repeat="item in selectExamine.panelArray" ng-class="{'button':selectExamine.selectPanel.id == item.id , 'button2': selectExamine.selectPanel.id != item.id }" ng-click="selectExamine.setSelectPanel(item)">{{item.name}}</button>
+	</div>
+
+	<div class="alert alert-info">下方图片为评审表的样例，请先从下方确定选择一个符合您需要的模板</div>
+
+	<div class="image-panel">
+		<ul>
+			<li ng-show="selectExamine.selectPanel.id == '1'">
+				<p>模板1</p>
+				<img src="https://image.eitty.cn/level1.jpg" />
+			</li>
+			<li ng-show="selectExamine.selectPanel.id == '2'">
+				<p>模板2</p>
+				<img src="https://image.eitty.cn/level2.jpg" />
+			</li>
+			<li ng-show="selectExamine.selectPanel.id == '3'">
+				<p>模板3</p>
+				<img src="https://image.eitty.cn/level3.jpg" />
+			</li>
+		</ul>
+	</div>
+	<div class="text-align-center" style="padding-top: 30px;">
+		<button type="button" class="button padding-left-right-30" ng-click="selectExamine.showDialog()">确定并付款</button>
+	</div>
+
+	<!--弹框 begin-->
+	<div class="mask-div" ng-class="{'showDom':selectExamine.alert_dialog,'hideDom':!selectExamine.alert_dialog}"></div>
+	<div class="alert-dialog hideDom" id="submit-dialog" ng-class="{'showDom':selectExamine.alert_dialog,'hideDom':!selectExamine.alert_dialog}">
+		<div class="alert-dialog-panner">
+			<div class="dialog-title">
+				<span>确认下单</span>
+				<i class="iconfont" ng-click="selectExamine.alertDialogCancel()">&#xe616;</i>
+			</div>
+			<div class="dialog-content">
+				<p>应用场景：{{selectExamine.selectType.name}}</p>
+				<p>应用模板：{{selectExamine.selectPanel.name}}</p>
+				<p>价格：<span class="color-red">{{selectExamine.price}}</span> 元</p>
+			</div>
+			<div class="dialog-footer has-two-button">
+				<button type="button" class="button button-36 padding-left-right-20" ng-click="selectExamine.alertDialogConfirm()">确定</button>
+				<button type="button" class="button2 button-36 padding-left-right-20" ng-click="selectExamine.alertDialogCancel()">取消</button>
+			</div>
+		</div>
+	</div>
+	<!--弹框 end-->
+</div>

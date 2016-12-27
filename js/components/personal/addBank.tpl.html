@@ -1,0 +1,119 @@
+<div id="personal-addBank">
+	<h1 class="title">
+		<a class="left" ui-sref="personal.myBankCard"><i class="iconfont">&#xe61a;</i>返回</a>
+		添加银行卡
+	</h1>
+
+	<form name="addBankForm" novalidate="novalidate" ng-submit="addBank.addBankSubmit()">
+		<div class="addMoneyAccount-panner">
+			<!--银行名称 begin-->
+			<div class="input-box">
+				<label><span class="color-red">* </span>银行名称</label>
+				<div class="input-container right-input-container">
+					<div class="select-box">
+						<select style="width: 100%;" ng-model="addBank.selectBank" ng-options="item as item.name for item in addBank.bankArray" ng-change="addBank.changeBank()">
+						</select>
+						<div class="error-tip"></div>
+					</div>
+
+				</div>
+			</div>
+			<!--银行名称 end-->
+			<!--银行帐号 begin-->
+			<div class="input-box">
+				<label><span class="color-red">* </span>银行卡号</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="银行卡号" name="bankcard" ng-model="addBank.addBankForm.bankcard" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="addBankForm.bankcard.$dirty && addBankForm.bankcard.$invalid">银行卡号不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!--银行帐号 end-->
+			<!--银行帐号 begin-->
+			<div class="input-box">
+				<label><span class="color-red">* </span>重复输入卡号</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="银行卡号" name="rep_bankcard" ng-model="addBank.addBankForm.rep_bankcard" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="addBankForm.rep_bankcard.$dirty && (addBankForm.rep_bankcard.$invalid || addBank.addBankForm.bankcard!=addBank.addBankForm.rep_bankcard)">两次银行卡号不一致</div>
+					</div>
+				</div>
+			</div>
+			<!--银行帐号 end-->
+			<!--开户姓名 begin-->
+			<div class="input-box">
+				<label><span class="color-red">* </span>开户姓名</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="开户姓名" name="real_name" ng-model="addBank.addBankForm.real_name" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="addBankForm.real_name.$dirty && addBankForm.real_name.$invalid">开户姓名不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!--开户姓名 end-->
+			<!--开户银行 begin-->
+			<div class="input-box">
+				<label><span class="color-red">* </span>开户支行</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" placeholder="开户支行" name="bankzone" ng-model="addBank.addBankForm.bankzone" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="addBankForm.bankzone.$dirty && addBankForm.bankzone.$invalid">开户支行不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!--开户银行 end-->
+			<!--银行卡或存折照片 begin-->
+			<!--<div class="input-box idCard-box">
+			<label><span class="color-red">*</span>银行卡或<br>存折照片</label>
+			<div class="input-container right-input-container">
+				<input class="hidden" type="file" id="file1" name="file1" />
+				<div class="img">
+					<img src="./img/example-slide-4.jpg" />
+				</div>
+				<button type="button" class="button" ng-click="public.triggerClick('file1')">选择文件</button>
+				<div class="error-tip">
+					<div class="alert alert-danger ng-hide">请上传图片</div>
+				</div>
+			</div>
+		</div>-->
+			<!--银行卡或存折照片 end-->
+			<!--身份证照片 begin-->
+			<!--<div class="input-box idCard-box">
+			<label><span class="color-red">*</span>身份证或公<br>司营业登记证</label>
+			<div class="input-container right-input-container">
+				<input class="hidden" type="file" id="file2" name="file2" />
+				<div class="img">
+					<img src="./img/example-slide-4.jpg" />
+				</div>
+				<button type="button" class="button" ng-click="public.triggerClick('file2')">选择文件</button>
+				<div class="error-tip">
+					<div class="alert alert-danger ng-hide">请上传图片</div>
+				</div>
+			</div>
+		</div>-->
+			<!--身份证照片 end-->
+			<!--安全验证 begin-->
+			<div class="input-box">
+				<label><span class="color-red">* </span>安全验证</label>
+				<div class="input-container right-input-container">
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" placeholder="请输入短信验证码" name="verify_coder" ng-model="addBank.addBankForm.verify_coder" required>
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button" value="获取验证码" canclick="true" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+						</div>
+					</div>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="addBankForm.verify_coder.$dirty && addBankForm.verify_coder.$invalid">验证码错误</div>
+					</div>
+				</div>
+			</div>
+			<!--安全验证 end-->
+			<div class="button-box text-align-center">
+				<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="addBankForm.$invalid" value="保存">
+			</div>
+		</div>
+	</form>
+</div>

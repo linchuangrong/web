@@ -1,0 +1,97 @@
+<div id="sponsorDetail" class="container">
+	<!--主办方基本数据信息 begin-->
+	<div class="sponsor-info">
+		<div class="left-img"></div>
+		<div class="right-content">
+			<p class="sponsor-name">{{sponsorDetail.sponsorInfo.identify_bs_name}}</p>
+			<p class="sponsor-desc">{{sponsorDetail.sponsorInfo.company_desc}}</p>
+			<p class="sponsor-fans">
+				<span class="color-green">{{sponsorDetail.sponsorInfo.build_count}}</span>
+				<strong>活动</strong>
+				<strong>|&nbsp;</strong>
+				<span class="color-green">{{sponsorDetail.sponsorInfo.foucuser}}</span>
+				<strong>粉丝</strong>
+			</p>
+			<div class="button-list">
+				<button type="button" class="button" style="width: 170px;" ng-click="sponsorDetail.focusSponsor(sponsorDetail.sponsorInfo.id)">关注&nbsp;<span>({{sponsorDetail.sponsorInfo.foucuser}})</span></button>
+				<div class="share-box">
+					<span>分享到</span>
+					<!--<a title="微信">
+						<img src="img/weixin.png">
+					</a>
+					<a title="微博">
+						<img src="img/weibo.png">
+					</a>
+					<a title="QQ空间">
+						<img src="img/qqzone.png">
+					</a>-->
+					<div class="bdsharebuttonbox">
+						<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+						<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+						<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--主办方基本数据信息 begin-->
+
+	<!--主办方曾经发布的活动等.... begin-->
+	<div class="tab-container">
+		<ul class="menu-list">
+			<li class="menu-item active">发布的活动</li>
+			<li class="menu-item">发布的众筹</li>
+		</ul>
+		<ul class="data-list">
+			<!--1个曾经的活动 begin-->
+			<li class="data-item going" ng-repeat="item in [1,2,3]">
+				<div class="left-img"></div>
+				<div class="right-content">
+					<p class="title color-green">名称活动名称活动名称活动名称活动名称</p>
+					<p class="time">时间：09月12日　周一　8:00-20:30</p>
+					<p class="address">地点：广东省广州市天河区中山大道中35号美好居3座1105美好居3座1105</p>
+					<p class="tags">标签：运动 摄影</p>
+					<div class="li-sponsor-info">
+						<div class="div-img">
+							<img src="img/example-slide-1.jpg" />
+						</div>
+						<span>我是猪猪侠</span>
+						<div class="li-sponsor-info-right">
+							<i class="iconfont" title="收藏数">&#xe60f;</i>
+							<span>125</span>&nbsp;|&nbsp;
+							<i class="iconfont" title="参与数">&#xe612;</i>
+							<span>25</span>
+							<button type="button" class="button2 button2-34 padding-left-right-20">查看详情</button>
+						</div>
+					</div>
+				</div>
+			</li>
+			<!--1个曾经的活动 end-->
+			<li class="data-item stop" ng-repeat="item in [4,5,6]">
+				<div class="left-img"></div>
+				<div class="right-content">
+					<p class="title color-green">名称活动名称活动名称活动名称活动名称</p>
+					<p class="time">时间：09月12日　周一　8:00-20:30</p>
+					<p class="address">地点：广东省广州市天河区中山大道中35号美好居3座1105美好居3座1105</p>
+					<p class="tags">标签：运动 摄影</p>
+					<div class="li-sponsor-info">
+						<div class="div-img">
+							<img src="img/example-slide-1.jpg" />
+						</div>
+						<span>我是猪猪侠</span>
+						<div class="li-sponsor-info-right">
+							<i class="iconfont" title="收藏数">&#xe60f;</i>
+							<span>125</span>&nbsp;|&nbsp;
+							<i class="iconfont" title="参与数">&#xe612;</i>
+							<span>25</span>
+							<button type="button" class="button2 button2-34 padding-left-right-20">查看详情</button>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!--主办方曾经发布的活动等.... end-->
+		<div style="height: 20px;"></div>
+		<page-bar page-change="sponsorDetail.pageParams.pageChange()" page-count="sponsorDetail.pageParams.page_count" current="sponsorDetail.pageParams.current" show-page="{{sponsorDetail.pageParams.showPage}}"></page-bar>
+	</div>
+</div>

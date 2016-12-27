@@ -1,0 +1,334 @@
+<div id="addCrowdFund" class="container add-active-panel big-page">
+	<h1 class="title">发起筹款<span>（以下所有信息均为必填项）</span></h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<div class="top-menu">
+		<ul>
+			<li ng-class="{'active':addCrowdFund.showPanel.crowdFundPanel1 || addCrowdFund.showPanel.crowdFundPanel2}"><i class="iconfont">&#xe636;</i>项目信息</li>
+			<li ng-class="{'active':addCrowdFund.showPanel.crowdFundPanel2}"><i class="iconfont">&#xe636;</i>详细描述</li>
+		</ul>
+	</div>
+	<form name="submitForm" novalidate="novalidate" ng-submit="addCrowdFund.submit()">
+		<!--crowd-main-panel1已经被删除掉了-->
+		<!--TODO 项目信息 begin-->
+		<div class="main-panel" id="crowd-main-panel1" ng-show="addCrowdFund.showPanel.crowdFundPanel1">
+			<!--项目类型 begin-->
+			<div class="project">
+				<h2 class="has-left-line-title">
+					<span>选择筹款类型</span>
+				<!--<button type="button" class="button2 button2-28">存为草稿</button>-->
+				</h2>
+				<div class="select-project-content">
+					<ul>
+						<li ng-repeat="item in addCrowdFund.crowdFundTypeArray">
+							<div ng-click="addCrowdFund.setCrowdFundType(item.id,item.name)" ng-class="{'active':addCrowdFund.submitForm.welfare_id == item.id}">
+								<span>{{item.name}}</span>
+								<i class="iconfont">&#xe61c;</i>
+							</div>
+						</li>
+					</ul>
+					<div class="alert alert-warning" ng-if="addCrowdFund.submitForm.welfare_name=='众筹'">发布众筹：本项适合有偿服务，即发起方需为支持方提供有形或无形服务；筹款方为筹款不达目标金额的，所筹资金将沿原路径返回。</div>
+					<div class="alert alert-warning" ng-if="addCrowdFund.submitForm.welfare_name=='捐赠'">发布捐赠：本项适合无偿的公益慈善活动，例如资助公益项目实施等；流程严格按照《慈善法》执行。</div>
+				</div>
+			</div>
+			<!--项目类型 end-->
+			<h2 class="has-left-line-title">
+				<span>创建你的项目信息</span>
+			</h2>
+			<div class="creat-project">
+				<!---->
+				<div class="input-box">
+					<label>项目名称</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" placeholder="给自己的项目起一个响亮的名称吧" name="title" ng-model="addCrowdFund.submitForm.title" required/>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="submitForm.title.$dirty && submitForm.title.$invalid">项目名称不可为空</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="input-box">
+					<label>筹款目的</label>
+					<div class="input-container right-input-container">
+						<textarea class="input-text" name="brief" ng-model="addCrowdFund.submitForm.brief" required></textarea>
+						<div class="error-tip">
+							<div class="alert alert-danger" ng-show="submitForm.brief.$dirty && submitForm.brief.$invalid">筹款目的不可为空</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="input-box address-box">
+					<label>项目地点</label>
+					<div class="input-container right-input-container">
+						<div class="select-box">
+							<select class="province" ng-model="addCrowdFund.submitForm.address.province" ng-options="item.name as item.name for item in addCrowdFund.provinceArray" ng-change="addCrowdFund.getCityList(addCrowdFund.submitForm.address.province,'cityArray')">
+								<option value="">请选择</option>
+							</select>
+							<select class="city" ng-model="addCrowdFund.submitForm.address.city" ng-options="item.name as item.name for item in addCrowdFund.cityArray">
+								<option value="">请选择</option>
+							</select>
+							<input type="text" class="input-text" placeholder="详细地址" name="location" ng-model="addCrowdFund.submitForm.address.location" required>
+						</div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="submitForm.location.$dirty && submitForm.location.$invalid">请填写地址</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="input-box">
+					<label>筹资金额</label>
+					<div class="input-container right-input-container">
+						<div class="table-row-input-content">
+							<div class="left-input-content">
+								<input class="input-text" type="text" placeholder="输入你需要筹集的金额，最低500元！" name="limit_price" ng-model="addCrowdFund.submitForm.limit_price" required limit-size min-size="500" integer/>
+							</div>
+							<div class="right-button-content">
+								<input type="button" class="button not-hover" value="&nbsp;元&nbsp;">
+							</div>
+						</div>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="submitForm.limit_price.$dirty && submitForm.limit_price.$invalid">请输入大于或等于500的整数金额</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="input-box">
+					<label>筹资结束时间</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" id="deal_days" name="deal_days" ng-model="addCrowdFund.submitForm.deal_days" required readonly="readonly" ng-focus="addCrowdFund.setDealDays()"/>
+						<div class="error-tip">
+							<div class="alert alert-danger" ng-show="submitForm.deal_days.$dirty && submitForm.deal_days.$invalid">请设置筹资结束时间</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="input-box">
+					<label>自定义标签</label>
+					<div class="input-container right-input-container">
+						<input class="input-text" type="text" placeholder="给你的项目设置一些个性标签，标签之间用空格隔开" name="tags_match" ng-model="addCrowdFund.submitForm.tags_match" required />
+						<div class="error-tip">
+							<div class="alert alert-danger" ng-show="submitForm.tags_match.$dirty && submitForm.tags_match.$invalid">自定义标签不可为空</div>
+						</div>
+					</div>
+				</div>
+				<!---->
+				<div class="input-box idCard-box idCard-box2">
+					<label>设置封面</label>
+					<div class="input-container right-input-container">
+						<div class="img">
+							<img ng-src="{{addCrowdFund.submitForm.image}}" ng-show="!!addCrowdFund.submitForm.image">
+							<span class="upload-tips">支持JPEG，JPG，PNG，GIF，BMP，建议图片大小<span class="color-red">640*480</span>且小于2M</span>
+						</div>
+						<button type="button" id="poster_img_button" class="button padding-left-right-30" img-upload btn-id="poster_img_button" img-src="addCrowdFund.submitForm.image">上传图片</button>
+						<div class="error-tip">
+							<!--<div class="alert alert-danger ng-hide" ng-show="!addCrowdFund.submitForm.image">请上传图片</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--项目信息 end-->
+
+		<!--详细描述 begin-->
+		<div class="main-panel ng-hide" id="crowd-main-panel2" ng-show="addCrowdFund.showPanel.crowdFundPanel2">
+			<h2 class="has-left-line-title">
+				<span>描述你的项目详情</span>
+			</h2>
+			<!---->
+			<div class="input-box">
+				<label>宣传视频</label>
+				<div class="input-container right-input-container" style="width: 500px;">
+					<input class="input-text" type="text" placeholder="请直接输入视频所在页面的地址，只支持优酷！（选填）" name="vedio" ng-model="addCrowdFund.submitForm.vedio" />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide">不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box">
+				<label style="line-height: 30px;">编辑项目详情</label>
+				<div class="input-container right-input-container">
+					<div id="editText" ng-model="addCrowdFund.submitForm.description" contenteditable="true" style="height: 600px;"></div>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide">不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!--回报设置 begin-->
+			<div ng-show="addCrowdFund.submitForm.welfare_name=='众筹'">
+				<h2 class="has-left-line-title"><span>创建你的回报设置</span></h2>
+				<div class="input-box">
+					<label>有无回报：</label>
+					<div class="input-container right-input-container">
+						<div class="radio-box">
+							<label>
+								<input class="hidden-radio" type="radio" name="hasRepay" value="1" ng-model="addCrowdFund.submitForm.hasRepay"/>
+								<span class="circle"><span></span></span>有回报</label>
+							<label>
+								<input class="hidden-radio" type="radio" name="hasRepay" value="0" ng-model="addCrowdFund.submitForm.hasRepay"/>
+								<span class="circle"><span></span></span>无回报</label>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请选择性别</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="repay-list" ng-show="addCrowdFund.submitForm.hasRepay=='1'">
+					<li class="repay-item" ng-repeat="item in addCrowdFund.repayArray track by $index">
+						<div class="info-content">
+							<p>
+								<span>回报类型：</span>
+								<strong ng-if="item.type=='1'">实物回报</strong>
+								<strong ng-if="item.type=='2'">虚拟回报</strong>
+							</p>
+							<p>
+								<span>回报标题：</span>
+								<strong>{{item.item_name}}</strong>
+							</p>
+							<p class="two">
+								<span>回报内容：</span>
+								<strong>{{item.description}}</strong>
+							</p>
+							<p>
+								<span>支持金额：</span>
+								<strong><span class="color-red">{{item.delivery_fee}}</span>元</strong>
+							</p>
+							<p>
+								<span>人数上限：</span>
+								<strong><span class="color-red">{{item.limit_user}}</span>人</strong>
+							</p>
+							<p>
+								<span>回报时间：</span>
+								<strong><span class="color-red">{{item.repaid_day}}</span></strong>
+							</p>
+						</div>
+
+						<div class="footer" ng-click="addCrowdFund.deleteRepay($index,item.id)">
+							<i class="iconfont">&#xe63a;</i>
+							<span>删除回报</span>
+						</div>
+					</li>
+					<li class="repay-item last-item" ng-click="addCrowdFund.showRepayDialog()">
+						<i class="iconfont">&#xe635;</i>
+						<br />
+						<span class="color-green">添加回报</span>
+					</li>
+				</ul>
+			</div>
+			<!--回报设置 end-->
+		</div>
+		<!--详细描述 end-->
+
+		<!--添加一个回报 begin-->
+		<div class="mask-div" ng-show="addCrowdFund.show.add_repay_dialog"></div>
+		<div class="alert-dialog" id="add_repay_dialog" ng-class="{'showDom':addCrowdFund.show.add_repay_dialog,'hideDom':!addCrowdFund.show.add_repay_dialog}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>添加回报</span>
+					<i class="iconfont" ng-click="addCrowdFund.alertDialogCancel()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<!---->
+					<div class="input-box">
+						<label>选择回报类型</label>
+						<div class="input-container right-input-container">
+							<div class="radio-box">
+								<label>
+										<input class="hidden-radio" type="radio" name="type" value="1" ng-model="addCrowdFund.repayForm.type"/>
+										<span class="circle"><span></span></span>实物回报（回报需要邮寄）</label>
+								<label>
+										<input class="hidden-radio" type="radio" name="type" value="2" ng-model="addCrowdFund.repayForm.type"/>
+										<span class="circle"><span></span></span>虚拟回报（回报无需邮寄）</label>
+								<!--<label>
+										<input class="hidden-radio" type="radio" name="type" value="0" ng-model="addCrowdFund.repayForm.type"/>
+										<span class="circle"><span></span></span>无回报</label>-->
+							</div>
+						</div>
+					</div>
+					<!---->
+					<div class="input-box">
+						<label>回报标题</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="回报标题" ng-model="addCrowdFund.repayForm.item_name" />
+						</div>
+					</div>
+					<!---->
+					<div class="input-box">
+						<label>回报内容</label>
+						<div class="input-container right-input-container">
+							<textarea class="input-text" ng-model="addCrowdFund.repayForm.description"></textarea>
+						</div>
+					</div>
+					<!---->
+					<div class="input-box">
+						<label>支持金额</label>
+						<div class="input-container right-input-container width-40">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="number" ng-model="addCrowdFund.repayForm.delivery_fee">
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button not-hover" value="&nbsp;元&nbsp;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!---->
+					<div class="input-box">
+						<label>人数上限</label>
+						<div class="input-container right-input-container width-40">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="number" ng-model="addCrowdFund.repayForm.limit_user">
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button not-hover" value="&nbsp;人&nbsp;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!---->
+					<div class="input-box">
+						<label>回报时间</label>
+						<div class="input-container right-input-container width-40">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="number" placeholder="筹款结束后XX天内发货" ng-model="addCrowdFund.repayForm.repaid_day" />
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button not-hover" value="&nbsp;天之内发货&nbsp;">
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!---->
+					<div class="input-box idCard-box idCard-box2">
+						<label>上传照片</label>
+						<div class="input-container right-input-container">
+							<input class="hidden" type="file" id="file4" name="file4">
+							<div class="img">
+								<img ng-src="{{addCrowdFund.repayForm.item_image}}" ng-show="!!addCrowdFund.repayForm.item_image">
+								<span class="upload-tips">支持JPEG，JPG，PNG，GIF，BMP，图片大小不超过500K</span>
+							</div>
+							<button type="button" id="item_image" class="button padding-left-right-30" img-upload btn-id="item_image" img-src="addCrowdFund.repayForm.item_image">上传图片</button>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer has-two-button">
+					<button type="button" class="button button-36 padding-left-right-20" ng-click="addCrowdFund.alertDialogConfirm()">确定</button>
+					<button type="button" class="button2 button-36 padding-left-right-20" ng-click="addCrowdFund.alertDialogCancel()">取消</button>
+				</div>
+			</div>
+		</div>
+		<!--添加一个回报 end-->
+
+		<div class="green-line" style="margin-bottom:10px"></div>
+		<div class="button-box text-align-center" ng-show="addCrowdFund.showPanel.crowdFundPanel1">
+			<button type="button" class="button padding-left-right-30" ng-click="addCrowdFund.goToPanel('crowdFundPanel2')">下一步</button>
+		</div>
+		<div class="button-box text-align-center" ng-show="addCrowdFund.showPanel.crowdFundPanel2">
+			<button type="button" class="button padding-left-right-30" ng-click="addCrowdFund.goToPanel('crowdFundPanel1')">上一步</button>
+			<input type="submit" class="button padding-left-right-30" ng-disabled="submitForm.$invalid" value="提交审核" />
+		</div>
+	</form>
+</div>

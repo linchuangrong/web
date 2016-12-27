@@ -1,0 +1,132 @@
+<div id="activityList" class="container">
+	<h1 class="title activityList-title">活动中心</h1>
+	<div class="left-panner">
+		<div class="select-panner">
+			<!--类型 begin-->
+			<div class="select-panner-item" id="type">
+				<span class="select-list-left-title">类型：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.cate == ''}" ng-click="activityList.setSelectActive('cate','')">全部</a>
+					</li>
+					<li class="select-item" ng-repeat="item in public.activityTypeArray">
+						<a ng-class="{'active':activityList.searchForm.cate == item.name}" ng-click="activityList.setSelectActive('cate',item.name)">{{item.name}}</a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--类型 begin-->
+			<div class="select-panner-item" id="time">
+				<span class="select-list-left-title">时间：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.time == ''}" ng-click="activityList.setSelectActive('time','')">全部</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.time == '今天'}" ng-click="activityList.setSelectActive('time','今天')">今天</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.time == '明天'}" ng-click="activityList.setSelectActive('time','明天')">明天</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.time == '周末'}" ng-click="activityList.setSelectActive('time','周末')">周末</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.time == '本周'}" ng-click="activityList.setSelectActive('time','本周')">本周</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.time == '本月'}" ng-click="activityList.setSelectActive('time','本月')">本月</a>
+					</li>
+					<li class="select-item select-date">
+						<a id="selectDateButton" ng-click="activityList.showDate()" ng-class="{'active':activityList.searchForm.time ==  activityList.selectDateInput }">
+							<span ng-show="activityList.searchForm.time ==  activityList.selectDateInput" ng-bind="activityList.selectDateInput"></span>
+							<span ng-show="activityList.searchForm.time !=  activityList.selectDateInput">指定日期</span>
+						</a>
+						<input id="selectDateInput" type="text" ng-model="activityList.selectDateInput" />
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--地区 begin-->
+			<div class="select-panner-item" id="address">
+				<span class="select-list-left-title">地区：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-class="{'active':activityList.searchForm.address == '' }" ng-click="activityList.setSelectActive('address','')">全部</a>
+					</li>
+					<li class="select-item" ng-repeat="item in public.cityArray">
+						<a ng-class="{'active':activityList.searchForm.address == item.name}" ng-click="activityList.setSelectActive('address',item.name)">{{item.name}}</a>
+					</li>
+				</ul>
+			</div>
+			<!--地区 end-->
+		</div>
+		<!--活动列表 begin-->
+		<div class="activity-list-panner">
+			<ul class="activity-list">
+				<li class="activity-item" ng-repeat="item in activityList.activityListArray" ui-sref="activityDetail({'activityId':item.deal_id})" background-lazy-load>
+					<div class="left-img">
+						<div class="background-cover background-lazy-load" lazy-load-src="{{item.image+'?imageslim'}}"></div>
+					</div>
+					<div class="right-content">
+						<h3 class="title">{{item.name}}</h3>
+						<p>时间：<span ng-bind="item.begin_time | toAutoTime"></span></p>
+						<p>地点：<span>{{item.province}}省{{item.city}}市{{item.address}}</span></p>
+						<!--<p>费用：<span>免费</span></p>-->
+						<p>发起：<span>{{item.business_name}}</span></p>
+						<h4 class="address">标签：<span>{{item.tags}}</span></h4>
+						<p class="people" style="margin-top: 22px;"><label><span>{{item.support_count || '0'}}</span> 参加</label><label><span>{{item.focus_count || '0'}}</span> 收藏</label></p>
+					</div>
+				</li>
+			</ul>
+			<div ng-show="activityList.activityListArray.length!='0'">
+				<page-bar page-change="activityList.pageParams.pageChange()" page-count="activityList.pageParams.page_count" current="activityList.pageParams.current" show-page="{{activityList.pageParams.showPage}}"></page-bar>
+			</div>
+		</div>
+		<!--活动列表 end-->
+	</div>
+	<div class="right-panner">
+		<div style="margin-bottom: 20px;">
+			<button type="button" class="button width-100" ui-sref="addActivity"><i class="icon iconfont">&#xe662;</i> 发布活动</button>
+		</div>
+		<div style="margin-bottom: 20px;">
+			<button type="button" class="button width-100" ui-sref="sponsorList">主办方</button>
+		</div>
+		<div class="guanggao">
+			<!--<img src="./img/example-slide-4.jpg" />-->
+		</div>
+		<!--官方售票 begin-->
+		<!--<div class="official-sell">
+			<h3><span>官方售票</span><a href="javascript:;">更多>></a></h3>
+			<ul class="official-sell-list">
+				<li class="official-sell-item" ng-repeat="item in activityList.rightListArray">
+					<div class="left-img">
+						<div class="background-cover" ng-style="{ 'background-image': 'url('+ public.imgUrl+ '/'+ item +')' }"></div>
+					</div>
+					<div class="right-content">
+						<p class="title">仓木麻衣Time After Time 中国巡回演唱会广州站</p>
+						<p class="time">09-07 20:00-23:00</p>
+						<p class="money">￥<span>998</span></p>
+					</div>
+				</li>
+			</ul>
+		</div>-->
+		<!--官方售票 begin-->
+		<!--活跃的主办方 begin-->
+		<!--<div class="official-sell">
+			<h3><span>活跃主办方</span><a href="javascript:;">更多>></a></h3>
+			<ul class="official-sell-list">
+				<li class="official-sell-item" ng-repeat="item in activityList.rightListArray">
+					<div class="left-img">
+						<div class="background-cover" ng-style="{ 'background-image': 'url('+ public.imgUrl+ '/'+ item +')' }"></div>
+					</div>
+					<div class="right-content">
+						<p class="title">仓木麻衣Time After Time 中国巡回演唱会广州站</p>
+						<p class="message">有<span class="color-green">6个活动</span>正在进行</p>
+					</div>
+				</li>
+			</ul>
+		</div>-->
+		<!--活跃的主办方 begin-->
+	</div>
+</div>

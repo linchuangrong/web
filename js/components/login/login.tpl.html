@@ -1,0 +1,202 @@
+<div id="login" class="login-bgk">
+	<div class="login-panner" ng-class="{'max-width':(login.showPanner=='registerPanner')}">
+		<div class="top-logo-panner">
+			<div class="go-to-home" ui-sref="index"><i class="iconfont" title="首页">&#xe616;</i></div>
+			<div class="logo">
+				<img ng-src="{{public.imgUrl}}/logo.png" ui-sref="index" />
+			</div>
+			<p>有益的事情，一齐做！</p>
+			<div class="login-register-container">
+				<a ng-class="{'active':login.showPanner=='loginPanner'}" ng-click="login.setPanner('loginPanner')">登&nbsp;&nbsp;录</a>
+				<a ng-class="{'active':login.showPanner=='registerPanner'}" ng-click="login.setPanner('registerPanner')">注&nbsp;&nbsp;册</a>
+			</div>
+		</div>
+		<div class="content">
+			<div class="login-content" ng-show="login.showPanner=='loginPanner'">
+				<form name="login_form" novalidate="novalidate" ng-submit="login.login()">
+					<!--用户名 begin-->
+					<div class="input-box not-margin-bottom">
+						<div class="input-container">
+							<i class="iconfont absolute username-img">&#xe606;</i>
+							<input class="input-text" name="loginName" type="text" placeholder="益齐帐号  手机/邮箱" maxlength="30" ng-model="login.loginName" required />
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="login_form.loginName.$dirty&&login_form.loginName.$error.required">帐号不可为空</div>
+							</div>
+						</div>
+					</div>
+					<!--用户名 end-->
+					<!--密码 begin-->
+					<div class="input-box not-margin-bottom">
+						<div class="input-container">
+							<i class="iconfont absolute mima-img">&#xe602;</i>
+							<input class="input-text" name="loginPassword" type="password" placeholder="请输入您的密码" ng-model="login.loginPassword" required ng-maxlength="18" />
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="login_form.loginPassword.$dirty&&login_form.loginPassword.$error.required">密码不可为空</div>
+								<div class="alert alert-danger" ng-show="login_form.loginPassword.$dirty&&login_form.loginPassword.$error.maxlength">密码长度不可超过18位</div>
+							</div>
+						</div>
+					</div>
+
+					<!--密码 end-->
+					<!--验证码 begin-->
+					<div class="input-box" ng-show="login.showLoginImgCode">
+						<div class="input-container horizontal-code-div">
+							<input class="input-text" name="loginImgCode" type="text" placeholder="验证码" ng-model="login.loginImgCode" required ng-minlength="4" ng-maxlength="4" />
+							<div class="img-code">
+								<img ng-src="{{login.imgCodeSrc}}" /><span ng-click="login.setImgCodeSrc()">看不清？换一张</span>
+							</div>
+						</div>
+					</div>
+					<!--验证码 end-->
+					<div class="input-box line-height20">
+						<div class="remember">
+							<i class="iconfont" ng-click="login.remember=!login.remember" ng-class="{'color-green':login.remember}">&#xe608;</i>
+							<span ng-class="{'color-green':login.remember}">记住我</span>
+						</div>
+						<a class="forget-password float-right" ui-sref="findpassword">忘记密码</a>
+					</div>
+					<div class="input-box">
+						<input id="login-submit" type="submit" class="button login-finally-button" ng-disabled="(login_form.loginImgCode.$invalid && login.showLoginImgCode==true)||login_form.loginPassword.$invalid||login_form.loginName.$invalid||login.loginButtonDisabled" ng-class="{'disabled':(login_form.loginImgCode.$invalid && login.showLoginImgCode==true)||login_form.loginPassword.$invalid||login_form.loginName.$invalid||login.loginButtonDisabled}" value="登&nbsp;&nbsp;&nbsp;&nbsp;录" />
+					</div>
+				</form>
+
+				<div class="other-login">
+					<div class="through-line">
+						<span>第三方登录</span>
+					</div>
+					<ul>
+						<li><i class="iconfont" title="微博">&#xe603;</i></li>
+						<li><i class="iconfont" title="微信" ng-click="login.weixinLogin()">&#xe600;</i></li>
+						<li><i class="iconfont" title="QQ">&#xe601;</i></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="register-content" ng-show="login.showPanner=='registerPanner'">
+				<form name="register_form" novalidate="novalidate" ng-submit="login.register()">
+					<!--个人/主办方 begin-->
+					<div class="input-box not-margin-bottom">
+						<label>个人/主办方：</label>
+						<div class="input-container right-input-container">
+							<div class="radio-box">
+								<label>
+									<input class="hidden-radio" type="radio" name="conditions" value="3" ng-model="login.conditions">
+									<span class="circle"><span></span></span>个人</label>
+								<label>
+									<input class="hidden-radio" type="radio" name="conditions" value="0" ng-model="login.conditions">
+									<span class="circle"><span></span></span>主办方</label>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--个人/主办方 end-->
+
+					<!--手机号码 begin-->
+					<div class="input-box not-margin-bottom" ng-show="login.conditions=='3'">
+						<label>手机：</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<!--<input class="input-text" type="text" name="registerName1" ng-model="login.registerName" placeholder="手机号" required ng-pattern="/^(1[0-9]{10})|((\w)+(\.\w+)*@(\w)+((\.\w+)+))$/" />-->
+									<input class="input-text" type="text" name="registerName1" ng-model="login.registerName1" placeholder="手机号" required ng-pattern="/^(1[0-9]{10})$/" />
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="{{register_form.registerName1.$valid}}" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode(login.registerName1)">
+								</div>
+							</div>
+
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="register_form.registerName1.$dirty && register_form.registerName1.$invalid">手机格式不正确</div>
+							</div>
+						</div>
+					</div>
+					<!--手机号码 end-->
+					<!--邮箱 begin-->
+					<div class="input-box not-margin-bottom" ng-show="login.conditions=='0'">
+						<label>邮箱：</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="email" name="registerName2" maxlength="30" ng-model="login.registerName2" placeholder="邮箱帐号" required />
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="{{register_form.registerName2.$valid}}" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode(login.registerName2)">
+								</div>
+							</div>
+
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="register_form.registerName2.$dirty && register_form.registerName2.$invalid">邮箱格式不正确</div>
+							</div>
+						</div>
+					</div>
+					<!--邮箱 end-->
+					<!--验证码 begin-->
+					<div class="input-box not-margin-bottom">
+						<label ng-show="login.conditions=='3'">手机验证码：</label>
+						<label ng-show="login.conditions=='0'">邮箱验证码：</label>
+						<div class="right-input-container">
+							<input class="input-text" name="code" type="text" placeholder="验证码" ng-model="login.registerCode" required />
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="register_form.code.$dirty&&register_form.code.$invalid">验证码不可为空</div>
+							</div>
+						</div>
+					</div>
+					<!--验证码 end-->
+					<!--登录密码 begin-->
+					<div class="input-box not-margin-bottom">
+						<label>登录密码：</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" name="registerPassword1" type="password" placeholder="设置您的密码（不少于6位）" ng-model="login.registerPassword1" required ng-minlength="6" ng-maxlength="18" ng-pattern="/^([a-zA-Z0-9_!@#%&-]|[\.\*\+]){0,}$/" />
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="register_form.registerPassword1.$dirty&&register_form.registerPassword1.$error.minlength">密码至少为6位</div>
+								<div class="alert alert-danger" ng-show="register_form.registerPassword1.$dirty&&register_form.registerPassword1.$error.maxlength">密码不可超过18位</div>
+								<div class="alert alert-danger" ng-show="register_form.registerPassword1.$dirty&&register_form.registerPassword1.$error.pattern">密码只能为数字、字母、下划线等字符</div>
+							</div>
+						</div>
+					</div>
+					<!--登录密码 end-->
+					<!--确认密码 begin-->
+					<div class="input-box not-margin-bottom">
+						<label>确认密码：</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" name="registerPassword2" type="password" placeholder="请再次输入您的密码" ng-model="login.registerPassword2" required />
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="register_form.registerPassword2.$dirty && login.registerPassword1!=login.registerPassword2">两次输入的密码不一致</div>
+							</div>
+						</div>
+					</div>
+					<!--确认密码 end-->
+					<!--验证码 begin-->
+					<div class="input-box">
+						<label>图片验证码：</label>
+						<div class="input-container right-input-container">
+							<div class="input-box">
+								<div class="input-container horizontal-code-div">
+									<input class="input-text" name="registerImgCode" type="text" placeholder="验证码" ng-model="login.registerImgCode" required ng-minlength="4" ng-maxlength="4" />
+									<div class="img-code">
+										<img ng-src="{{login.imgCodeSrc}}" /><span ng-click="login.setImgCodeSrc()">看不清？换一张</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--验证码 end-->
+					<div class="input-box line-height20">
+						<div class="remember">
+							<i ng-click="login.registerAgree=!login.registerAgree" class="iconfont" ng-class="{'color-green':login.registerAgree}">&#xe608;</i>
+							<span>我已阅读并同意</span>
+							<a href="javascript:void(0)" class="color-blue" ui-sref="protocol" target="_blank">服务条款及隐私权政策</a>
+						</div>
+
+					</div>
+					<div class="input-box">
+						<input type="submit" class="button login-finally-button" ng-class="{'disabled':!login.registerAgree}" value="立即注册" />
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,327 @@
+.top-header {
+    @header-height: 36px;
+    width: 100%;
+    height: @header-height;
+    line-height: @header-height;
+    background-color: #313539;
+    position: relative;
+    z-index: 998;
+    div.container {
+        color: #a5a6a7;
+        font-size: 12px;
+        padding-bottom: 0;
+        .header-left {
+            display: inline-block;
+        }
+        .header-right {
+            display: inline-block;
+            float: right;
+            height: @header-height;
+            span {
+                display: inline-block;
+                padding: 0 5px;
+                &:hover {
+                    color: @color-green-1;
+                }
+            }
+        }
+        .hover-span {
+            cursor: pointer;
+            &.code {
+                position: relative;
+                img {
+                    position: absolute;
+                    top: @header-height + 5px;
+                    left: 50%;
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    .transform(translate(-50%,0));
+                    .transition(all .3s);
+                }
+                &:hover {
+                    img {
+                        height: 160px;
+                        width: 160px;
+                    }
+                }
+            }
+            &:hover {
+                color: @color-green-1;
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+    #exit{
+        &:hover{
+            color: @color-red;
+        }
+    }
+    &:after {
+        .after();
+    }
+}
+.top-nav {
+    @menu-height: 60px;
+    height: @menu-height;
+    background: @color-green-1;
+    position: relative;
+    z-index: 990;
+    width: 100%;
+    .container {
+        padding: 0;
+        ul.top-menu-ul {
+            width: 100%;
+            height: @menu-height;
+            li.top-menu-li {
+                position: relative;
+                width: 100px;
+                float: left;
+                display: block;
+                padding: 0;
+                margin: 0;
+                height: @menu-height;
+                line-height: @menu-height;
+                cursor: pointer;
+                text-align: center;
+                color: #FFFFFF;
+                font-size: 14px;
+                & > a {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    color: #FFFFFF;
+                }
+                //LOGO
+                &.logo {
+                    width: 120px;
+                    margin-right: 20px;
+                    a {
+                        text-align: center;
+                        img {
+                            width: 86px;
+                            display: inline-block;
+                            border: 0;
+                            vertical-align: middle;
+                        }
+                    }
+                    a:hover{
+                        background-color: @color-green-1;
+                    }
+                }
+                //地区
+                &.area {
+                    .hover-panner {
+                        width: 332px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        ul {
+                            li {
+                                width: 75px;
+                                a {
+                                    padding-left: 5px;
+                                    padding-right: 5px;
+                                    &:hover {
+                                        color: #FFFFFF;
+                                        background-color: @color-green-1;
+                                    }
+                                }
+                            }
+                            &:after {
+                                .after();
+                            }
+                        }
+                    }
+                }
+                //发现活动
+                &.find-active {
+                    .hover-panner {
+                        width: 402px;
+                        .find-active-item {
+                            .left {
+                                float: left;
+                                padding-top: 10px;
+                                color: @color-green-1;
+                                width: 80px;
+                                line-height: @hover-panner-line-height;
+                            }
+                            .right {
+                                float: left;
+                                width: 320px;
+                                ul {
+                                    li {
+                                        width: 75px;
+                                        a {
+                                            &:hover {
+                                                color: @color-green-1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &:after {
+                                .after();
+                            }
+                        }
+                    }
+                }
+                //搜索框
+                &.search {
+                    width: 330px;
+                    padding-top: 13px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    .input-box {
+                        @height: 34px;
+                        line-height: @height;
+                        .input-text {
+                            border: 0;
+                            height: @height;
+                            color: #666666;
+                            padding-right: 40px;
+                        }
+                        .left-button-content {
+                            .button {
+                                height: @height;
+                                line-height: @height - 12px;
+                                border-top: 0;
+                                border-right: 1px solid @color-green-1;
+                                border-left: 1px solid @color-green-1;
+                                border-bottom: 0;
+                                color: @color-green-1;
+                                background: #FFFFFF !important;
+                            }
+                            ul.search-list {
+                                width: 100%;
+                                position: absolute;
+                                top: 100%;
+                                display: none;
+                                border: 1px solid @color-green-1;
+                                border-top: 0;
+                                .border-radius(0 0 4px 4px);
+                                overflow: hidden;
+                                li.search-item {
+                                    text-align: left;
+                                    padding-left: 12px;
+                                    line-height: @height;
+                                    color: #666666;
+                                    background-color: #FFFFFF;
+                                    &:hover {
+                                        color: @color-green-1;
+                                    }
+                                }
+                            }
+                            &.active {
+                                .button {
+                                    .border-radius(4px 0 0 0);
+                                }
+                                ul.search-list {
+                                    display: block;
+                                }
+                            }
+                        }
+                        i.search-btn {
+                            height: @height;
+                            line-height: @height;
+                            position: absolute;
+                            left: auto;
+                            right: 0;
+                            top: 0;
+                            color: #CCCCCC;
+                            font-size: 18px;
+                            &:hover {
+                                color: @color-green-1;
+                            }
+                        }
+                    }
+                    &:hover {
+                        background-color: @color-green-1;
+                    }
+                }
+                //发布活动
+                &.add-active,&.project {
+                    width: 105px;
+                    .img-jia {
+                        font-size: 20px;
+                        vertical-align: middle;
+                        width: auto;
+                        top: 0px;
+                        color: #FF9900;
+                    }
+                    .hover-panner {
+                        width: 100%;
+                        ul {
+                            width: 100%;
+                            li {
+                                float: none;
+                                width: 100%;
+                                height: 40px;
+                                line-height: 40px;
+                                a {
+                                    display: block;
+                                    height: 100%;
+                                    margin: 0 10px;
+                                    font-size: 14px;
+                                    display: block;
+                                    width: auto;
+                                    .transition(all .2s);
+                                    text-align: center;
+                                    border-bottom: 1px solid @color-line-gray;
+                                }
+                                &:hover {
+                                    a {
+                                        background-color: @color-green-1;
+                                        color: #FFFFFF;
+                                    }
+                                }
+                                &:last-child {
+                                    a {
+                                        border-bottom: 0;
+                                    }
+                                }
+                            }
+                            &:after {
+                                .after();
+                            }
+                        }
+                    }
+                    &:hover {
+                        ul {
+                            display: block;
+                        }
+                    }
+                }
+                //开发中
+                &.opening {
+                    width: auto;
+                    margin-left: 140px;
+                    float: none;
+                    cursor: default;
+                    a {
+                        font-size: 24px;
+                        color: rgba(255,255,255,.6);
+                        cursor: default;
+                    }
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+                //li鼠标发过效果
+                &:hover {
+                    background-color: @color-green-2;
+                    .hover-panner {
+                        display: block;
+                    }
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+}

@@ -1,0 +1,337 @@
+<div id="crowdFundDetail" class="container">
+	<div class="crowdFundDetail-info">
+		<div class="left-top-status-img crowdFundReady" ng-show="crowdFundDetail.crowdFundInfo.is_effect=='0'"></div>
+		<div class="left-top-status-img crowdFundLoading" ng-show="crowdFundDetail.crowdFundInfo.is_effect=='1' && crowdFundDetail.crowdFundInfo.is_success=='0'"></div>
+		<div class="left-top-status-img crowdFundSuccess" ng-show="crowdFundDetail.crowdFundInfo.is_effect=='1' && crowdFundDetail.crowdFundInfo.is_success=='1'"></div>
+		<div class="left-top-status-img crowdFundStop" ng-show="crowdFundDetail.crowdFundInfo.is_effect=='1' && crowdFundDetail.crowdFundInfo.is_success=='2'"></div>
+		<div class="left-img" ng-style="{ 'background-image': 'url(' + crowdFundDetail.crowdFundInfo.image + '?imageslim)' }"></div>
+		<div class="right-content">
+			<p class="right-content-title" title="{{crowdFundDetail.crowdFundInfo.name}}">{{crowdFundDetail.crowdFundInfo.name}}</p>
+			<p class="already-fund-text">已筹到</p>
+			<p class="money">￥<span>{{crowdFundDetail.crowdFundInfo.support_amount}}</span></p>
+			<div class="progressbar">
+				<p ng-style="{'width':(crowdFundDetail.crowdFundInfo.support_amount/crowdFundDetail.crowdFundInfo.limit_price)*100 + '%'}"></p>
+			</div>
+			<div class="progress-size">
+				<div class="width-50 left"><span>当前进度</span><span>{{(crowdFundDetail.crowdFundInfo.support_amount/crowdFundDetail.crowdFundInfo.limit_price)*100 | number:2}}</span>%</div>
+				<div class="width-50 right"><span>{{crowdFundDetail.crowdFundInfo.support_count}}</span><span>名支持者</span></div>
+			</div>
+			<p class="desc">此项目必须在 <span>{{crowdFundDetail.crowdFundInfo.deal_days | toTime}}</span> 前得到 <span>￥{{crowdFundDetail.crowdFundInfo.limit_price}}</span> 的支持才可成功！</p>
+
+			<div class="button-list">
+				<div class="div-button right-button" ng-show="!crowdFundDetail.focusFlag" ng-click="crowdFundDetail.focusCrowdFund()"><i class="iconfont">&#xe644;</i>收藏<span>({{crowdFundDetail.crowdFundInfo.focus_count}})</span></div>
+				<div class="div-button right-button active" ng-show="crowdFundDetail.focusFlag" ng-click="crowdFundDetail.focusCrowdFund()"><i class="iconfont">&#xe643;</i>已收藏<span>({{crowdFundDetail.crowdFundInfo.focus_count}})</span></div>
+
+				<!--<div class="div-button right-button" ng-show="false"><i class="iconfont">&#xe642;</i>赞<span>(</span><span>33</span><span>)</span></div>
+				<div class="div-button right-button active" ng-show="true"><i class="iconfont">&#xe641;</i>已赞<span>(</span><span>33</span><span>)</span></div>-->
+			</div>
+
+			<p class="share-text">分享到</p>
+			<!--<div class="share-box">
+				<a title="微信">
+					<img src="img/weixin.png">
+				</a>
+				<a title="微博">
+					<img src="img/weibo.png">
+				</a>
+				<a title="QQ空间">
+					<img src="img/qqzone.png">
+				</a>
+			</div>-->
+			<div class="bdsharebuttonbox">
+				<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+			</div>
+		</div>
+	</div>
+
+	<!---->
+
+	<div class="project-more-info">
+		<!--左侧-->
+		<div class="left-big-box">
+			<ul class="left-menu">
+				<li ng-click="crowdFundDetail.setActivePanel('detail')" ng-class="{'active':crowdFundDetail.activePanel=='detail'}">项目主页</li>
+				<li ng-click="crowdFundDetail.setActivePanel('project')" ng-class="{'active':crowdFundDetail.activePanel=='project'}">项目进展<span>{{crowdFundDetail.projectProgressArray.length}}</span></li>
+				<li ng-click="crowdFundDetail.setActivePanel('comment')" ng-class="{'active':crowdFundDetail.activePanel=='comment'}">评论<span ng-bind="crowdFundDetail.comment_count"></span></li>
+				<li ng-click="crowdFundDetail.setActivePanel('people')" ng-class="{'active':crowdFundDetail.activePanel=='people'}">支持者<span>{{crowdFundDetail.peopleCount}}</span></li>
+			</ul>
+			<ul class="left-content">
+				<!--项目主页 begin-->
+				<li class="detail-panel" ng-show="crowdFundDetail.activePanel=='detail'">
+					<div ng-show="!!crowdFundDetail.crowdFundInfo.vedio">
+						<div ng-bind-html="crowdFundDetail.crowdFundInfo.vedio | toHtml"></div>
+					</div>
+					<div class="break-word" ng-bind-html="crowdFundDetail.crowdFundInfo.description | toHtml"></div>
+				</li>
+				<!--项目主页 end-->
+
+				<!--项目进展 begin-->
+				<li class="project-panel" ng-show="crowdFundDetail.activePanel=='project'">
+					<!--评论输入框   只有当前用户名user_name == 众筹发布者时才显示 -->
+					<div class="post-comment-box" ng-show="userInfo.id == crowdFundDetail.sponsorInfo.id">
+						<div class="left-circle-photo">
+							<img ng-src="{{userInfo.head_image}}" ng-show="!!userInfo.head_image" />
+						</div>
+						<div class="right-edit">
+							<textarea class="input-text" ng-model="crowdFundDetail.projectProgressDesc"></textarea>
+							<div class="select-img-box">
+								<button type="button" class="button2 button2-36" img-upload id="project-btn" btn-id="project-btn" img-array="crowdFundDetail.projectImgArray">选择图片</button>
+								<label>最多选择 5 张</label>
+								<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="crowdFundDetail.addProjectProgress()">发&nbsp;布</button>
+								<div class="clearfix"></div>
+								<ul class="img-list">
+									<li ng-repeat="item in crowdFundDetail.projectImgArray">
+										<img ng-src="{{item}}" />
+										<div class="delete" ng-click="crowdFundDetail.deleteImage('projectImgArray',$index)"><i class="iconfont">&#xe63a;</i></div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<ul>
+						<li class="one">
+							<div class="left-time">&nbsp;</div>
+							<div class="right-panner">
+								<div class="left-img">
+									<img ng-src="{{crowdFundDetail.sponsorInfo.head_image}}" />
+								</div>
+								<div class="content">
+									<p title="{{crowdFundDetail.crowdFundInfo.brief}}">{{crowdFundDetail.crowdFundInfo.brief}}</p>
+								</div>
+							</div>
+						</li>
+						<li ng-repeat="item in crowdFundDetail.projectProgressArray | orderBy: '-id'">
+							<div class="left-time">{{item.create_time | toDate}}</div>
+							<div class="right-panner">
+								<div class="left-circle"><span></span></div>
+								<div class="content">
+									<p>{{item.comment_data_cache}}</p>
+									<div class="img-list">
+										<img ng-src="{{imgItem}}" toggle="true" ng-repeat="imgItem in item.imgArray" ng-click="crowdFundDetail.toggleImageWidth($event)" />
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<!--项目进展 end-->
+
+				<!--TODO 评论 begin-->
+				<li class="comment-panel" ng-show="crowdFundDetail.activePanel=='comment'">
+					<!--评论输入框-->
+					<div class="post-comment-box">
+						<div class="left-circle-photo">
+							<img ng-src="{{userInfo.head_image}}" ng-show="!!userInfo.head_image" />
+						</div>
+						<div class="right-edit">
+							<textarea class="input-text" ng-model="crowdFundDetail.commentText"></textarea>
+							<div class="select-img-box">
+								<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="crowdFundDetail.addComment()">评&nbsp;论</button>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<!--评论列表-->
+					<ul class="comment-list">
+						<!---->
+						<li class="comment-item" ng-repeat="item in crowdFundDetail.commentArray">
+							<div class="left-circle-photo">
+								<img ng-src="{{item.head_image}}" />
+							</div>
+							<div class="right-content">
+								<!--用户名-->
+								<h4><span class="username">{{item.nickname}}</span></h4>
+								<!--文字内容-->
+								<div class="talking">{{item.content}}</div>
+								<!--图片列表-->
+								<!--时间-->
+								<p class="time-box">
+									<span class="time">{{item.create_time | toTime}}</span>
+									<a class="float-right color-orange" ng-click="crowdFundDetail.setCommentBox($event , item.id , item.id , item.nickname , $index)">评论</a>
+								</p>
+								<!--回复列表   显示这个模块的条件：有人点击了评论按钮   ，或者  ，回复列表的长度大于0 -->
+								<div class="answer-box" ng-show="crowdFundDetail.showCommentBoxIndex==$index || item.list.length>0">
+									<div class="triangle"></div>
+									<ul class="answer-list">
+										<!--评论输入框 begin  显示这个模块的条件：有人点击了评论按钮 -->
+										<li class="answer-item" ng-show="crowdFundDetail.showCommentBoxIndex==$index">
+											<div class="reply-box">
+												<textarea class="input-text" ng-model="crowdFundDetail.replyText"></textarea>
+												<div class="button-parent">
+													<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="crowdFundDetail.addReply()">发&nbsp;送</button>
+												</div>
+											</div>
+										</li>
+										<!--评论输入框 end-->
+										<li class="answer-item" ng-repeat="smallItem in item.list">
+											<div class="talking">
+												<span class="username">{{smallItem.nickname}}</span> 回复 <span class="username">{{smallItem.reply_nickname}}</span> ：<span>{{smallItem.content}} </span>
+											</div>
+											<p class="time-box">
+												<a class="float-right color-orange" ng-click="crowdFundDetail.setReplyBox($event , item.id , smallItem.id , smallItem.nickname ,$parent.$index,$index)">回复</a>
+												<span class="time float-right">{{smallItem.create_time | toTime}}</span>
+											</p>
+										</li>
+										<!--回复输入框 begin-->
+										<li class="answer-item" ng-show="crowdFundDetail.showReplyBoxIndex==$index">
+											<div class="reply-box">
+												<textarea class="input-text" placeholder="{{crowdFundDetail.replyPlaceholder}}" ng-model="crowdFundDetail.replyText"></textarea>
+												<div class="button-parent">
+													<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="crowdFundDetail.addReply()">发&nbsp;送</button>
+												</div>
+											</div>
+										</li>
+										<!--回复输入框 begin-->
+									</ul>
+								</div>
+
+							</div>
+						</li>
+						<!---->
+					</ul>
+					<!--分页 begin-->
+					<div class="pagination-box" ng-show="crowdFundDetail.commentArray.length!='0'">
+						<page-bar page-change="crowdFundDetail.commentPageParams.pageChange()" page-count="crowdFundDetail.commentPageParams.page_count" current="crowdFundDetail.commentPageParams.current" show-page="{{crowdFundDetail.commentPageParams.showPage}}"></page-bar>
+					</div>
+					<!--分页 end-->
+				</li>
+				<!--评论 end-->
+
+				<!--支持者 begin-->
+				<li class="people-panel" ng-show="crowdFundDetail.activePanel=='people'">
+					<ol>
+						<li ng-repeat="item in crowdFundDetail.peopleArray">
+							<div class="left-img">
+								<img ng-src="{{item.head_image}}" />
+							</div>
+							<div class="right-content">
+								<p class="username" title="{{item.nickname}}">{{item.nickname}}</p>
+								<p class="money">支持项目<span class="color-orange">￥{{item.price}}元</span></p>
+								<p class="count">
+									<label>发起&nbsp;<strong>{{item.build_count}}</strong></label>
+									<label>支持&nbsp;<strong>{{item.support_count}}</strong></label>
+								</p>
+							</div>
+						</li>
+					</ol>
+					<div style="padding-left: 20px;" ng-show="crowdFundDetail.peopleArray.length!='0'">
+						<page-bar page-change="crowdFundDetail.peoplePageParams.pageChange()" page-count="crowdFundDetail.peoplePageParams.page_count" current="crowdFundDetail.peoplePageParams.current" show-page="{{crowdFundDetail.peoplePageParams.showPage}}"></page-bar>
+					</div>
+				</li>
+				<!--支持者 end-->
+			</ul>
+		</div>
+		<!--右侧-->
+		<div class="right">
+			<!--项目发起人 begin-->
+			<div class="right-box-item">
+				<h3 class="title"><span>项目发起人</span></h3>
+				<div class="content">
+					<div class="user-info">
+						<div class="left-img">
+							<img ng-src="{{crowdFundDetail.sponsorInfo.head_image}}" />
+						</div>
+						<div class="right-content">
+							<p class="username" title="{{crowdFundDetail.sponsorInfo.identify_bs_name}}">{{crowdFundDetail.sponsorInfo.identify_bs_name}}</p>
+							<p class="desc">{{crowdFundDetail.sponsorInfo.company_desc}}</p>
+							<p>
+								<span>发起&nbsp;</span><span class="color-orange">{{crowdFundDetail.sponsorInfo.build_count}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>支持&nbsp;</span><span class="color-orange">{{crowdFundDetail.sponsorInfo.support_count}}</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--项目发起人 end-->
+			<!--无私奉献 begin-->
+			<div class="right-box-item">
+				<h3 class="title"><span>无私奉献</span><!--<span class="float-right"><span>1</span> 位支持者</span>--></h3>
+				<div class="content">
+					<div class="devotion">
+						<p>感谢您的无私奉献，这份支持将助我们的梦想飞的更高更远。</p>
+						<div class="money-box">
+							<ul>
+								<li ng-click="crowdFundDetail.freeMoney=1" ng-class="{'active':crowdFundDetail.freeMoney==1}">￥1</li>
+								<li ng-click="crowdFundDetail.freeMoney=5" ng-class="{'active':crowdFundDetail.freeMoney==5}">￥5</li>
+								<li ng-click="crowdFundDetail.freeMoney=20" ng-class="{'active':crowdFundDetail.freeMoney==20}">￥20</li>
+							</ul>
+							<div class="input-box not-margin-bottom">
+								<div class="input-container">
+									<i class="absolute" style="font-style: normal;font-size: 16px;color: #666;top:1px;">￥</i>
+									<input class="input-text" type="number" placeholder="其他" style="font-size: 16px;" ng-model="crowdFundDetail.freeMoney"/>
+								</div>
+							</div>
+						</div>
+						<button type="button" class="button width-100" ng-click="crowdFundDetail.addFreeMoney(crowdFundDetail.freeMoney)">无私支持</button>
+					</div>
+				</div>
+			</div>
+			<!--无私奉献 end-->
+
+			<div class="right-box-item" ng-repeat="item in crowdFundDetail.repayArray">
+				<h3 class="title"><span class="title-money">￥<span>{{item.delivery_fee}}</span></span><span class="float-right"><span>{{item.support_count}}</span> 位支持者</span></h3>
+				<div class="content">
+					<div class="need-money">
+						<p class="count">限额 <strong class="color-orange">{{item.limit_user}}</strong>&nbsp;份&nbsp;|&nbsp;剩余&nbsp;<strong class="color-orange">{{item.limit_user - item.support_count}}</strong>&nbsp;份</p>
+						<p>{{item.item_name}}</p>
+						<p class="color-gray">{{item.description}}</p>
+						<div class="small-img background-cover"  ng-style="{ 'background-image': 'url(' + item.item_image + '?imageslim)' }">
+							<!--<img ng-src="{{item.item_image}}" />-->
+						</div>
+						<!--<p><span class="color-gray">配送运费：</span>免运费</p>-->
+						<p><span class="color-gray">预计回报发送时间：</span>项目成功结束后<span class="color-orange">{{item.repaid_day}}</span>天内</p>
+						<button type="button" class="button width-100" ng-click="crowdFundDetail.goToOrderPage(item.id,item.delivery_fee)">支持￥{{item.delivery_fee}}</button>
+					</div>
+				</div>
+			</div>
+			<!--<div class="right-box-item">
+				<h3 class="title"><span class="title-money">￥<span>789</span></span><span class="float-right"><span>8</span> 位支持者</span></h3>
+				<div class="content">
+					<div class="need-money">
+						<p class="count">限额 <strong class="color-orange">500</strong>&nbsp;份&nbsp;|&nbsp;剩余&nbsp;<strong class="color-orange">489</strong>&nbsp;份</p>
+						<p class="color-gray">感谢您对获得原装的大力支持！您将获得原装获得原装魅族手机1个。</p>
+						<div class="small-img">
+							<img ng-src="{{public.imgUrl}}/example-slide-4.jpg" />
+						</div>
+						<p><span class="color-gray">配送运费：</span>免运费</p>
+						<p><span class="color-gray">预计回报发送时间：</span>项目成功结束后<span class="color-orange">30</span>天内</p>
+						<button type="button" class="button width-100">支持￥789</button>
+					</div>
+				</div>
+			</div>-->
+
+			<!---->
+			<!--联系我们 begin-->
+			<div class="right-box-item">
+				<h3 class="title"><span>联系我们</span></h3>
+				<div class="content">
+					<div class="contact-us">
+						<p>
+							<i class="iconfont color-green" style="font-size: 20px;">&#xe64b;</i>
+							<span class="key">公司名称：</span>
+							<span class="value">{{crowdFundDetail.sponsorInfo.identify_bs_name}}</span>
+						</p>
+						<!--<p>
+							<i class="iconfont color-green" style="font-size: 19px;">&#xe64a;</i>
+							<span class="key">联系地址：</span>
+							<span class="value">广东省广州市天河区中山大道54号家悦大厦B座2206</span>
+						</p>-->
+						<p>
+							<i class="iconfont color-green">&#xe64c;</i>
+							<span class="key">联系电话：</span>
+							<span class="value">{{crowdFundDetail.sponsorInfo.mobile}}</span>
+						</p>
+						<!--<p>
+							<i class="iconfont color-green">&#xe611;</i>
+							<span class="key">工作时间：</span>
+							<span class="value">10:00-18:00</span>
+						</p>-->
+					</div>
+				</div>
+			</div>
+			<!--联系我们 end-->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+<div id="personal-invoice">
+	<h1 class="title">发票信息设置</h1>
+	<div class="invoice-panner">
+		<form name="setInvoiceForm" novalidate="novalidate" ng-submit="invoice.setInvoiceSubmit()">
+			<ul>
+				<li class="item">
+					<!--发票项目 begin-->
+					<div class="input-box">
+						<label>发票项目：</label>
+						<div class="input-container right-input-container">
+							<div class="select-box">
+								<select ng-model="invoice.setInvoiceForm.deal_name" ng-options="item.name as item.name for item in invoice.dealNameArray">
+									<option value="">请选择</option>
+								</select>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide">发票项目不可超过8个字符</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!--发票项目 end-->
+				</li>
+				<li class="item">
+					<!--发票抬头 begin-->
+					<div class="input-box">
+						<label>发票抬头：</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="请输入发票抬头" name="invoice_title" ng-model="invoice.setInvoiceForm.invoice_title" required />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setInvoiceForm.invoice_title.$dirty && setInvoiceForm.invoice_title.$invalid">请填写发票抬头</div>
+							</div>
+						</div>
+					</div>
+					<!--发票抬头 end-->
+				</li>
+				<li class="item">
+					<!--联系人 begin-->
+					<div class="input-box">
+						<label>联系人：</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="请输入联系人" name="consignee" ng-model="invoice.setInvoiceForm.consignee" required/>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setInvoiceForm.consignee.$dirty && setInvoiceForm.consignee.$invalid">联系人不可为空</div>
+							</div>
+						</div>
+					</div>
+					<!--联系人 end-->
+				</li>
+				<li class="item">
+					<!--联系电话 begin-->
+					<div class="input-box">
+						<label>联系电话：</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="请输入联系电话" name="mobile" ng-model="invoice.setInvoiceForm.mobile" required ng-pattern="/^(1[0-9]{10})$/" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setInvoiceForm.mobile.$dirty && setInvoiceForm.mobile.$invalid">联系电话格式不正确</div>
+							</div>
+						</div>
+					</div>
+					<!--联系电话 end-->
+				</li>
+				<li class="item">
+					<!--寄送地址 begin-->
+					<div class="input-box">
+						<label>寄送地址：</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="寄送地址" name="address" ng-model="invoice.setInvoiceForm.address" required/>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setInvoiceForm.address.$dirty && setInvoiceForm.address.$invalid">收货地址不可为空</div>
+							</div>
+						</div>
+					</div>
+					<!--寄送地址 end-->
+				</li>
+			</ul>
+			<div class="button-box text-align-center">
+				<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="setInvoiceForm.$invalid" value="提交发票申请">
+			</div>
+		</form>
+	</div>
+</div>

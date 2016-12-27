@@ -1,0 +1,37 @@
+#personal-moneyAccount {
+}
+.account-panner {
+    width: 840px;
+    ul{
+        width: 100%;
+        padding: 0 50px;
+        li{
+            width: 100%;
+            line-height: 60px;
+            border-bottom: 1px solid @color-line-gray;
+            font-size: 14px;
+            .left-content{
+                width: 150px;
+                float: left;
+                color: @main-color;
+            }
+            .center-content{
+                width: 350px;
+                float: left;
+                color: @color-888;
+            }
+            .right-content{
+                float: left;
+                width: 840px - 100px - 150px - 350px;
+                text-align: right;
+                color: @color-888;
+                a{
+                    color: @color-blue;
+                }
+            }
+            &:after{
+                .after();
+            }
+        }
+    }
+}

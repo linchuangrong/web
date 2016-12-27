@@ -1,0 +1,76 @@
+#companyList {
+    width: 1080px;
+    overflow: visible;
+    .company-list {
+        width: 1110px;
+        overflow: visible;
+        margin-left: -15px;
+        margin-right: 0;
+        .company-item {
+            float: left;
+            width: 340px;
+            height: auto;
+            border: 1px solid @color-line-gray2;
+            padding: 10px 10px 0;
+            margin-right: 15px;
+            margin-left: 15px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            &>.img {
+                .background-cover();
+                width: 320px;
+                height: 320px;
+            }
+            &>p {
+                height: 40px;
+                text-align: center;
+                .overflow-ellipsis();
+                line-height: 40px;
+            }
+            &.active {
+                border-color: @color-green-1;
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+    .detail-panel {
+        border: 1px solid @color-green-1;
+        padding: 10px 20px;
+        margin-bottom: 30px;
+        color: #222222;
+        .left {
+            width: 50%;
+            float: left;
+            p {
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+        .right {
+            width: 50%;
+            float: left;
+            p {
+                height: 40px;
+                line-height: 40px;
+            }
+            .image-box {
+                span {
+                    display: inline-block;
+                    height: 80px;
+                    line-height: 80px;
+                    vertical-align: middle;
+                }
+                img {
+                    width: auto;
+                    height: 80px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+}

@@ -1,0 +1,152 @@
+<div id="personal" class="container">
+	<!--左侧导航菜单 begin-->
+	<div class="left-menu">
+		<div class="big-item home" ng-class="{'active':currentRouter=='personal.home'}" ui-sref="personal.home"><i class="iconfont gerenzhuye-img">&#xe622;</i>我的主页</div>
+		<div class="big-item"><i class="iconfont wofabu-img">&#xe61f;</i>我发布的</div>
+		<ul>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.myActivity'}">
+				<a ui-sref="personal.myActivity">我的活动</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.myCrowdFund'}">
+				<a ui-sref="personal.myCrowdFund">我的众筹</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.myReview'}">
+				<a ui-sref="personal.myReview">我的评审</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.myEstimate'}">
+				<a ui-sref="personal.myEstimate">我的评估</a>
+			</li>
+		</ul>
+		<div class="big-item"><i class="iconfont wocanyu-img">&#xe623;</i>我参与的</div>
+		<ul>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.joinActivity'}">
+				<a ui-sref="personal.joinActivity">我的报名</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.joinCrowdFund'}">
+				<a ui-sref="personal.joinCrowdFund">我的众筹</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.collection'}">
+				<a ui-sref="personal.collection">我的收藏</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.concern'}">
+				<a ui-sref="personal.concern">我的关注</a>
+			</li>
+		</ul>
+		<div class="big-item"><i class="iconfont zhanghushezi-img">&#xe621;</i>帐户设置</div>
+		<ul>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.dataSet'}" ng-show="userInfo.identity_conditions!='0'">
+				<a ui-sref="personal.dataSet">资料设置</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.safe'}">
+				<a ui-sref="personal.safe">安全中心</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.sponsor'}" ng-show="userInfo.identity_conditions=='0'">
+				<a ui-sref="personal.sponsor">主办方</a>
+			</li>
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.moneyAccount'||currentRouter=='personal.addMoneyAccount'||currentRouter=='personal.addBank'||currentRouter=='personal.myBankCard'}">
+				<a ui-sref="personal.moneyAccount">收款帐户</a>
+			</li>
+			<!--<li class="small-item" ng-class="{'active':currentRouter=='personal.invoice'}">
+				<a ui-sref="personal.invoice">发票信息</a>
+			</li>-->
+			<li class="small-item" ng-class="{'active':currentRouter=='personal.address'}">
+				<a ui-sref="personal.address">收货地址</a>
+			</li>
+		</ul>
+	</div>
+	<!--左侧导航菜单 end-->
+	<!--右侧内容 begin-->
+	<div class="right-panner">
+		<div class="personal-back-img">
+			<div class="user-photo" ng-style="{ 'background-image': 'url('+ userInfo.head_image +')' }"></div>
+			<div class="user-info">
+				<!--此处用户信息，来自personalController-->
+				<div class="username" title="{{userInfo.identify_bs_name || userInfo.nickname || userInfo.user_name}}">{{userInfo.identify_bs_name || userInfo.nickname || userInfo.user_name}}</div>
+				<div class="anquan-shezhi">
+					<i class="iconfont color-green" title="安全中心" ui-sref="personal.safe">&#xe605;</i>
+					<i class="iconfont color-green" title="资料设置" ui-sref="personal.dataSet" ng-show="userInfo.identity_conditions!='0'">&#xe631;</i>
+					<i class="iconfont color-green" title="主办方" ui-sref="personal.sponsor" ng-show="userInfo.identity_conditions=='0'">&#xe631;</i>
+					<span>安全等级：<span class="color-orange" ng-bind="personal.gradeText"></span></span>
+				</div>
+			</div>
+			<div class="user-data">
+				<ul>
+					<li>
+						<div class="data-name">关注</div>
+						<div class="count" ui-sref="personal.concern">{{userInfo.focus_company_count}}</div>
+					</li>
+					<li>
+						<div class="data-name">收藏</div>
+						<div class="count" ui-sref="personal.collection">{{userInfo.focus_count}}</div>
+					</li>
+					<li>
+						<div class="data-name">参与</div>
+						<div class="count" ui-sref="personal.joinActivity">{{userInfo.support_count}}</div>
+					</li>
+				</ul>
+			</div>
+			<div class="user-money">
+				<p>可用余额</p>
+				<div>
+					<span class="color-orange">￥ {{10250.00 | number:2}}</span>
+					<a class="small-button">提现</a>
+				</div>
+				<p class="stop-money">（冻结余额：￥111.00）</p>
+			</div>
+		</div>
+		<!--二级路由 begin-->
+		<div class="small-view" ui-view></div>
+		<!--二级路由 end-->
+	</div>
+	<!--右侧内容 end-->
+
+	<div id="bind-phone-panel" ng-show="personal.showBindPhonePanel">
+		<div class="form-content">
+			<form name="bindPhoneForm" novalidate="novalidate" ng-submit="personal.bindPhoneSubmit()">
+				<div class="dialog-title">
+					<span>绑定手机</span>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>手机号</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" placeholder="请输入手机号" ng-maxlength="16" name="mobile" ng-model="personal.bindPhoneForm.mobile" required ng-pattern="/^(1[0-9]{10})$/" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="bindPhoneForm.mobile.$dirty && bindPhoneForm.mobile.$invalid">请输入正确的手机号</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" placeholder="输入手机验证码" ng-model="personal.bindPhoneForm.verify_coder" name="verify_coder" required>
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button ng-isolate-scope" value="获取验证码" canclick="bindPhoneForm.mobile.$valid" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode(personal.bindPhoneForm.mobile)">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请输入正确的验证码</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>设置密码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="password" placeholder="请设置您的密码" name="password" ng-model="personal.bindPhoneForm.password" required ng-minlength="6" ng-maxlength="18" ng-pattern="/^([a-zA-Z0-9_!@#%&-]|[\.\*\+]){0,}$/" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="bindPhoneForm.password.$dirty && bindPhoneForm.password.$invalid">密码为6到18位数字、字母字符</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="dialog-footer text-align-center">
+					<button type="submit" class="button button-36 padding-left-right-20" ng-class="{'disabled':bindPhoneForm.$invalid}" ng-disabled="bindPhoneForm.$invalid">确&nbsp;定</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,70 @@
+#personal-myBankCard {
+    .myBankCard-panner {
+        ul {
+            padding-top: 10px;
+            li {
+                width: 240px;
+                height: 150px;
+                float: left;
+                background-color: #FFFFFF;
+                .border-radius(5px);
+                overflow: hidden;
+                .box-shadow(0 0 6px rgba(0,0,0,0.4));
+                margin-right: 20px;
+                margin-left: 20px;
+                margin-bottom: 30px;
+                .info-content {
+                    position: relative;
+                    height: 110px;
+                    padding: 10px 10px 0;
+                    .title {
+                        height: 50px;
+                        img {
+                            vertical-align: middle;
+                            &.float-right{
+                                margin-top: 11px;
+                            }
+                        }
+                    }
+                    .number {
+                        height: 20px;
+                        font-size: 12px;
+                        line-height: 20px;
+                    }
+                    .name {
+                        height: 20px;
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+                }
+                .delete-content {
+                    cursor: pointer;
+                    border-top: 1px dashed @color-line-gray;
+                    height: 40px;
+                    background-color: #EEEEEE;
+                    color: @color-green-1;
+                    text-align: center;
+                    line-height: 39px;
+                    font-size: 14px;
+                }
+                &.last {
+                    cursor: pointer;
+                    .box-shadow(none);
+                    border: 2px dashed @color-green-1;
+                    padding-top: 35px;
+                    .iconfont {
+                        font-size: 48px;
+                        color: #BBBBBB;
+                    }
+                    span {
+                        font-size: 14px;
+                        line-height: 30px;
+                    }
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+}

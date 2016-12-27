@@ -1,0 +1,122 @@
+#examineDetail {
+    .p-title {
+        text-indent: 2em;
+        line-height: 30px;
+        font-size: 16px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed @color-line-gray2;
+        a {
+            font-size: 14px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    .main-panner {
+        padding-left: 30px;
+    }
+    //被评审人
+    .examine-people {
+        padding-top: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid @color-line-gray;
+        .not-hover {
+            cursor: inherit;
+        }
+        .input-container.right-input-container {
+            margin-left: 0;
+            .table-row-input-content {
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    .broadcast {
+        p {
+            padding: 15px 0 8px;
+            line-height: 28px;
+            font-size: 16px;
+        }
+    }
+    //评审项
+    .main-content {
+        //padding-left: 30px;
+        font-size: 16px;
+        .p-first-title {
+            font-size: 24px;
+            font-weight: bold;
+            padding-top: 20px;
+            line-height: 40px;
+            .overflow-ellipsis();
+        }
+        .big-list {
+            .big-item {
+                padding-top: 20px;
+                .list-title {
+                    color: #3e91e8;
+                    font-weight: bold;
+                    height: 24px;
+                    line-height: 24px;
+                }
+            }
+        }
+        .small-list {
+            .small-item {
+                padding-top: 10px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid @color-line-gray;
+                p.title {
+                    line-height: 36px;
+                    font-weight: 600;
+                }
+                .alert {
+                    font-size: 12px;
+                }
+                .people-box {
+                    line-height: 36px;
+                    //padding-top: 10px;
+                    .name {
+                        display: inline-block;
+                        width: 100px;
+                        text-align: center;
+                        vertical-align: middle;
+                        font-weight: bold;
+                    }
+                    .select-span-box {
+                        display: inline-block;
+                        width: 441px;
+                        border-left: 1px solid @color-line-gray2;
+                        vertical-align: middle;
+                        span {
+                            display: block;
+                            float: left;
+                            margin-top: -1px;
+                            width: 40px;
+                            line-height: 28px;
+                            text-align: center;
+                            cursor: pointer;
+                            border-right: 1px solid @color-line-gray2;
+                            border-top: 1px solid @color-line-gray2;
+                            border-bottom: 1px solid @color-line-gray2;
+                            background-color: rgba(101, 167, 236, 0.75);
+                            color: #FFFFFF;
+                            .transition(all .1s);
+                        }
+                        span.active {
+                            & ~ span {
+                                background-color: transparent;
+                                color: @main-color;
+                            }
+                        }
+                        &:after {
+                            .after();
+                        }
+                    }
+                    & + .people-box {
+                        padding-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

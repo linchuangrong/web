@@ -1,0 +1,54 @@
+<div id="personal-myCrowdFund">
+	<h1 class="title">我的众筹</h1>
+	<div class="tab-menu">
+		<ul>
+			<li class="active">已经发布</li>
+			<!--<li>已结束</li>-->
+		</ul>
+	</div>
+	<!--时间轴 begin-->
+	<div class="time-list-panner ng-hide" ng-show="myCrowdFund.crowdFundArray.length!='0'">
+		<ul>
+			<li class="time-item" ng-repeat="item in myCrowdFund.crowdFundArray">
+				<!--<div class="time" ng-hide="myCrowdFund.crowdFundArray[$index].year_month == myCrowdFund.crowdFundArray[$index-1].year_month">
+					<div class="left-circle"><span></span></div>
+					<p>{{item.year_month}}</p>
+				</div>-->
+				<div class="content">
+					<div class="left-image background-cover hover-pointer" ng-style="{ 'background-image': 'url(' + item.image+'?imageslim)' }"  ui-sref="crowdFundDetail({'crowdFundId':item.id})"></div>
+					<div class="right-content">
+						<h3 ui-sref="crowdFundDetail({'crowdFundId':item.id})">
+							<p title="{{item.name}}">{{item.name}}</p>
+							<div class="right-money">已筹得 <strong class="color-orange">￥{{item.support_amount}}</strong></div>
+						</h3>
+						<p class="text">结束时间：<span ng-bind="item.deal_days | toDate"></span>
+							<span class="ready" ng-if="item.is_effect=='0'">审核中</span>
+							<span class="overtime" ng-if="item.is_effect=='1' && myCrowdFund.setActivityStop(item.deal_days)">已结束</span>
+							<span class="continue" ng-if="item.is_effect=='1' && !myCrowdFund.setActivityStop(item.deal_days)">进行中</span>
+						</p>
+						<div class="text">
+							<span class="text-button" ui-sref="updateCrowdFund({'id':{{item.id}}})"><i class="iconfont">&#xe626;</i> 众筹管理</span>
+							<!--<span class="text-button"><i class="iconfont">&#xe628;</i> 名单管理</span>
+							<span class="text-button"><i class="iconfont">&#xe62b;</i> 活动推广</span>
+							<span class="text-button"><i class="iconfont">&#xe62a;</i> 分享</span>-->
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--时间轴 begin-->
+	<div ng-show="myCrowdFund.crowdFundArray.length!='0'">
+		<page-bar page-change="myCrowdFund.pageParams.pageChange()" page-count="myCrowdFund.pageParams.page_count" current="myCrowdFund.pageParams.current" show-page="{{myCrowdFund.pageParams.showPage}}"></page-bar>
+	</div>
+
+	<!--无数据 begin-->
+	<div class="not-data ng-hide" ng-show="myCrowdFund.crowdFundArray.length=='0' && myCrowdFund.loaded">
+		<i class="iconfont">&#xe627;</i>
+		<div>您还未发布过众筹</div>
+		<div>
+			<button class="button button-36" ui-sref="addCrowdFund">去发布</button>
+		</div>
+	</div>
+	<!--无数据 begin-->
+</div>

@@ -1,0 +1,39 @@
+#personal-myReview,
+#personal-myEstimate {
+    width: 840px;
+    overflow: visible;
+    ul.review-list {
+        width: 880px;
+        overflow: visible;
+        li.review-item {
+            float: left;
+            margin: 0 30px 30px 0;
+            width: 405px;
+            border: 1px solid @color-line-gray2;
+            background: #FFFFFF;
+            padding: 10px 20px 20px 0;
+            .border-radius(5px);
+            .transition(all 0.3s);
+            .title {
+                .overflow-ellipsis();
+                padding-left: 20px;
+            }
+            .link-box {
+                margin-top: 10px;
+            }
+            a {
+                margin-left: 10px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            &:hover {
+                border-color: transparent;
+                .box-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+}

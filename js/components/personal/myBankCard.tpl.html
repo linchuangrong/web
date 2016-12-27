@@ -1,0 +1,71 @@
+<div id="personal-myBankCard">
+	<h1 class="title">
+		<a class="left" ui-sref="personal.moneyAccount"><i class="iconfont">&#xe61a;</i>返回</a>
+		<span>管理我的银行卡</span>
+	</h1>
+	<div class="myBankCard-panner">
+		<ul>
+			<li ng-repeat="item in myBankCard.bankArray">
+				<div class="info-content">
+					<div class="title">
+						<img class="left" ng-src="{{item.icon}}" />
+						<img class="float-right" src="./img/cuxuka.png" />
+					</div>
+					<div class="number">{{item.card_top}} **** **** {{item.card_last}}</div>
+					<div class="name">{{item.real_name}}</div>
+				</div>
+				<div class="delete-content" ng-click="myBankCard.showAlertDialog(item.id)">
+					<i class="iconfont">&#xe63a;</i>
+					<span>删除银行卡</span>
+				</div>
+			</li>
+			<!--<li>
+				<div class="info-content">
+					<div class="title">
+						<img class="left" src="./img/yinhang.png" />
+						<img class="float-right" src="./img/cuxuka.png" />
+					</div>
+					<div class="number">**** **** **** 4584</div>
+					<div class="name">欧阳疯</div>
+				</div>
+				<div class="delete-content">
+					<i class="iconfont">&#xe63a;</i>
+					<span>删除银行卡</span>
+				</div>
+			</li>
+			<li>
+				<div class="info-content">
+					<div class="title">
+						<img class="left" src="./img/yinhang.png" />
+						<img class="float-right" src="./img/xinyongka.png" />
+					</div>
+					<div class="number">**** **** **** 4584</div>
+					<div class="name">欧阳疯</div>
+				</div>
+				<div class="delete-content">
+					<i class="iconfont">&#xe63a;</i>
+					<span>删除银行卡</span>
+				</div>
+			</li>
+			<li>
+				<div class="info-content">
+					<div class="title">
+						<img class="left" src="./img/yinhang.png" />
+						<img class="float-right" src="./img/cuxuka.png" />
+					</div>
+					<div class="number">**** **** **** 4584</div>
+					<div class="name">欧阳疯</div>
+				</div>
+				<div class="delete-content">
+					<i class="iconfont">&#xe63a;</i>
+					<span>删除银行卡</span>
+				</div>
+			</li>-->
+			<li class="last text-align-center" ui-sref="personal.addBank">
+				<i class="iconfont">&#xe635;</i>
+				<br />
+				<span class="color-green">添加银行卡</span>
+			</li>
+		</ul>
+	</div>
+</div>

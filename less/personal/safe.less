@@ -1,0 +1,154 @@
+.safe-panner {
+    border: 1px solid @color-line-gray;
+    //左侧头像
+    .safe-left {
+        float: left;
+        width: 300px;
+        text-align: center;
+        padding: 20px 40px;
+        min-height: 400px;
+        h3.title {
+            font-size: 18px;
+            line-height: 40px;
+            color: #666666;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        div.circle {
+            @width: 220px;
+            width: @width;
+            height: @width;
+            line-height: @width;
+            margin: 0 auto;
+            position: relative;
+            canvas {
+                display: block;
+                margin: 0;
+                position: absolute;
+                background: transparent;
+                left: 0;
+                top: 0;
+            }
+            #canvas_1 {
+                z-index: 1;
+            }
+            #canvas_2 {
+                z-index: 2;
+                background: transparent;
+                .transform(rotate(-90deg));
+            }
+        }
+        p.tips {
+            font-size: 16px;
+            color: @color-orange;
+            line-height: 20px;
+            margin-top: 20px;
+        }
+    }
+    //右侧input组
+    .safe-right {
+        float: left;
+        width: 840px - 2px - 300px;
+        //margin-left: 280px;
+        border-left: 1px solid @color-line-gray;
+        padding: 20px 30px 10px;
+        min-height: 400px;
+        .safe-item {
+            width: 840px - 2px - 300px - 1px - 60px;
+            margin-bottom: 30px;
+            &>div {
+                display: inline-block;
+                font-size: 14px;
+                vertical-align: middle;
+                line-height: 24px;
+                .iconfont {
+                    width: 24px;
+                    text-align: center;
+                    &.false {
+                        font-size: 22px;
+                        top: 2px;
+                    }
+                    &.true {
+                        font-size: 16px;
+                        top: 1px;
+                    }
+                }
+            }
+            .name {
+                width: 100px;
+            }
+            .status {
+                width: 70px;
+            }
+            .message {
+                width: 197px;
+            }
+            .text-button {
+                width: 82px;
+                text-align: right;
+                font-size: 12px;
+                margin-left: 10px;
+                button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &:after {
+        .after();
+    }
+}
+//各种弹框的样式
+.small-dialog {
+    .alert-dialog-panner {
+        width: 450px;
+        .dialog-title {
+            line-height: 46px;
+        }
+        .dialog-content {
+            padding: 20px 40px 0;
+            .input-box {
+                label {
+                    width: 65px;
+                }
+                .right-input-container {
+                    margin-left: 75px;
+                }
+            }
+        }
+        .dialog-footer {
+            padding: 15px 10px;
+        }
+    }
+}
+#set_phone,
+#set_email {
+    .alert-dialog-panner {
+        width: 380px;
+    }
+}
+#set_password {
+    .alert-dialog-panner {
+        width: 380px;
+    }
+    .input-box {
+        label {
+            width: 75px;
+        }
+        .right-input-container {
+            margin-left: 85px;
+        }
+    }
+}
+#set_pay_password,
+#set_idCard,
+#set_company {
+    .input-box {
+        label {
+            width: 100px;
+        }
+        .right-input-container {
+            margin-left: 110px;
+        }
+    }
+}

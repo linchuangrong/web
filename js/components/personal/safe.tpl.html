@@ -1,0 +1,481 @@
+<div id="personal-safe">
+	<h1 class="title">安全中心</h1>
+	<div class="safe-panner">
+		<div class="safe-left">
+			<h3 class="title">您的安全等级</h3>
+			<div class="circle">
+				<canvas id="canvas_1" width="220" height="220"></canvas>
+				<canvas id="canvas_2" width="220" height="220"></canvas>
+			</div>
+			<p class="tips">安全级别 - <span ng-bind="personal.gradeText"></span></p>
+		</div>
+		<div class="safe-right">
+			<!--登录密码 begin-->
+			<div class="safe-item">
+				<div class="name">
+					<i class="iconfont color-green true">&#xe636;</i> 登录密码
+				</div>
+				<div class="status"><span class="color-green">已设置</span></div>
+				<div class="message">设置登录密码，降低盗号风险，现在赶紧设置吧</div>
+				<div class="text-button">
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_password')">修改密码</button>
+				</div>
+			</div>
+			<!--登录密码 end-->
+			<!--手机号码 begin-->
+			<div class="safe-item">
+				<div class="name">
+					<i class="iconfont color-green true" ng-if="!!userInfo.mobile">&#xe636;</i>
+					<i class="iconfont color-orange false" ng-if="!userInfo.mobile">&#xe62f;</i> 手机号码
+				</div>
+				<div class="status">
+					<span class="color-green" ng-if="!!userInfo.mobile">已设置</span>
+					<span class="color-orange" ng-if="!userInfo.mobile">未设置</span>
+				</div>
+				<div class="message">设置登录密码，降低盗号风险，现在赶紧设置吧</div>
+				<div class="text-button">
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_phone');safe.mobileDialogTitle='绑定手机'" ng-show="!userInfo.mobile">立即设置</button>
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_phone');safe.mobileDialogTitle='解绑手机'" ng-show="!!userInfo.mobile">解绑</button>
+				</div>
+			</div>
+			<!--手机号码 end-->
+			<!--邮箱 begin-->
+			<div class="safe-item">
+				<div class="name">
+					<i class="iconfont color-green true" ng-if="!!userInfo.email">&#xe636;</i>
+					<i class="iconfont color-orange false" ng-if="!userInfo.email">&#xe62f;</i> 邮箱
+				</div>
+				<div class="status">
+					<span class="color-green" ng-if="!!userInfo.email">已设置</span>
+					<span class="color-orange" ng-if="!userInfo.email">未设置</span>
+				</div>
+				<div class="message">设置登录密码，降低盗号风险，现在赶紧设置吧</div>
+				<div class="text-button">
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_email');safe.emailDialogTitle='绑定邮箱'" ng-show="!userInfo.email">立即设置</button>
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_email');safe.emailDialogTitle='解绑邮箱'" ng-show="!!userInfo.email">解绑</button>
+				</div>
+			</div>
+			<!--邮箱 end-->
+			<!--支付密码 begin-->
+			<div class="safe-item">
+				<div class="name">
+					<i class="iconfont color-green true" ng-if="!!userInfo.paypassword">&#xe636;</i>
+					<i class="iconfont color-orange false" ng-if="!userInfo.paypassword">&#xe62f;</i> 支付密码
+				</div>
+				<div class="status">
+					<span class="color-green" ng-if="!!userInfo.paypassword">已设置</span>
+					<span class="color-orange" ng-if="!userInfo.paypassword">未设置</span>
+				</div>
+				<div class="message">设置登录密码，降低盗号风险，现在赶紧设置吧</div>
+				<div class="text-button">
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_pay_password');" ng-show="!userInfo.paypassword">立即设置</button>
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_pay_password');" ng-show="!!userInfo.paypassword">修改密码</button>
+				</div>
+			</div>
+			<!--支付密码 end-->
+			<!--实名认证 begin-->
+			<div class="safe-item" ng-show="userInfo.identity_conditions!='0'">
+				<div class="name">
+					<i class="iconfont color-green true" ng-if="userInfo.identify_status==2">&#xe636;</i>
+					<i class="iconfont color-orange false" ng-if="userInfo.identify_status!=2">&#xe62f;</i> 实名认证
+				</div>
+				<div class="status">
+					<span class="color-orange" ng-show="userInfo.identify_status==0">未设置</span>
+					<span class="color-orange" ng-show="userInfo.identify_status==1">审核中</span>
+					<span class="color-green" ng-show="userInfo.identify_status==2">已认证</span>
+				</div>
+				<div class="message" ng-if="userInfo.identify_status==0">保护帐户安全，验证您身份的工具之一，现在赶紧设置吧</div>
+				<div class="message" ng-if="userInfo.identify_status!=0">{{safe.idCardInfo.id_name}}<br>{{safe.idCardInfo.id_number}}</div>
+				<div class="text-button">
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_idCard')" ng-show="userInfo.identify_status==0">立即设置</button>
+				</div>
+			</div>
+			<!--实名认证 end-->
+
+			<!--企业认证 begin-->
+			<div class="safe-item" ng-show="userInfo.identity_conditions=='0'">
+				<div class="name">
+					<i class="iconfont color-green true" ng-if="userInfo.is_investor==2">&#xe636;</i>
+					<i class="iconfont color-orange false" ng-if="userInfo.is_investor!=2">&#xe62f;</i> 企业认证
+				</div>
+				<div class="status">
+					<span class="color-orange" ng-show="userInfo.is_investor==0">未设置</span>
+					<span class="color-orange" ng-show="userInfo.is_investor==1">审核中</span>
+					<span class="color-green" ng-show="userInfo.is_investor==2">已认证</span>
+				</div>
+				<div class="message" ng-if="userInfo.is_investor==0">保护帐户安全，验证您身份的工具之一，现在赶紧设置吧</div>
+				<div class="message" ng-if="userInfo.is_investor!=0">{{safe.companyInfo.bs_name}}<br>{{safe.companyInfo.bs_number}}</div>
+				<div class="text-button">
+					<button class="button2 button2-28" ng-click="safe.showDialog('set_company')" ng-show="userInfo.is_investor==0">立即设置</button>
+				</div>
+			</div>
+			<!--企业认证 end-->
+		</div>
+	</div>
+	<!---->
+	<!---->
+	<!---->
+	<!---->
+	<!---->
+	<!---->
+	<!---->
+	<!---->
+
+	<!--遮罩层 begin-->
+	<div class="mask-div hideDom" id="safe_mask_div" ng-class="{'showDom':safe.safe_mask_div,'hideDom':!safe.safe_mask_div}"></div>
+	<!--遮罩层 end-->
+	<!--登录密码 begin-->
+	<form name="setPasswordForm" novalidate="novalidate" ng-submit="safe.passwordConfirm()">
+		<div class="alert-dialog small-dialog hideDom" id="set_password" ng-class="{'showDom':safe.set_password,'hideDom':!safe.set_password}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>修改登录密码</span>
+					<i class="iconfont" ng-click="safe.closeAllDialog()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>旧密码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="password" name="oldLoginPassword" ng-model="safe.oldLoginPassword" required>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setPasswordForm.oldLoginPassword.$dirty && setPasswordForm.oldLoginPassword.$invalid ">不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>新密码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="password" name="newLoginPassword1" ng-model="safe.newLoginPassword1" required ng-minlength="6" ng-maxlength="18" ng-pattern="/^([a-zA-Z0-9_!@#%&-]|[\.\*\+]){0,}$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setPasswordForm.newLoginPassword1.$dirty && setPasswordForm.newLoginPassword1.$error.minlength">密码至少为6位</div>
+								<div class="alert alert-danger ng-hide" ng-show="setPasswordForm.newLoginPassword1.$dirty && setPasswordForm.newLoginPassword1.$error.maxlength">密码不可超过18位</div>
+								<div class="alert alert-danger ng-hide" ng-show="setPasswordForm.newLoginPassword1.$dirty && setPasswordForm.newLoginPassword1.$error.pattern">密码只能为数字、字母、下划线等字符</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>确认新密码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="password" name="newLoginPassword2" ng-model="safe.newLoginPassword2" required>
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="setPasswordForm.newLoginPassword2.$dirty && safe.newLoginPassword1!=safe.newLoginPassword2">两次输入的密码不一致</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer">
+					<input type="submit" class="button button-36 padding-left-right-30" value="保存" ng-disabled="setPasswordForm.$invalid">
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--登录密码 end-->
+	<!--绑定手机 begin-->
+	<form name="setMobileForm" novalidate="novalidate" ng-submit="safe.phoneConfirm()">
+		<div class="alert-dialog small-dialog hideDom" id="set_phone" ng-class="{'showDom':safe.set_phone,'hideDom':!safe.set_phone}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>{{safe.mobileDialogTitle}}</span>
+					<i class="iconfont" ng-click="safe.closeAllDialog()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>手机</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="mobile" ng-model="safe.setMobileForm.mobile" required ng-pattern="/^(1[0-9]{10})$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setMobileForm.mobile.$dirty && setMobileForm.mobile.$invalid">手机号格式错误</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" ng-model="safe.setMobileForm.verify_coder" name="verify_coder" required>
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="{{setMobileForm.mobile.$valid}}" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode(safe.setMobileForm.mobile)">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">验证码错误</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer">
+					<button type="submit" class="button button-36 padding-left-right-30" ng-disabled="setMobileForm.$invalid">保存</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--绑定手机 end-->
+	<!--绑定邮箱 begin-->
+	<form name="setEmailForm" novalidate="novalidate" ng-submit="safe.emailConfirm()">
+		<div class="alert-dialog small-dialog hideDom" id="set_email" ng-class="{'showDom':safe.set_email,'hideDom':!safe.set_email}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>{{safe.emailDialogTitle}}</span>
+					<i class="iconfont" ng-click="safe.closeAllDialog()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>邮箱</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="email" ng-model="safe.setEmailForm.email" required ng-pattern="/^((\w)+(\.\w+)*@(\w)+((\.\w+)+))$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setEmailForm.email.$dirty && setEmailForm.email.$invalid">邮箱格式不正确</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" ng-model="safe.setEmailForm.verify_coder" name="verify_coder" required>
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="{{setEmailForm.email.$valid}}" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode(safe.setEmailForm.email)">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">验证码错误</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer">
+					<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="setEmailForm.$invalid" value="保存">
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--绑定邮箱 end-->
+	<!--支付密码 begin-->
+	<form name="setPayPasswordForm" novalidate="novalidate" ng-submit="safe.payPasswordConfirm()">
+		<div class="alert-dialog small-dialog hideDom" id="set_pay_password" ng-class="{'showDom':safe.set_pay_password,'hideDom':!safe.set_pay_password}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>设置支付密码</span>
+					<i class="iconfont" ng-click="safe.closeAllDialog()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>设置支付密码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="password" name="payPassword1" ng-model="safe.setPayPasswordForm.payPassword1" required ng-minlength="6" ng-maxlength="18" ng-pattern="/^([a-zA-Z0-9_!@#%&-]|[\.\*\+]){0,}$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setPayPasswordForm.payPassword1.$dirty && setPayPasswordForm.payPassword1.$error.minlength">密码至少为6位</div>
+								<div class="alert alert-danger ng-hide" ng-show="setPayPasswordForm.payPassword1.$dirty && setPayPasswordForm.payPassword1.$error.maxlength">密码不可超过18位</div>
+								<div class="alert alert-danger ng-hide" ng-show="setPayPasswordForm.payPassword1.$dirty && setPayPasswordForm.payPassword1.$error.pattern">密码只能为数字、字母、下划线等字符</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>确认支付密码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="password" name="payPassword2" ng-model="safe.setPayPasswordForm.payPassword2" required ng-minlength="6" ng-maxlength="18" ng-pattern="/^([a-zA-Z0-9_!@#%&-]|[\.\*\+]){0,}$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setPayPasswordForm.payPassword2.$dirty && safe.setPayPasswordForm.payPassword1!=safe.setPayPasswordForm.payPassword2">两次输入的密码不一致</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>已绑定的手机</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="mobile" ng-model="safe.setPayPasswordForm.mobile" required ng-pattern="/^(1[0-9]{10})$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setPayPasswordForm.mobile.$dirty && setPayPasswordForm.mobile.$invalid">手机号格式错误</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" ng-model="safe.setPayPasswordForm.verify_coder">
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="{{setPayPasswordForm.mobile.$valid}}" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">验证码错误</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer">
+					<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="setPayPasswordForm.$invalid" value="保存">
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--支付密码 end-->
+	<!--实名认证 begin-->
+	<form name="setIdCardForm" novalidate="novalidate" ng-submit="safe.idCardConfirm()">
+		<div class="alert-dialog small-dialog hideDom" id="set_idCard" ng-class="{'showDom':safe.set_idCard,'hideDom':!safe.set_idCard}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>实名认证</span>
+					<i class="iconfont" ng-click="safe.closeAllDialog()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>真实姓名</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="real_name" ng-model="safe.setIdCardForm.real_name" required>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setIdCardForm.real_name.$dirty && setIdCardForm.real_name.$invalid">不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>身份证号</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="id_number" ng-model="safe.setIdCardForm.id_number" ng-pattern="/^([0-9]{15}|[0-9xX]{18})$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setIdCardForm.id_number.$dirty && setIdCardForm.id_number.$invalid">身份证号为15位或18位</div>
+							</div>
+						</div>
+					</div>
+					<!--身份证正面 begin-->
+					<div class="input-box idCard-box">
+						<label>身份证正面</label>
+						<div class="input-container right-input-container">
+							<div class="img">
+								<img ng-src="{{safe.setIdCardForm.id_frontimg}}" />
+							</div>
+							<button type="button" id="id_frontimg" class="button" img-upload btn-id="id_frontimg" img-src="safe.setIdCardForm.id_frontimg">选择图片</button>
+						</div>
+					</div>
+					<!--身份证正面 end-->
+					<!--身份证反面 begin-->
+					<div class="input-box idCard-box">
+						<label>身份证反面</label>
+						<div class="input-container right-input-container">
+							<div class="img">
+								<img ng-src="{{safe.setIdCardForm.id_backimg}}" />
+							</div>
+							<button type="button" id="id_backimg" class="button" img-upload btn-id="id_backimg" img-src="safe.setIdCardForm.id_backimg">选择图片</button>
+						</div>
+					</div>
+					<!--身份证反面 end-->
+					<div class="input-box not-margin-bottom">
+						<label>手机号码</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="mobile" ng-model="safe.setIdCardForm.mobile" required ng-pattern="/^(1[0-9]{10})$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setIdCardForm.mobile.$dirty && setIdCardForm.mobile.$invalid">手机号码为11位数字</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" name="verify_coder" ng-model="safe.setIdCardForm.verify_coder" required>
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="{{setIdCardForm.mobile.$valid}}" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setIdCardForm.verify_coder.$dirty && setIdCardForm.verify_coder.$invalid">验证码错误</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer">
+					<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="setIdCardForm.$invalid" value="保存">
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--实名认证 end-->
+	<!--企业认证 begin-->
+	<form name="setCompanyForm" novalidate="novalidate" ng-submit="safe.companyConfirm()">
+		<div class="alert-dialog small-dialog hideDom" id="set_company" ng-class="{'showDom':safe.set_company,'hideDom':!safe.set_company}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>企业认证</span>
+					<i class="iconfont" ng-click="safe.closeAllDialog()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<div class="input-box not-margin-bottom">
+						<label>公司名称</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="bs_name" ng-model="safe.setCompanyForm.bs_name" required>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setCompanyForm.bs_name.$dirty && setCompanyForm.bs_name.$invalid">不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>营业执照号</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="bs_licence" ng-model="safe.setCompanyForm.bs_licence" required>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setCompanyForm.bs_licence.$dirty && setCompanyForm.bs_licence.$invalid">不可为空</div>
+							</div>
+						</div>
+					</div>
+					<!--营业执照照片 begin-->
+					<div class="input-box idCard-box">
+						<label>组织机构代码证<br>（营业执照）</label>
+						<div class="input-container right-input-container">
+							<div class="img">
+								<img ng-src="{{safe.setCompanyForm.licence_img}}" />
+							</div>
+							<button type="button" id="licence_img" class="button" img-upload btn-id="licence_img" img-src="safe.setCompanyForm.licence_img">选择图片</button>
+						</div>
+					</div>
+					<!--营业执照照片 end-->
+					<div class="input-box not-margin-bottom">
+						<label>地址</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="bs_address" ng-model="safe.setCompanyForm.bs_address" required>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setCompanyForm.bs_address.$dirty && setCompanyForm.bs_address.$invalid">不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>法人姓名</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="bs_user" ng-model="safe.setCompanyForm.bs_user" required>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setCompanyForm.bs_user.$dirty && setCompanyForm.bs_user.$invalid">不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label>验证码</label>
+						<div class="input-container right-input-container">
+							<div class="table-row-input-content">
+								<div class="left-input-content">
+									<input class="input-text" type="text" name="verify_coder" ng-model="safe.setCompanyForm.verify_coder" required>
+								</div>
+								<div class="right-button-content">
+									<input type="button" class="button" value="获取验证码" canclick="true" count-down count-down-size="60" start-text="获取验证码" click-func="public.getSmsEmailCode()">
+								</div>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="setCompanyForm.verify_coder.$dirty && setCompanyForm.verify_coder.$invalid">验证码错误</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer">
+					<input type="submit" class="button button-36 padding-left-right-30" ng-disabled="setCompanyForm.$invalid" value="保存">
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--企业认证 end-->
+</div>

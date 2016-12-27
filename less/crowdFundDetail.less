@@ -1,0 +1,796 @@
+#crowdFundDetail {
+    margin-top: 40px;
+    .crowdFundDetail-info {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        background-color: #FFFFFF;
+        position: relative;
+        margin-bottom: 20px;
+        .left-top-status-img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 113px;
+            height: 112px;
+            background-repeat: no-repeat;
+            &.crowdFundReady {
+                background-image: url("../img/crowdFundReady.png");
+            }
+            &.crowdFundSuccess {
+                background-image: url("../img/crowdFundSuccess.png");
+            }
+            &.crowdFundStop {
+                background-image: url("../img/crowdFundStop.png");
+            }
+            &.crowdFundLoading {
+                background-image: url("../img/crowdFundLoading.png");
+            }
+        }
+        .left-img {
+            float: left;
+            width: 660px;
+            height: 400px;
+            background-image: url("../img/example-slide-3.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .right-content {
+            float: left;
+            width: 1080px - 660px - 40px;
+            height: auto;
+            padding-left: 20px;
+            //标题
+            p.right-content-title {
+                width: 100%;
+                line-height: 36px;
+                font-size: 24px;
+                max-height: 72px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+            }
+            //已筹到
+            .already-fund-text {
+                font-size: 16px;
+                line-height: 36px;
+            }
+            //已筹款金额
+            .money {
+                padding-left: 10px;
+                font-size: 24px;
+                height: 70px;
+                line-height: 70px;
+                span {
+                    font-size: 48px;
+                }
+            }
+            //进度简要
+            .progressbar {
+                width: 100%;
+                height: 8px;
+                .border-radius(4px);
+                background-color: #e4e4e4;
+                margin-bottom: 7px;
+                margin-top: 7px;
+                overflow: hidden;
+                p {
+                    background-color: @color-green-1;
+                    height: 100%;
+                    .border-radius(4px);
+                    overflow: hidden;
+                }
+            }
+            //进度描述 支持者数据
+            .progress-size {
+                font-size: 14px;
+                line-height: 36px;
+                .left {
+                    float: left;
+                    color: @color-green-1;
+                }
+                .right {
+                    float: left;
+                    text-align: right;
+                }
+                &:after {
+                    .after();
+                }
+            }
+            //描述
+            .desc {
+                line-height: 24px;
+                height: 50px;
+                overflow: hidden;
+                font-size: 14px;
+                color: #5e5e5e;
+                span {
+                    color: #e54e47;
+                }
+            }
+            //按钮
+            .button-list {
+                text-align: center;
+                margin-top: 20px;
+                .div-button {
+                    width: 170px;
+                    height: 40px;
+                    line-height: 40px;
+                    .border-radius(4px);
+                    color: #FFFFFF;
+                    overflow: hidden;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+                .left-button {
+                    float: left;
+                    background-color: @color-green-1;
+                    i {
+                        top: 1px;
+                        margin-right: 10px;
+                    }
+                    &.active {
+                        background-color: #1ef1af;
+                    }
+                }
+                .right-button {
+                    float: right;
+                    /*background-color: #d9512b;
+                    i {
+                        margin-right: 10px;
+                        font-size: 18px;
+                    }*/
+                    background-color: @color-green-1;
+                    i {
+                        top: 1px;
+                        margin-right: 10px;
+                    }
+                    /*&.active {
+                        background-color: #1ef1af;
+                    }*/
+                }
+                span {
+                    font-size: 12px;
+                }
+                &:after {
+                    .after();
+                }
+            }
+            //分享到
+            .share-text {
+                font-size: 14px;
+                color: @color-888;
+                line-height: 36px;
+                margin-top: 20px;
+            }
+            .share-box {
+                a {
+                    display: inline-block;
+                    width: 22px;
+                    height: 22px;
+                    margin-right: 5px;
+                    img {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                    }
+                }
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+    .project-more-info {
+        padding-bottom: 40px;
+        //左侧大模块
+        .left-big-box {
+            float: left;
+            width: 680px;
+            height: auto;
+            background-color: #FFFFFF;
+            min-height: 100px;
+            padding: 10px 20px 20px;
+            overflow: hidden;
+            //左侧菜单
+            & > .left-menu {
+                border-bottom: 1px solid @color-line-gray2;
+                li {
+                    float: left;
+                    width: 25%;
+                    line-height: 50px;
+                    //border-bottom: 1px solid @color-line-gray2;
+                    height: 50px;
+                    overflow: hidden;
+                    font-size: 16px;
+                    text-align: center;
+                    cursor: pointer;
+                    .transition(color .3s);
+                    span {
+                        display: inline-block;
+                        height: 16px;
+                        line-height: 16px;
+                        position: relative;
+                        top: 2px;
+                        .border-radius(8px);
+                        overflow: hidden;
+                        color: #FFFFFF;
+                        font-size: 12px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        margin-left: 5px;
+                        background-color: #AAAAAA;
+                        .transition(all .3s);
+                    }
+                    &.active {
+                        color: @color-green-1;
+                        border-bottom: 4px solid @color-green-1;
+                        span {
+                            background-color: @color-green-1;
+                        }
+                    }
+                }
+                &:after {
+                    .after();
+                }
+            }
+            //左侧面板
+            & > .left-content {
+                padding-top: 20px;
+            }
+        }
+        //右侧大模块
+        .right {
+            float: left;
+            width: 380px;
+            margin-left: 20px;
+            height: auto;
+            .right-box-item {
+                padding: 0 20px 20px;
+                background-color: #FFFFFF;
+                margin-bottom: 20px;
+                h3.title {
+                    line-height: 50px;
+                    font-size: 20px;
+                    border-bottom: 1px solid @color-line-gray2;
+                    .float-right {
+                        font-size: 14px;
+                        color: #888888;
+                    }
+                    .title-money {
+                        font-size: 20px;
+                    }
+                }
+                .content {
+                    padding-top: 10px;
+                }
+            }
+            .content {
+                //发起人
+                .user-info {
+                    .left-img {
+                        float: left;
+                        width: 70px;
+                        height: 70px;
+                        overflow: hidden;
+                        .border-radius(50%);
+                        img {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .right-content {
+                        float: left;
+                        width: 320px - 70px;
+                        padding-left: 20px;
+                        p {
+                            font-size: 14px;
+                            line-height: 24px;
+                            height: 24px;
+                        }
+                        .username {
+                            font-size: 16px;
+                            .overflow-ellipsis();
+                        }
+                        .desc {
+                            color: #666666;
+                            .overflow-ellipsis();
+                        }
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+                //无私奉献
+                .devotion {
+                    .money-box {
+                        width: 340px;
+                        ul {
+                            width: 360px;
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                            li {
+                                width: 100px;
+                                height: 36px;
+                                margin-right: 20px;
+                                float: left;
+                                border: 1px solid @color-line-gray2;
+                                color: #666666;
+                                .border-radius(3px);
+                                text-align: center;
+                                font-size: 16px;
+                                line-height: 34px;
+                                cursor: pointer;
+                                .not-select();
+                                &.active {
+                                    color: @color-green-1;
+                                    border: 1px solid @color-green-1;
+                                }
+                            }
+                            &:after {
+                                .after();
+                            }
+                        }
+                    }
+                    .button {
+                        margin-top: 20px;
+                    }
+                }
+                //需要钱的众筹
+                .need-money {
+                    .color-gray {
+                        color: #888888;
+                    }
+                    p.count {
+                        font-weight: bold;
+                        font-size: 14px;
+                        line-height: 30px;
+                    }
+                    .small-img {
+                        width: 70px;
+                        height: 70px;
+                        margin: 10px 0;
+                        img {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .button {
+                        margin-top: 20px;
+                    }
+                }
+                //联系我们
+                .contact-us {
+                    p {
+                        line-height: 30px;
+                        i {
+                            display: inline-block;
+                            width: 20px;
+                            vertical-align: top;
+                        }
+                        span {
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                        span.key {
+                            width: 75px;
+                        }
+                        span.value {
+                            width: 235px;
+                        }
+                    }
+                }
+            }
+        }
+        &:after {
+            .after();
+        }
+    }
+    //TODO
+    //全局使用：发布评论模块样式 
+    .post-comment-box {
+        width: 100%; //正常而言，是640px
+        padding: 20px;
+        background-color: #f0f4fa;
+        .border-radius(5px);
+        border: 1px solid @color-line-gray2;
+        margin-bottom: 20px;
+        .left-circle-photo {
+            .background-cover();
+            background-image: url('https://image.eitty.cn/head_image.jpg');
+            float: left;
+            width: 46px;
+            height: 46px;
+            overflow: hidden;
+            .border-radius(50%);
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .right-edit {
+            margin-left: 60px;
+            width: auto;
+            height: auto;
+            .input-text {
+                width: 100%;
+                min-height: 98px;
+                height: auto;
+                line-height: 20px;
+                overflow-y: visible;
+                background-color: #FFFFFF;
+            }
+            .select-img-box {
+                margin: 10px 0 0;
+                .img-list {
+                    margin-top: 20px;
+                    li {
+                        float: left;
+                        width: 80px;
+                        height: 80px;
+                        margin-right: 10px;
+                        position: relative;
+                        img {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .delete {
+                            position: absolute;
+                            cursor: pointer;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            line-height: 80px;
+                            font-size: 36px;
+                            color: #FFFFFF;
+                            text-align: center;
+                            background-color: rgba(0,0,0,.3);
+                            .transition(all .3s);
+                            .opacity(0);
+                        }
+                        &:hover {
+                            .delete {
+                                .opacity(1);
+                            }
+                        }
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+            }
+            label {
+                margin-left: 10px;
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 14px;
+                height: 36px;
+                line-height: 36px;
+            }
+        }
+    }
+    //项目主页
+    .detail-panel {
+        background-color: #FFFFFF;
+        embed {
+            width: 100%;
+        }
+        img {
+            max-width: 100%;
+        }
+    }
+    //项目进展
+    .project-panel {
+        &>ul {
+            width: 640px;
+            li {
+                font-size: 14px;
+                line-height: 24px;
+                color: #5E5E5E;
+                .left-time {
+                    float: left;
+                    width: 90px;
+                    height: auto;
+                    text-align: right;
+                    padding-right: 15px;
+                }
+                .right-panner {
+                    float: left;
+                    width: 550px;
+                    border-left: 1px solid @color-line-gray2;
+                    padding-left: 15px;
+                    padding-bottom: 30px;
+                    position: relative;
+                    .left-circle {
+                        position: absolute;
+                        left: -7px;
+                        top: 6px;
+                        width: 13px;
+                        height: 13px;
+                        .border-radius(50%);
+                        overflow: hidden;
+                        background-color: @color-green-1;
+                        text-align: center;
+                        font-size: 0;
+                        line-height: 0;
+                        padding: 3px;
+                        span {
+                            display: inline-block;
+                            width: 100%;
+                            height: 100%;
+                            .border-radius(50%);
+                            overflow: hidden;
+                            background-color: #FFFFFF;
+                        }
+                    }
+                    .content {
+                        .img-list {
+                            font-size: 0;
+                            line-height: normal; //解决：行高导致高度超出80px
+                            img {
+                                width: 80px;
+                                height: 80px;
+                                display: inline-block;
+                                margin-right: 10px;
+                                margin-top: 10px;
+                                .transition(all .3s);
+                                cursor: pointer;
+                            }
+                            img.width100 {
+                                width: 100%;
+                                height: auto;
+                            }
+                        }
+                    }
+                }
+                &:after {
+                    .after();
+                }
+            }
+            //第一个Li
+            li.one {
+                line-height: 60px;
+                color: @main-color;
+                font-size: 15px;
+                .left-img {
+                    width: 60px;
+                    height: 60px;
+                    .border-radius(50%);
+                    overflow: hidden;
+                    position: absolute;
+                    left: -30px;
+                    top: 0;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                    }
+                }
+                .right-panner {
+                    padding-left: 45px;
+                    p {
+                        .overflow-ellipsis();
+                    }
+                }
+            }
+            li:last-child {
+                .right-panner {
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+    //评论
+    .comment-panel {
+        ul.comment-list {
+            li.comment-item {
+                width: 100%;
+                padding-bottom: 20px;
+                margin-top: 20px;
+                border-bottom: 1px solid @color-line-gray2;
+                //左边头像
+                .left-circle-photo {
+                    .background-cover();
+                    float: left;
+                    width: 46px;
+                    height: 46px;
+                    overflow: hidden;
+                    .border-radius(50%);
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                //右边文字内容
+                .right-content {
+                    margin-left: 60px;
+                    line-height: 24px;
+                    h4 {
+                        line-height: 30px;
+                        height: 30px;
+                    }
+                    //蓝色名字
+                    .username {
+                        color: #00b7ee;
+                        font-size: 14px;
+                    }
+                    //文字内容
+                    .talking {
+                        color: @main-color;
+                        font-size: 14px;
+                    }
+                    //图片列表
+                    .img-list {
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        li {
+                            float: left;
+                            width: 80px;
+                            height: 80px;
+                            margin-right: 10px;
+                            position: relative;
+                            img {
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        &:after {
+                            .after();
+                        }
+                    }
+                    //时间
+                    .time-box {
+                        &:after {
+                            .after();
+                        }
+                    }
+                    .time {
+                        font-size: 12px;
+                        color: #CCCCCC;
+                    }
+                    //回复列表
+                    .answer-box {
+                        padding-top: 20px;
+                        position: relative;
+                        //三角形
+                        .triangle {
+                            width: 0;
+                            height: 0;
+                            border-top: 10px solid transparent;
+                            border-left: 10px solid transparent;
+                            border-bottom: 10px solid #EFF0F5;
+                            border-right: 10px solid transparent;
+                            position: absolute;
+                            left: 20px;
+                            top: 0;
+                        }
+                    }
+                    .answer-list {
+                        .border-radius(5px);
+                        background: #EFF0F5;
+                        //background: #f7f8fa;
+                        overflow: hidden;
+                        padding: 5px 15px;
+                    }
+                    .answer-item {
+                        padding: 5px 0;
+                        //overflow: hidden;
+                        div.talking {
+                            font-size: 14px;
+                            .username {
+                                color: #00b7ee;
+                                font-size: 12px;
+                            }
+                        }
+                        .time {
+                            margin-right: 20px;
+                        }
+                        &:after {
+                            .after();
+                        }
+                    }
+                    //回复输入框
+                    .reply-box {
+                        padding-top: 5px;
+                        .input-text {
+                            width: 100%;
+                            min-height: 98px;
+                            height: auto;
+                            line-height: 20px;
+                            overflow-y: visible;
+                            background-color: #FFFFFF;
+                        }
+                        .button-parent {
+                            padding: 10px 0 0;
+                            &:after {
+                                .after();
+                            }
+                        }
+                    }
+                }
+                &:after {
+                    .after();
+                }
+            }
+        }
+        .pagination-box {
+            text-align: right;
+            padding: 20px 0 10px;
+        }
+    }
+    //支持者
+    .people-panel {
+        width: 100%;
+        //padding-left: 30px;
+        //padding-right: 30px;
+        ol {
+            width: 100%;
+            margin-bottom: 10px;
+            li {
+                float: left;
+                width: 280px;
+                height: 130px;
+                background-color: #F8F8F8;
+                //.box-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+                //.border-radius(5px);
+                margin-bottom: 20px;
+                padding-top: 25px;
+                padding-left: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                .left-img {
+                    float: left;
+                    width: 80px;
+                    height: 80px;
+                    .border-radius(50%);
+                    overflow: hidden;
+                    img {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .right-content {
+                    padding-left: 90px;
+                    .username {
+                        color: #00aaee;
+                        font-size: 15px;
+                        line-height: 30px;
+                        height: 30px;
+                        .overflow-ellipsis();
+                    }
+                    .money {
+                        color: #5E5E5E;
+                        font-size: 14px;
+                        line-height: 25px;
+                        height: 25px;
+                    }
+                    .count {
+                        color: #a5a5a5;
+                        font-size: 14px;
+                        line-height: 25px;
+                        height: 25px;
+                        label {
+                            display: inline-block;
+                            width: 62px;
+                        }
+                    }
+                }
+                &:after {
+                    .after();
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+}

@@ -1,0 +1,101 @@
+<div id="order" class="container add-active-panel big-page">
+	<h1 class="title">{{order.title}}</h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<h2 class="has-left-line-title">
+		<span>填写基本信息</span>
+	</h2>
+	<form name="submitForm" novalidate="novalidate" ng-submit="order.addOrder()">
+		<div class="form-panel">
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>项目名称</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="title" ng-model="order.submitForm.title" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.title.$dirty && submitForm.title.$invalid">项目名称不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>地点</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="address" ng-model="order.submitForm.address" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.address.$dirty && submitForm.address.$invalid">地点不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>联系人</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="constant" ng-model="order.submitForm.constant" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.constant.$dirty && submitForm.constant.$invalid">联系人不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>联系电话</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="mobile" ng-model="order.submitForm.mobile" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.mobile.$dirty && submitForm.mobile.$invalid">联系电话不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>电子邮箱</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="email" name="email" ng-model="order.submitForm.email" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.email.$dirty && submitForm.email.$invalid">电子邮箱格式错误</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>内容及流程</label>
+				<div class="input-container right-input-container">
+					<textarea class="input-text" name="content" ng-model="order.submitForm.content" required></textarea>
+					<div class="error-tip">
+						<div class="alert alert-danger" ng-show="submitForm.content.$dirty && submitForm.content.$invalid">内容及流程不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>评审/评估预算</label>
+				<div class="input-container right-input-container">
+					<div class="table-row-input-content">
+						<div class="left-input-content">
+							<input class="input-text" type="text" name="price" ng-model="order.submitForm.price" required limit-size min-size="1" integer/>
+						</div>
+						<div class="right-button-content">
+							<input type="button" class="button not-hover" value="&nbsp;元&nbsp;">
+						</div>
+					</div>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.price.$dirty && submitForm.price.$invalid">请输入大于0的整数</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>生成报告截止时间</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" id="stop_day" name="time" ng-model="order.submitForm.time" required readonly="readonly" ng-focus="order.setStopDay()" />
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.time.$dirty && submitForm.time.$invalid">不可为空</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="text-align-center">
+			<button type="submit" class="button padding-left-right-30" ng-class="{'disabled':submitForm.$invalid}" ng-disabled="submitForm.$invalid">确定</button>
+		</div>
+	</form>
+</div>

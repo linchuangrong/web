@@ -1,0 +1,90 @@
+<div id="sponsorList" class="container">
+	<h1 class="title sponsorList-title">主办方列表</h1>
+	<div class="sponsorList-panner">
+		<div class="select-panner">
+			<!--类型 begin-->
+			<div class="select-panner-item" id="type">
+				<span class="select-list-left-title">行业筛选：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','全部')" class="active">全部</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','公益')">公益</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','创业')">创业</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','休闲')">休闲</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','社交')">社交</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','娱乐')">娱乐</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','体育')">体育</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','文化')">文化</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectType','其他')">其他</a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--类型 begin-->
+			<div class="select-panner-item" id="sort">
+				<span class="select-list-left-title">关注排序：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectSort','默认')" class="active">默认</a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectSort','关注人数')">关注人数<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectSort','最新入驻')">最新入驻<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectSort','最受欢迎')">最受欢迎<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-click="sponsorList.setSelectActive($event,'selectSort','最活跃')">最活跃<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+		</div>
+		<!--活动列表 begin-->
+		<div class="sponsorList-list-panner">
+			<ul class="sponsorList-ul">
+				<!-- 1条评审 begin-->
+				<li ng-repeat="item in sponsorList.sponsorArray track by $index">
+					<img ng-src="{{item.head_image}}" ui-sref="sponsorDetail({'id':item.id})" />
+					<div class="sponsor-message">
+						<p class="text-align-center" title="{{item.identify_bs_name}}">{{item.identify_bs_name}}</p>
+						<div class="text-align-center">
+							<button type="button" class="button button-34 padding-left-right-20" ng-click="sponsorList.focusSponsor(item.id)">
+								<i class="iconfont">&#xe609;</i>
+								<span>关注</span>
+								<span>({{item.focus_count}})</span>
+							</button>
+						</div>
+
+					</div>
+				</li>
+				<!-- 1条评审 end-->
+			</ul>
+			<div class="clearfix"></div>
+			<div class="text-align-center">
+				<page-bar page-change="sponsorList.pageParams.pageChange()" page-count="sponsorList.pageParams.page_count" current="sponsorList.pageParams.current" show-page="{{sponsorList.pageParams.showPage}}"></page-bar>
+			</div>
+
+		</div>
+		<!--活动列表 end-->
+	</div>
+</div>

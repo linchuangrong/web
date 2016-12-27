@@ -1,0 +1,45 @@
+#finalScore {
+    .input-box {
+        &>label {
+            color: #666;
+        }
+    }
+    .max-score-box {
+        padding-bottom: 30px;
+        padding-left: 35px;
+        span {
+            margin-right: 15px;
+        }
+        &:after {
+            .after();
+        }
+    }
+    .result-title {
+        margin-left: 35px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 40px;
+        border-bottom: 2px solid @color-green-1;
+        display: inline-block;
+    }
+    ul.subject-list {
+        padding-top: 10px;
+        padding-left: 35px;
+        li.subject-item {
+            font-size: 15px;
+            margin-bottom: 10px;
+            p {
+                line-height: 30px;
+                &.float-left {
+                    padding-left: 20px;
+                }
+                span {
+                    font-weight: bold;
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+}

@@ -1,0 +1,211 @@
+<header class="top-header">
+	<div class="container menu-top-bgk">
+		<div class="header-left">
+			<span>你好，</span>
+			<span ng-show="userInfo.user_name" ng-bind="userInfo.identify_bs_name || userInfo.nickname || userInfo.user_name"></span>
+			<span ng-show="!userInfo.user_name" class="color-green hover-span" ui-sref="login">请登录</span>
+			<span ng-show="userInfo.user_name" class="hover-span" id="exit" ng-click="public.userExit()">&nbsp;&nbsp;&nbsp;注销</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+			<span class="color-green hover-span" ui-sref="personal.home">个人中心</span>
+		</div>
+		<div class="header-right">
+			<!--<span class="hover-span"><i class="iconfont">&#xe605;</i> 手机版 <i class="iconfont">&#xe60a;</i></span>-->
+			<span class="hover-span code">
+				<i class="iconfont">&#xe604;</i> 微信公众号 <i class="iconfont">&#xe60a;</i>
+				<img ng-src="{{public.imgUrl}}/code.jpg" />
+			</span>
+			<span>
+				<a style="color: #a5a6a7;" class="hover-color-green" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3340990155&site=qq&menu=yes">
+					<i class="iconfont">&#xe601;</i> 联系客服
+				</a>
+			</span>
+			<!--<span class="hover-span">意见反馈</span>
+			<span class="hover-span"><i class="iconfont">&#xe60c;</i> 客服咨询</span>-->
+		</div>
+	</div>
+</header>
+<div class="top-nav" id="menu-panner-height" style="display: none;"></div>
+<nav class="top-nav" id="menu-panner">
+	<div class="container">
+		<ul class="top-menu-ul">
+			<li class="top-menu-li logo">
+				<a ui-sref="index"><img ng-src="{{public.imgUrl}}/logo.png"></a>
+			</li>
+			<!--地区-->
+			<li class="top-menu-li area">
+				<a><span ng-bind="public.selectProvince.name"></span> <i class="iconfont">&#xe60d;</i></a>
+				<div class="hover-panner">
+					<ul>
+						<li ng-repeat="item in public.provinceArray" ng-click="public.setProvince(item)">
+							<a>{{item.name}}</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!--公益众筹-->
+			<li class="top-menu-li">
+				<a ui-sref="crowdFundList">众筹/捐赠</a>
+			</li>
+			<!--发现活动-->
+			<li class="top-menu-li find-active">
+				<a ui-sref="activityList({'address':'','cate':'','time':''})"><span>发现活动</span> <i class="iconfont">&#xe60d;</i> </a>
+				<div class="hover-panner">
+					<!--类型 begin-->
+					<div class="find-active-item">
+						<div class="left">
+							<i class="iconfont">&#xe617;</i> <span>类型</span>
+						</div>
+						<div class="right">
+							<ul>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':''})">全部</a>
+								</li>
+								<li ng-repeat="item in public.activityTypeArray">
+									<a ui-sref="activityList({'cate':item.name,'address':'','time':''})">{{item.name}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!--类型 end-->
+					<!--时间 begin-->
+					<div class="find-active-item">
+						<div class="left">
+							<i class="iconfont">&#xe611;</i> <span>时间</span>
+						</div>
+						<div class="right">
+							<ul>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':''})">全部</a>
+								</li>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':'今天'})">今天</a>
+								</li>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':'明天'})">明天</a>
+								</li>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':'周末'})">周末</a>
+								</li>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':'本周'})">本周</a>
+								</li>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':'本月'})">本月</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!--时间 end-->
+					<!--地点 begin-->
+					<div class="find-active-item">
+						<div class="left">
+							<i class="iconfont">&#xe618;</i> <span>地点</span>
+						</div>
+						<div class="right">
+							<ul>
+								<li>
+									<a ui-sref="activityList({'address':'','cate':'','time':''})">全部</a>
+								</li>
+								<li ng-repeat="item in public.cityArray">
+									<a ui-sref="activityList({'address': item.name,'cate':'','time':''})">{{item.name}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!--地点 end-->
+				</div>
+			</li>
+			<!--搜索框-->
+			<li class="top-menu-li search">
+				<!--搜索框input-box begin-->
+				<div class="input-box not-margin-bottom">
+					<div class="input-container">
+						<div class="table-row-input-content" id="search-content">
+							<div class="left-button-content" ng-class="{'active':public.showSearch}" ng-mouseover="public.showSearchType()" ng-mouseleave="public.hideSearchType()">
+								<button class="button"><span>{{public.searchType}}</span> <i class="iconfont">&#xe60d;</i> </button>
+								<ul class="search-list">
+									<li class="search-item" ng-click="public.setSearchType('活动',$event)">活动</li>
+									<li class="search-item" ng-click="public.setSearchType('主办方',$event)">主办方</li>
+								</ul>
+							</div>
+							<div class="right-input-content">
+								<input class="input-text" type="text" placeholder="搜索您想要的{{public.searchType}}" ng-model="public.keyword">
+								<i class="iconfont search-btn" ng-click="public.goToSearch()">&#xe610;</i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--搜索框input-box begin-->
+			</li>
+			<li class="top-menu-li add-active">
+				<a><i class="iconfont img-jia color-orange">&#xe609;</i><span>发布</span></a>
+				<div class="hover-panner">
+					<ul>
+						<li>
+							<a ui-sref="addActivity">活动</a>
+						</li>
+						<li>
+							<a ui-sref="addCrowdFund">众筹</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li class="top-menu-li project">
+				<a ui-sref="examineHome"><span>评审/评估</span></a>
+				<!--<div class="hover-panner">
+					<ul>
+						<li>
+							<a ui-sref="appointment">预约</a>
+						</li>
+						<li>
+							<a ui-sref="selectExamine">设计表单</a>
+						</li>
+						
+					</ul>
+				</div>-->
+			</li>
+			<li class="top-menu-li" ui-sref="software">
+				<a>软件开发</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<!--<nav class="top-nav" style="display: block;">
+	<div class="container">
+		<ul class="top-menu-ul">
+			<li class="top-menu-li logo">
+				<a ui-sref="index">LOGO</a>
+			</li>
+			<li class="top-menu-li opening">
+				<a>程序员正在开发中，敬请期待</a>
+			</li>
+		</ul>
+	</div>
+</nav>-->
+
+<script type="text/javascript">
+	(function() {
+		'use strict';
+
+		//设置导航条悬浮
+		$(function() {
+			var menuHeight = $(".top-header").height() + $(".top-nav").height();
+			$(window).scroll(function() {
+				if ($(window).scrollTop() >= menuHeight) {
+					$("#menu-panner").css({
+						"position": "fixed",
+						"top": "0",
+						"left": "0"
+					});
+					$("#menu-panner-height").show();
+				} else {
+					$("#menu-panner").css({
+						"position": "relative",
+						"top": "0",
+						"left": "0"
+					});
+					$("#menu-panner-height").hide();
+				}
+			});
+		});
+	})();
+</script>

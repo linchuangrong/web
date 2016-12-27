@@ -1,0 +1,33 @@
+<div id="companyList" class="container big-page">
+	<h1 class="title">
+		机构名录
+		<button type="button" class="button button-36 float-right padding-left-right-20" ui-sref="joinList">加入名录</button>
+	</h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<ul class="company-list">
+		<li class="company-item" ng-repeat="item in companyList.companyListArray" ng-mouseover="companyList.setCompany(item)" ng-class="{'active':companyList.selectCompany == item}">
+			<div class="img" ng-style="{'background-image':'url('+ item.roll_image +')'}"></div>
+			<p>{{item.roll_name}}</p>
+		</li>
+	</ul>
+	<div class="detail-panel">
+		<div class="left">
+			<p>机构名称：{{companyList.selectCompany.roll_name}}</p>
+			<p>联系人：{{companyList.selectCompany.roll_contact}}</p>
+			<p>联系电话：{{companyList.selectCompany.roll_phone}}</p>
+			<p>电子邮箱：{{companyList.selectCompany.roll_email}}</p>
+		</div>
+		<div class="right">
+			<p>地址：{{companyList.selectCompany.roll_address}}</p>
+			<div class="image-box">
+				<span>登记证书：</span>
+				<img ng-src="{{companyList.selectCompany.roll_certificate}}" />
+			</div>
+			<p>登记证书编号：{{companyList.selectCompany.roll_number}}</p>
+		</div>
+	</div>
+	<div ng-show="companyList.companyListArray.length!='0'">
+		<page-bar page-change="companyList.pageParams.pageChange()" page-count="companyList.pageParams.page_count" current="companyList.pageParams.current" show-page="{{companyList.pageParams.showPage}}"></page-bar>
+	</div>
+	<div style="height: 40px;"></div>
+</div>

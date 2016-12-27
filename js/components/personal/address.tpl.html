@@ -1,0 +1,162 @@
+<div id="address">
+	<h1 class="title">收货地址</h1>
+
+	<div class="address-panner">
+		<p style="margin-bottom: 30px;">
+			<button class="button padding-left-right-20 button-34" ng-click="address.showAddAddress=true"><i class="iconfont">&#xe635;</i> 添加新地址</button>
+		</p>
+
+		<!--添加地址-->
+		<div class="add-address-panner" ng-show="address.showAddAddress">
+			<form name="addAddressForm" novalidate="novalidate" ng-submit="address.addAddressSubmit()">
+				<div class="input-box not-margin-bottom">
+					<label><span class="color-red">* </span><span>省市：</span></label>
+					<div class="input-container right-input-container">
+						<div class="select-box">
+							<select class="province" ng-model="address.addAddressForm.address.province" ng-options="item.name as item.name for item in address.provinceArray" ng-change="address.getCityList(address.addAddressForm.address.province,'cityArray1')">
+								<option value="">请选择</option>
+							</select>
+							<span>省</span>
+							<select class="city" ng-model="address.addAddressForm.address.city" ng-options="item.name as item.name for item in address.cityArray1">
+								<option value="">请选择</option>
+							</select>
+							<span>市</span>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="input-box not-margin-bottom">
+					<label><span class="color-red">* </span><span>详细地址：</span></label>
+					<div class="input-container right-input-container">
+						<input type="text" class="input-text" name="location" ng-model="address.addAddressForm.address.location" required/>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="addAddressForm.location.$dirty && addAddressForm.location.$invalid">地址不可为空</div>
+						</div>
+					</div>
+				</div>
+				<div class="input-box not-margin-bottom">
+					<label><span>邮政编码：</span></label>
+					<div class="input-container right-input-container">
+						<input type="text" class="input-text" placeholder="000000" name="zip" ng-model="address.addAddressForm.zip" />
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide">&nbsp;</div>
+						</div>
+					</div>
+				</div>
+				<div class="input-box not-margin-bottom">
+					<label><span class="color-red">* </span><span>收货人姓名：</span></label>
+					<div class="input-container right-input-container">
+						<input type="text" class="input-text" name="consignee" ng-model="address.addAddressForm.consignee" required/>
+						<div class="error-tip">
+							<div class="alert alert-danger ng-hide" ng-show="addAddressForm.consignee.$dirty && addAddressForm.consignee.$invalid">姓名不可为空</div>
+						</div>
+					</div>
+				</div>
+				<div class="input-box not-margin-bottom">
+					<label><span class="color-red">* </span><span>联系电话：</span></label>
+					<div class="input-container right-input-container">
+						<input type="tel" class="input-text" name="mobile" ng-model="address.addAddressForm.mobile" required/>
+						<div class="error-tip">
+							<div class="alert alert-danger" ng-show="addAddressForm.mobile.$dirty && addAddressForm.mobile.$invalid">联系电话不可为空</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-align-center">
+					<input type="submit" class="button button-36 padding-left-right-20" value="确定" ng-disabled="addAddressForm.$invalid" />&nbsp;&nbsp;&nbsp;
+					<input type="button" class="button2 button-36 padding-left-right-20" / value="取消" ng-click="address.showAddAddress=false">
+				</div>
+			</form>
+		</div>
+
+		<!--收货地址 列表-->
+		<ul class="address-list">
+			<li class="address-item" ng-repeat="item in address.addressArray">
+				<span class="username">{{item.consignee}}</span>
+				<span class="address-text">{{item.province}} {{item.city}} {{item.address}}</span>
+				<span class="post-code">{{item.zip}}</span>
+				<span class="phone">{{item.mobile}}</span>
+				<label>
+					<a class="color-green active" ng-show="item.is_default=='1'">已设默认</a><a class="color-blue" ng-show="item.is_default=='0'" ng-click="address.setDefaultAddress(item.id)">设为默认</a>|
+					<a class="color-blue" ng-click="address.showEditDialog(item)">编辑</a>|
+					<a class="color-blue" ng-click="address.showDeleteDialog(item.id)">删除</a>
+				</label>
+			</li>
+		</ul>
+
+		<div class="mask-div hideDom" id="edit_dialog_mask" ng-class="{'showDom':address.edit_dialog_mask,'hideDom':!address.edit_dialog_mask}"></div>
+		<!--编辑地址 begin-->
+		<div class="alert-dialog hideDom" id="edit_dialog" ng-class="{'showDom':address.edit_dialog,'hideDom':!address.edit_dialog}">
+			<form name="editAddressForm" novalidate="novalidate" ng-submit="address.editAddressSubmit()">
+				<div class="alert-dialog-panner">
+					<div class="dialog-title">
+						<span>修改地址</span>
+						<i class="iconfont" ng-click="address.editDialogCancel()">&#xe616;</i>
+					</div>
+					<div class="dialog-content">
+						<div class="input-box not-margin-bottom">
+							<label><span class="color-red">* </span><span>省市：</span></label>
+							<div class="input-container right-input-container">
+								<div class="select-box">
+									<select class="province" ng-model="address.editAddressForm.address.province" ng-options="item.name as item.name for item in address.provinceArray" ng-change="address.getCityList(address.editAddressForm.address.province,'cityArray2')">
+										<option value="">请选择</option>
+									</select>
+									<span>省</span>
+									<select class="city" ng-model="address.editAddressForm.address.city" ng-options="item.name as item.name for item in address.cityArray2">
+										<option value="">请选择</option>
+									</select>
+									<span>市</span>
+									<div class="error-tip">
+										<div class="alert alert-danger ng-hide">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="input-box not-margin-bottom">
+							<label><span class="color-red">* </span><span>详细地址：</span></label>
+							<div class="input-container right-input-container">
+								<input type="text" class="input-text" name="location" ng-model="address.editAddressForm.address.location" required/>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide" ng-show="editAddressForm.location.$dirty && editAddressForm.location.$invalid">地址不可为空</div>
+								</div>
+							</div>
+						</div>
+						<div class="input-box not-margin-bottom">
+							<label><span>邮政编码：</span></label>
+							<div class="input-container right-input-container">
+								<input type="text" class="input-text" placeholder="000000" ng-model="address.editAddressForm.zip"/>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+						<div class="input-box not-margin-bottom">
+							<label><span class="color-red">* </span><span>收货人姓名：</span></label>
+							<div class="input-container right-input-container">
+								<input type="text" class="input-text" name="consignee" ng-model="address.editAddressForm.consignee" required/>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide" ng-show="editAddressForm.consignee.$dirty && editAddressForm.consignee.$invalid">姓名不可为空</div>
+								</div>
+							</div>
+						</div>
+						<div class="input-box not-margin-bottom">
+							<label><span class="color-red">* </span><span>联系电话：</span></label>
+							<div class="input-container right-input-container">
+								<input type="text" class="input-text" name="mobile" ng-model="address.editAddressForm.mobile" required />
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide" ng-show="editAddressForm.mobile.$dirty && editAddressForm.mobile.$invalid">联系电话不可为空</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="dialog-footer has-two-button">
+						<input type="submit" class="button button-36 padding-left-right-20" value="确定" ng-disabled="editAddressForm.$invalid" />
+						<input type="button" class="button2 button-36 padding-left-right-20" ng-click="address.editDialogCancel()" value="取消" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--编辑地址 end-->
+	</div>
+</div>

@@ -1,0 +1,95 @@
+#crowdFundList {
+    padding-bottom: 50px;
+    .crowdFundList-title {
+        margin: 30px 0 0;
+        padding-bottom: 10px;
+    }
+    .crowdFundList-panner {
+        width: 100%;
+        margin-right: 50px;
+        min-height: 500px;
+        //选项模块
+        .select-panner {
+            width: 100%;
+            height: auto;
+            padding: 20px 20px 10px;
+            margin-bottom: 20px;
+            background: #FFFFFF;
+            .select-panner-item {
+                padding-bottom: 10px;
+                span.select-list-left-title {
+                    color: #666666 !important;
+                    float: left;
+                    line-height: 24px;
+                    font-size: 14px;
+                    display: block;
+                    width: 72px;
+                }
+                ul.select-list {
+                    margin-left: 72px;
+                    .select-item {
+                        .not-select();
+                        float: left;
+                        display: block;
+                        line-height: 24px;
+                        font-size: 12px;
+                        margin: 0 4px 10px;
+                        a {
+                            display: block;
+                            padding: 0 10px;
+                            height: 100%;
+                            color: #888888;
+                            .border-radius(3px);
+                            overflow: hidden;
+                            .transition(all .3s);
+                            .jiantou {
+                                font-size: 14px;
+                                top: 1px;
+                            }
+                            &:hover,
+                            &.active {
+                                color: #FFFFFF;
+                                background-color: @color-green-1;
+                            }
+                            &.active {
+                                .up {
+                                    .transform(rotate(180deg));
+                                    top: 0;
+                                }
+                            }
+                        }
+                        &.select-date {
+                            position: relative;
+                            input {
+                                position: absolute;
+                                left: 0;
+                                top: 5px;
+                                //top: 100%;
+                                height: 100%;
+                                z-index: -1;
+                            }
+                        }
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+            }
+        }
+        //列表模块
+        .crowdFundList-list-panner {
+            width: 1080px + 20px;
+            height: auto;
+            min-height: 100px;
+            .crowdFundList-ul {
+                height: auto;
+                li {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+    &:after {
+        .after();
+    }
+}

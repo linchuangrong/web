@@ -1,0 +1,103 @@
+<div id="joinList" class="container add-active-panel big-page">
+	<h1 class="title">入驻益齐</h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+	<h2 class="has-left-line-title">
+		<span>填写基本信息</span>
+	</h2>
+	<form name="submitForm" novalidate="novalidate" ng-submit="joinList.submit()">
+		<div class="form-panel">
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>单位名称</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="roll_name" ng-model="joinList.submitForm.roll_name" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.roll_name.$dirty && submitForm.roll_name.$invalid">单位名称不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>单位地址</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="roll_address" ng-model="joinList.submitForm.roll_address" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.roll_address.$dirty && submitForm.roll_address.$invalid">单位地址不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>联系人</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="roll_contact" ng-model="joinList.submitForm.roll_contact" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.roll_contact.$dirty && submitForm.roll_contact.$invalid">联系人不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>联系电话</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="roll_phone" ng-model="joinList.submitForm.roll_phone" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.roll_phone.$dirty && submitForm.roll_phone.$invalid">联系电话不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>电子邮箱</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="email" name="roll_email" ng-model="joinList.submitForm.roll_email" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.roll_email.$dirty && submitForm.roll_email.$invalid">电子邮箱格式错误</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom idCard-box idCard-box2">
+				<label>单位LOGO</label>
+				<div class="input-container right-input-container">
+					<div class="img">
+						<img ng-src="{{joinList.submitForm.roll_image}}" ng-show="!!joinList.submitForm.roll_image">
+						<span class="upload-tips">支持JPEG，JPG，PNG，GIF，BMP，建议图片小于2M</span>
+					</div>
+					<button type="button" id="roll_image" class="button padding-left-right-30" img-upload btn-id="roll_image" img-src="joinList.submitForm.roll_image">上传图片</button>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="!joinList.submitForm.roll_image">请上传图片</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom idCard-box idCard-box2">
+				<label>登记证书</label>
+				<div class="input-container right-input-container">
+					<div class="img">
+						<img ng-src="{{joinList.submitForm.roll_certificate}}" ng-show="!!joinList.submitForm.roll_certificate">
+						<span class="upload-tips">支持JPEG，JPG，PNG，GIF，BMP，建议图片小于2M</span>
+					</div>
+					<button type="button" id="roll_certificate" class="button padding-left-right-30" img-upload btn-id="roll_certificate" img-src="joinList.submitForm.roll_certificate">上传图片</button>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="!joinList.submitForm.roll_certificate">请上传图片</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="input-box not-margin-bottom">
+				<label>证书编号</label>
+				<div class="input-container right-input-container">
+					<input class="input-text" type="text" name="roll_number" ng-model="joinList.submitForm.roll_number" required/>
+					<div class="error-tip">
+						<div class="alert alert-danger ng-hide" ng-show="submitForm.roll_number.$dirty && submitForm.roll_number.$invalid">证书编号不可为空</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+		</div>
+		<div class="text-align-center">
+			<button type="submit" class="button padding-left-right-30" style="margin-left: 100px;" ng-disabled="submitForm.$invalid">保&nbsp;存</button>
+		</div>
+	</form>
+</div>

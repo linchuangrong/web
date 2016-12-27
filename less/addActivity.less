@@ -1,0 +1,198 @@
+.add-active-panel {
+    padding: 0 40px 30px;
+    margin: 40px auto;
+    background-color: #FFFFFF;
+}
+#addActivity,#updateActivity {
+    .main-panner {
+        margin: 0 auto;
+        width: auto;
+        //共用：多个界面共用的样式
+        .input-box {
+            margin-bottom: 0;
+            &>label {
+                width: 100px;
+                font-size: 14px;
+                color: @main-color;
+            }
+            .right-input-container {
+                margin-left: 120px;
+            }
+        }
+        .width-50 {
+            width: 50%;
+            float: left;
+        }
+        //项目地点
+        .address-box {
+            .select-box {
+                select {
+                    float: left;
+                    margin-right: 10px;
+                    width: 185px;
+                }
+                .input-text {
+                    float: left;
+                    width: 490px;
+                }
+                &:after {
+                    .after();
+                }
+            }
+        }
+        .width-33 {
+            width: 33.33%;
+            float: left;
+            select {
+                width: 100%;
+            }
+        }
+        //活动标签
+        #tags,#joinForm {
+            ul {
+                li {
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                    width: auto;
+                    padding: 0 20px;
+                    .border-radius(15px);
+                    line-height: 28px;
+                    height: 30px;
+                    margin-right: 20px;
+                    border: 1px dashed @color-green-1;
+                    color: @color-green-1;
+                    .transition(all .3s);
+                    font-size: 14px;
+                    &.active,&:hover {
+                        background-color: @color-green-1;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+        .edit-box {
+            .input-text {
+                height: 200px;
+            }
+        }
+        //上传海报
+        .idCard-box2 {
+            &>label {
+                top: 0;
+                line-height: 40px;
+            }
+            .right-input-container {
+                text-align: center;
+                width: 380px;
+                .img {
+                    width: 380px;
+                    height: 225px;
+                }
+            }
+        }
+        //选择票种
+        .select-ticket {
+            .ticket-box {
+                margin-bottom: 20px;
+                .tag {
+                    display: inline-block;
+                    width: 120px;
+                    text-align: center;
+                    height: 40px;
+                    border: 1px solid @color-green-1;
+                    background-color: #F3F3F3;
+                    color: @color-green-1;
+                    margin-right: 20px;
+                    font-size: 16px;
+                }
+                ul {
+                    padding: 20px 0 0;
+                    li {
+                        width: 220px;
+                        margin-bottom: 20px;
+                        float: left;
+                        div {
+                            position: relative;
+                            text-align: center;
+                            background: #FFFFFF;
+                            font-size: 14px;
+                            width: 120px;
+                            border: 1px solid #dddddd;
+                            line-height: 40px;
+                            height: 40px;
+                            overflow: hidden;
+                            display: inline-block;
+                            vertical-align: middle;
+                            .iconfont {
+                                position: absolute;
+                                bottom: -1px;
+                                right: -1px;
+                                font-size: 24px;
+                                line-height: 24px;
+                                color: @color-green-1;
+                                display: none;
+                            }
+                        }
+                        div.active {
+                            border-color: @color-green-1;
+                            .iconfont {
+                                display: block;
+                            }
+                        }
+                        .delete {
+                            display: inline-block;
+                            font-size: 18px;
+                            color: #999999;
+                            vertical-align: middle;
+                            margin-left: 20px;
+                            cursor: pointer;
+                        }
+                    }
+                    &:after {
+                        .after();
+                    }
+                }
+            }
+        }
+        #add_ticket_dialog,
+        #add_free_dialog {
+            .alert-dialog-panner {
+                width: 460px;
+                .dialog-content {
+                    padding-top: 20px;
+                    padding-bottom: 0;
+                }
+                .dialog-footer {
+                    text-align: right;
+                }
+                select {
+                    width: 100px;
+                }
+            }
+        }
+    }
+    p.agree {
+        text-align: center;
+        font-size: 14px;
+        padding: 10px 0;
+        .iconfont {
+            color: #BBBBBB;
+            cursor: pointer;
+            vertical-align: middle;
+            top: -1px;
+            &.active {
+                color: @color-green-1;
+            }
+        }
+    }
+    //底部的按钮
+    .bottom-button {
+        text-align: center;
+        padding-top: 20px;
+        button,
+        input {
+            margin: 0 10px;
+        }
+    }
+}

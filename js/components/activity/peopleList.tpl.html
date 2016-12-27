@@ -1,0 +1,100 @@
+<div id="peopleList" class="container add-active-panel big-page">
+	<h1 class="title">名单管理<a class="button button-32 padding-left-right-20 float-right" type="button" target="_blank" href="/phalapi/public/yiapp/?service=ExcelToArray.getExcelToArray&deal_id={{peopleList.id}}&is_free={{peopleList.showTab == 'free' ? '0' : '1'}}">导出报名表</a></h1>
+	<div class="green-line" style="margin-bottom:0px"></div>
+
+	<div class="tab-container">
+		<ul class="menu-list">
+			<li class="menu-item" ng-click="peopleList.showTab='charge'" ng-class="{'active':peopleList.showTab=='charge'}">收费票</li>
+			<li class="menu-item" ng-click="peopleList.showTab='free'" ng-class="{'active':peopleList.showTab=='free'}">免费票</li>
+		</ul>
+		<ul style="padding-top: 20px;">
+			<li ng-show="peopleList.showTab=='charge'">
+				<div class="scroll-bar">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="text-align-center" width="50">序号</th>
+								<th>姓名</th>
+								<th>手机</th>
+								<th>邮箱</th>
+								<th>单位</th>
+								<th>QQ</th>
+								<th>微信</th>
+								<th>性别</th>
+								<th>年龄</th>
+								<th>部门</th>
+								<th>职务</th>
+								<th>地址</th>
+								<th>票名</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in peopleList.chargeArray">
+								<td class="text-align-center">{{$index+1}}</td>
+								<td>{{item.nickname}}</td>
+								<td>{{item.mobile}}</td>
+								<td>{{item.email}}</td>
+								<td>{{item.company}}</td>
+								<td>{{item.qq}}</td>
+								<td>{{item.wechat}}</td>
+								<td>
+									<span ng-show="item.sex=='1'">男</span>
+									<span ng-show="item.sex=='0'">女</span>
+								</td>
+								<td>{{item.age}}</td>
+								<td>{{item.department}}</td>
+								<td>{{item.job}}</td>
+								<td>{{item.address}}</td>
+								<td>{{item.ticket_name}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+			<li ng-show="peopleList.showTab=='free'">
+				<div class="scroll-bar">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="text-align-center" width="50">序号</th>
+								<th>姓名</th>
+								<th>手机</th>
+								<th>邮箱</th>
+								<th>单位</th>
+								<th>QQ</th>
+								<th>微信</th>
+								<th>性别</th>
+								<th>年龄</th>
+								<th>部门</th>
+								<th>职务</th>
+								<th>地址</th>
+								<th>票名</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in peopleList.freeArray">
+								<td class="text-align-center">{{$index+1}}</td>
+								<td>{{item.nickname}}</td>
+								<td>{{item.mobile}}</td>
+								<td>{{item.email}}</td>
+								<td>{{item.company}}</td>
+								<td>{{item.qq}}</td>
+								<td>{{item.wechat}}</td>
+								<td>
+									<span ng-show="item.sex=='1'">男</span>
+									<span ng-show="item.sex=='0'">女</span>
+								</td>
+								<td>{{item.age}}</td>
+								<td>{{item.department}}</td>
+								<td>{{item.job}}</td>
+								<td>{{item.address}}</td>
+								<td>{{item.ticket_name || '免费票'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</div>

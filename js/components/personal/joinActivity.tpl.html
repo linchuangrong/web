@@ -1,0 +1,39 @@
+<div id="personal-joinActivity">
+	<h1 class="title">我的报名</h1>
+	<!--时间轴 begin-->
+	<div class="time-list-panner ng-hide" ng-show="joinActivity.activityArray.length!='0'">
+		<ul>
+			<li class="time-item" ng-repeat="item in joinActivity.activityArray">
+				<div class="time" ng-hide="joinActivity.activityArray[$index].year_month == joinActivity.activityArray[$index-1].year_month">
+					<div class="left-circle"><span></span></div>
+					<p>{{item.year_month}}</p>
+				</div>
+				<div class="content">
+					<div class="left-image background-cover hover-pointer" ng-style="{ 'background-image': 'url(' + item.image + '?imageslim)' }" ui-sref="activityDetail({'activityId':item.id})"></div>
+					<div class="right-content">
+						<h3 ui-sref="activityDetail({'activityId':item.id})">{{item.name}}</h3>
+						<p class="text">开始时间：
+							<span ng-bind="item.begin_time | toDate"></span>
+							<span class="overtime" ng-if="joinActivity.setActivityStop(item.end_time)">已结束</span>
+							<span class="continue" ng-if="!joinActivity.setActivityStop(item.end_time)">进行中</span>
+						</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<!--时间轴 begin-->
+	<div ng-show="joinActivity.activityArray.length!='0' && joinActivity.loaded">
+		<page-bar page-change="joinActivity.pageParams.pageChange()" page-count="joinActivity.pageParams.page_count" current="joinActivity.pageParams.current" show-page="{{joinActivity.pageParams.showPage}}"></page-bar>
+	</div>
+	<!--无数据 begin-->
+	<div class="not-data ng-hide" ng-show="joinActivity.activityArray.length=='0'">
+		<i class="iconfont">&#xe627;</i>
+		<div>您还未报名过活动</div>
+		<div>
+			<button class="button button-36" ui-sref="activityList({'address':'','cate':'','time':''})">去报名</button>
+		</div>
+	</div>
+	<!--无数据 begin-->
+</div>

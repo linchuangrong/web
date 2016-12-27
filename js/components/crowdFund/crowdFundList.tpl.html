@@ -1,0 +1,101 @@
+<div id="crowdFundList" class="container">
+	<h1 class="title crowdFundList-title">众筹中心</h1>
+	<div class="crowdFundList-panner">
+		<div class="select-panner">
+			<!--类型 begin-->
+			<div class="select-panner-item" id="type">
+				<span class="select-list-left-title">类型筛选：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.welfare_cate == ''}" ng-click="crowdFundList.setSelectActive($event,'welfare_cate','')">全部</a>
+					</li>
+					<li class="select-item" ng-repeat="item in crowdFundList.crowdFundTypeArray">
+						<a ng-class="{'active':crowdFundList.searchForm.welfare_cate == item.id}" ng-click="crowdFundList.setSelectActive($event,'welfare_cate',item.id)">{{item.name}}</a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--类型 begin-->
+			<div class="select-panner-item" id="progress">
+				<span class="select-list-left-title">项目进程：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.process == ''}" ng-click="crowdFundList.setSelectActive($event,'process','')">全部</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.process == '0'}" ng-click="crowdFundList.setSelectActive($event,'process','0')">众筹中</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.process == '1'}" ng-click="crowdFundList.setSelectActive($event,'process','1')">将要结束</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.process == '2'}" ng-click="crowdFundList.setSelectActive($event,'process','2')">成功结束</a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+			<!--类型 begin-->
+			<div class="select-panner-item" id="sort">
+				<span class="select-list-left-title">项目排序：</span>
+				<ul class="select-list">
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.sort == ''}" ng-click="crowdFundList.setSelectActive($event,'sort','')" class="active">默认</a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.sort == 'begin_time'}" ng-click="crowdFundList.setSelectActive($event,'sort','begin_time')">最新上线<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.sort == 'limit_price'}" ng-click="crowdFundList.setSelectActive($event,'sort','limit_price')">目标金额<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.sort == 'support_count'}" ng-click="crowdFundList.setSelectActive($event,'sort','support_count')">支持人数<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+					<li class="select-item">
+						<a ng-class="{'active':crowdFundList.searchForm.sort == 'support_amount'}" ng-click="crowdFundList.setSelectActive($event,'sort','support_amount')">筹资额<i class="iconfont jiantou">&#xe648;</i></a>
+					</li>
+				</ul>
+			</div>
+			<!--类型 end-->
+		</div>
+		<!--活动列表 begin-->
+		<div class="crowdFundList-list-panner">
+			<ul class="crowdFundList-ul">
+				<!-- 1个公益众筹 begin-->
+				<li ng-repeat="item in crowdFundList.crowdFundArray" background-lazy-load ui-sref="crowdFundDetail({'crowdFundId':item.deal_id})">
+					<div class="top-img">
+						<div class="transition-scale background-lazy-load" lazy-load-src="{{item.image+'?imageslim'}}"></div>
+					</div>
+					<div class="content">
+						<h4 class="crowdfunding-title">{{item.name}}</h4>
+						<p class="crowdfunding-message">{{item.brief}}</p>
+						<p class="crowdfunding-label">
+							<i class="iconfont icon-biaoqian">&nbsp;</i>
+							<span>{{item.tags_match}}</span>
+						</p>
+						<div class="crowdfunding-progress">
+							<div class="progressbar">
+								<p ng-style="{'width':(item.support_amount/item.limit_price)*100 + '%'}"></p>
+							</div>
+							<div class="progress-desc already-fund">
+								<span>￥</span><span>{{item.support_amount}}</span>
+								<h5>已筹款</h5>
+							</div>
+							<div class="progress-desc support">
+								<span>{{item.support_count}}</span>
+								<h5>支持数</h5>
+							</div>
+							<div class="progress-desc schedule">
+								<span>{{ item.support_amount * 100 / item.limit_price | number:2 }}</span><span>%</span>
+								<h5>筹款进度</h5>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 1个公益众筹 end-->
+			</ul>
+			<div class="clearfix"></div>
+			<page-bar page-change="crowdFundList.pageParams.pageChange()" page-count="crowdFundList.pageParams.page_count" current="crowdFundList.pageParams.current" show-page="{{crowdFundList.pageParams.showPage}}"></page-bar>
+		</div>
+		<!--活动列表 end-->
+	</div>
+</div>

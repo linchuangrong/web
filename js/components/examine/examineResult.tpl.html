@@ -1,0 +1,37 @@
+<div id="examineResult" class="container add-active-panel big-page">
+	<h1 class="title">{{examineResult.title}}<span>（{{examineResult.reviewInfo.score_title}}，表编号：<strong class="color-orange">{{examineResult.reviewInfo.review_sn}}</strong>）</span></h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+
+	<!---->
+	<div class="max-score-box">
+		<p class="width-50 float-left">
+			<span>项目最高平均分</span>
+			<strong class="color-orange">88（项目A）</strong>
+		</p>
+		<p class="width-30 float-left">
+			<span>表单平均分</span>
+			<strong class="color-orange">86</strong>
+		</p>
+	</div>
+	<!--项目名 begin-->
+	<div class="input-box">
+		<label>查看项目</label>
+		<div class="input-container right-input-container">
+			<div class="select-box">
+				<select class="width-40" ng-model="examineResult.select_project_id" ng-options="item.id as item.project_name for item in examineResult.projectArray" ng-change="examineResult.getReviewResult()"></select>
+			</div>
+		</div>
+	</div>
+	<!--项目名 end-->
+	<!--专家评分结果 begin-->
+	<div class="result-title">项目评分结果</div>
+	<ul class="result-list">
+		<li class="result-item" ng-repeat="item in examineResult.resultScoreArray">
+			<p>
+				<span>{{item.username}}</span>
+				<span>评分：<strong class="color-orange">{{item.score}}</strong></span>
+			</p>
+		</li>
+	</ul>
+	<!--专家评分结果 end-->
+</div>

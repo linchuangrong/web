@@ -1,0 +1,345 @@
+<div id="activityDetail" class="container">
+	<div class="left-panner">
+		<div class="activity-info-panner">
+			<div class="left-image background-cover" ng-style="{'background-image': 'url(' + activityDetail.activityInfo.image + '?imageslim)'}">
+			</div>
+			<div class="right-content">
+				<h3>{{activityDetail.activityInfo.name}}
+					<span class="button-text gray" ng-if="activityDetail.activityInfo.is_success=='1'">已结束</span>
+					<span class="button-text green" ng-if="activityDetail.activityInfo.is_success=='0'">进行中</span>
+				</h3>
+				<p><strong>时间：</strong><span>{{activityDetail.activityInfo.begin_time | toAutoTime }}&nbsp;&nbsp;至&nbsp;&nbsp;{{activityDetail.activityInfo.end_time | toAutoTime}}</span></p>
+				<p><strong>地点：</strong><span>{{activityDetail.activityInfo.province}}省{{activityDetail.activityInfo.city}}市{{activityDetail.activityInfo.address}}</span></p>
+				<p><strong>类型：</strong><span class="color-green">{{activityDetail.activityInfo.cate_id}}</span></p>
+				<p><strong>发起：</strong><span>{{activityDetail.sponsorInfo.identify_bs_name}}</span></p>
+				<div class="ticket-type" ng-hide="activityDetail.freeTicketArray.length == '0' && activityDetail.chargeTicketArray.length == '0'">
+					<span>活动票种：</span>
+					<ul>
+						<!--免费票 begin-->
+						<li class="border-green" ng-repeat="item in activityDetail.freeTicketArray" ng-class="{'active':activityDetail.selectTicketId==item.id}" ng-click="activityDetail.selectTicket(item.id)" tooltip tooltip-data="<p>剩余数量：{{item.ticket_num}}张</p>">免费票<i class="iconfont xuanzhong-img color-green">&#xe61c;</i></li>
+						<!--免费票 end-->
+
+						<!--收费票 begin-->
+						<li ng-repeat="item in activityDetail.chargeTicketArray" ng-class="{'active':activityDetail.selectTicketId==item.id}" ng-click="activityDetail.selectTicket(item.id)" tooltip tooltip-data="<p>票价类型：{{item.ticket_name}}</p><p>报名截止时间：{{item.ticket_time | toTime }}</p><p>单价：{{item.ticket_price}}</p><p>剩余数量：{{item.ticket_num}}张</p><p>费用说明：{{item.ticket_decription}}</p>">￥{{item.ticket_price}}<i class="iconfont xuanzhong-img color-orange">&#xe61c;</i></li>
+						<!--收费票 end-->
+					</ul>
+				</div>
+				<div class="baoming">
+					<button type="button" class="button button-36 padding-left-right-20" ng-click="activityDetail.showAlertDialog()" ng-show="activityDetail.activityInfo.is_effect!='0'">我要报名</button>
+					<div class="share-box">
+						<!--<span><i class="iconfont fengxiang-img">&#xe62a;</i>分享</span>-->
+						<div class="bdsharebuttonbox">
+							<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+							<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+							<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+							<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+						</div>
+					</div>
+					<div class="shoucang" ng-show="!activityDetail.focusFlag">
+						<span ng-click="activityDetail.focusActivity()"><i class="iconfont shoucang-img">&#xe60f;</i>收藏</span>
+					</div>
+					<div class="shoucang active" ng-show="activityDetail.focusFlag">
+						<span ng-click="activityDetail.focusActivity()"><i class="iconfont shoucang-img">&#xe60f;</i>取消收藏</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="left-big-box">
+			<!--选项卡按钮 begin-->
+			<ul class="left-menu">
+				<li ng-click="activityDetail.setActivePanel('detail')" ng-class="{'active':activityDetail.activePanel=='detail'}">活动详情</li>
+				<li ng-click="activityDetail.setActivePanel('comment')" ng-class="{'active':activityDetail.activePanel=='comment'}">评论<span ng-bind="activityDetail.comment_count"></span></li>
+			</ul>
+			<!--选项卡按钮 end-->
+			<!--选项卡内容 begin-->
+			<ul class="left-content">
+				<li class="detail-panel" ng-show="activityDetail.activePanel=='detail'">
+					<div class="break-word" ng-bind-html="activityDetail.activityInfo.description | toHtml"></div>
+				</li>
+				<!--TODO 评论 begin-->
+				<li class="comment-panel" ng-show="activityDetail.activePanel=='comment'">
+					<!--评论输入框-->
+					<div class="post-comment-box">
+						<div class="left-circle-photo">
+							<img ng-src="{{userInfo.head_image}}" ng-show="!!userInfo.head_image" />
+						</div>
+						<div class="right-edit">
+							<textarea class="input-text" ng-model="activityDetail.commentText"></textarea>
+							<div class="select-img-box">
+								<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="activityDetail.addComment()">评&nbsp;论</button>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<!--评论列表-->
+					<ul class="comment-list">
+						<!---->
+						<li class="comment-item" ng-repeat="item in activityDetail.commentArray">
+							<div class="left-circle-photo">
+								<img ng-src="{{item.head_image}}" />
+							</div>
+							<div class="right-content">
+								<!--用户名-->
+								<h4><span class="username">{{item.nickname}}</span></h4>
+								<!--文字内容-->
+								<div class="talking">{{item.content}}</div>
+								<!--图片列表-->
+								<!--时间-->
+								<p class="time-box">
+									<span class="time">{{item.create_time | toTime}}</span>
+									<a class="float-right color-orange" ng-click="activityDetail.setCommentBox($event , item.id , item.id , item.nickname , $index)">评论</a>
+								</p>
+								<!--回复列表   显示这个模块的条件：有人点击了评论按钮   ，或者  ，回复列表的长度大于0 -->
+								<div class="answer-box" ng-show="activityDetail.showCommentBoxIndex==$index || item.list.length>0">
+									<div class="triangle"></div>
+									<ul class="answer-list">
+										<!--评论输入框 begin  显示这个模块的条件：有人点击了评论按钮 -->
+										<li class="answer-item" ng-show="activityDetail.showCommentBoxIndex==$index">
+											<div class="reply-box">
+												<textarea class="input-text" ng-model="activityDetail.replyText"></textarea>
+												<div class="button-parent">
+													<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="activityDetail.addReply()">发&nbsp;送</button>
+												</div>
+											</div>
+										</li>
+										<!--评论输入框 end-->
+										<li class="answer-item" ng-repeat="smallItem in item.list">
+											<div class="talking">
+												<span class="username">{{smallItem.nickname}}</span> 回复 <span class="username">{{smallItem.reply_nickname}}</span> ：<span>{{smallItem.content}} </span>
+											</div>
+											<p class="time-box">
+												<a class="float-right color-orange" ng-click="activityDetail.setReplyBox($event , item.id , smallItem.id , smallItem.nickname ,$parent.$index,$index)">回复</a>
+												<span class="time float-right">{{smallItem.create_time | toTime}}</span>
+											</p>
+										</li>
+										<!--回复输入框 begin-->
+										<li class="answer-item" ng-show="activityDetail.showReplyBoxIndex==$index">
+											<div class="reply-box">
+												<textarea class="input-text" placeholder="{{activityDetail.replyPlaceholder}}" ng-model="activityDetail.replyText"></textarea>
+												<div class="button-parent">
+													<button type="button" class="button button-36 float-right padding-left-right-20" ng-click="activityDetail.addReply()">发&nbsp;送</button>
+												</div>
+											</div>
+										</li>
+										<!--回复输入框 begin-->
+									</ul>
+								</div>
+
+							</div>
+						</li>
+						<!---->
+					</ul>
+					<!--分页 begin-->
+					<div class="pagination-box" ng-show="activityDetail.commentArray.length!='0'">
+						<page-bar page-change="activityDetail.commentPageParams.pageChange()" page-count="activityDetail.commentPageParams.page_count" current="activityDetail.commentPageParams.current" show-page="{{activityDetail.commentPageParams.showPage}}"></page-bar>
+					</div>
+					<!--分页 end-->
+				</li>
+				<!--评论 end-->
+			</ul>
+			<!--选项卡内容 end-->
+		</div>
+	</div>
+	<div class="right-panner">
+		<!--下载app begin-->
+		<!--<div class="right-panner-item download-app-box">
+			<h3 class="panner-title">在手机APP中讨论这场活动</h3>
+			<div class="right-item-content app-panner">
+				<div class="code-img">
+					<img src="./img/example-slide-3.jpg" />
+				</div>
+				<div class="app-desc">
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<p>用益齐App扫码，找人聊聊这场活动。没有益齐App？
+						<a href="javascript:;" class="color-green">去下载</a>
+					</p>
+				</div>
+				<div class="clearfix"></div>
+				<p class="tips">本活动信息由发起人自行发布，仅代表其个人意志，与益齐无关，且活动的后续事项由发起人独立安排及负责。益齐仅提供信息展示空间。不能保证活动的真实性、有效性安全性，请在参加活动前与发起人具体确认核实相关情况注意人身安全与财产安全。 </p>
+			</div>
+		</div>-->
+		<!--下载app end-->
+		<!--广告位 begin-->
+		<div class="guanggao">
+			<!--<img src="./img/example-slide-2.jpg" />-->
+		</div>
+		<!--广告位 end-->
+		<!--活动相关标签 begin-->
+		<div class="right-panner-item biaoqian-box">
+			<h3 class="panner-title">活动相关标签</h3>
+			<div>
+				<a class="button-text" ng-repeat="item in activityDetail.tagsArray">{{item}}</a>
+			</div>
+		</div>
+		<!--活动相关标签 end-->
+		<!--活动地图 begin-->
+		<div class="right-panner-item map-box">
+			<h3 class="panner-title">活动地图</h3>
+			<div class="right-item-content" id="activityMap"></div>
+		</div>
+		<!--活动地图 end-->
+		<!--联系我们 begin-->
+		<div class="right-box-item">
+			<h3 class="title"><span>联系我们</span></h3>
+			<div class="content">
+				<div class="contact-us">
+					<p>
+						<i class="iconfont color-green" style="font-size: 20px;">&#xe64b;</i>
+						<span class="key">公司名称：</span>
+						<span class="value">{{activityDetail.sponsorInfo.identify_bs_name}}</span>
+					</p>
+					<p>
+						<i class="iconfont color-green">&#xe64c;</i>
+						<span class="key">联系电话：</span>
+						<span class="value">{{activityDetail.sponsorInfo.mobile}}</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!--联系我们 end-->
+	</div>
+
+	<!--有确定、删除的弹框 begin-->
+	<div class="mask-div" ng-class="{'showDom':activityDetail.show.joinDialog,'hideDom':!activityDetail.show.joinDialog}"></div>
+	<div class="alert-dialog hideDom" id="joinDialog" ng-class="{'showDom':activityDetail.show.joinDialog,'hideDom':!activityDetail.show.joinDialog}">
+		<form name="joinForm" novalidate="novalidate" ng-submit="activityDetail.alertDialogConfirm()">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>填写报名信息</span>
+					<i class="iconfont" ng-click="activityDetail.alertDialogCancel()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+					<!--名称-->
+					<div class="input-box not-margin-bottom">
+						<label><span class="color-red">*</span> 名称</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="nickname" ng-model="activityDetail.joinForm.nickname" required>
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="joinForm.nickname.$dirty && joinForm.nickname.$invalid">名称不能为空</div>
+							</div>
+						</div>
+					</div>
+					<!--手机-->
+					<div class="input-box not-margin-bottom">
+						<label><span class="color-red">*</span> 手机</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="mobile" ng-model="activityDetail.joinForm.mobile" required ng-pattern="/^(1[0-9]{10})$/">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="joinForm.mobile.$dirty && joinForm.mobile.$invalid">请填写正确的手机号</div>
+							</div>
+						</div>
+					</div>
+					<!--邮箱-->
+					<div class="input-box not-margin-bottom">
+						<label>邮箱</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="email" ng-model="activityDetail.joinForm.email">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--单位-->
+					<div class="input-box not-margin-bottom">
+						<label>单位</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="company" ng-model="activityDetail.joinForm.company">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--qq-->
+					<div class="input-box not-margin-bottom">
+						<label>qq</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="qq" ng-model="activityDetail.joinForm.qq">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--wechat-->
+					<div class="input-box not-margin-bottom">
+						<label>微信</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="wechat" ng-model="activityDetail.joinForm.wechat">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--性别-->
+					<div class="input-box not-margin-bottom">
+						<label>性别</label>
+						<div class="input-container right-input-container">
+							<div class="radio-box">
+								<label style="width: auto;">
+									<input class="hidden-radio" type="radio" name="sex" ng-model="activityDetail.joinForm.sex" value="1">
+									<span class="circle"><span></span></span>男</label>
+								<label style="width: auto;">
+									<input class="hidden-radio" type="radio" name="sex" ng-model="activityDetail.joinForm.sex" value="0">
+									<span class="circle"><span></span></span>女</label>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--年龄-->
+					<div class="input-box not-margin-bottom">
+						<label>年龄</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="age" ng-model="activityDetail.joinForm.age">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--部门-->
+					<div class="input-box not-margin-bottom">
+						<label>部门</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="department" ng-model="activityDetail.joinForm.department">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--职务-->
+					<div class="input-box not-margin-bottom">
+						<label>职务</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="job" ng-model="activityDetail.joinForm.job">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!--地址-->
+					<div class="input-box not-margin-bottom">
+						<label>地址</label>
+						<div class="input-container right-input-container">
+							<input class="input-text" type="text" name="address" ng-model="activityDetail.joinForm.address">
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<!---->
+				</div>
+				<div class="dialog-footer has-two-button">
+					<button type="submit" class="button button-36 padding-left-right-20" ng-disabled="joinForm.$invalid">确定</button>
+					<button type="button" class="button2 button-36 padding-left-right-20" ng-click="activityDetail.alertDialogCancel()">取消</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!--有确定、删除的弹框 end-->
+</div>

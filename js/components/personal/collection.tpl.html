@@ -1,0 +1,93 @@
+<div id="personal-collection">
+	<h1 class="title">我的收藏</h1>
+	<!--<p class="not-data-tip">
+		<span>您值得收藏的活动</span>
+		<a class="float-right more">更多>></a>
+	</p>-->
+	<div class="tab-menu">
+		<ul>
+			<li ng-class="{'active':collection.activePanel=='activity'}" ng-click="collection.setActivePanel('activity')">收藏的活动</li>
+			<li ng-class="{'active':collection.activePanel=='crowdFund'}" ng-click="collection.setActivePanel('crowdFund')">收藏的众筹</li>
+		</ul>
+	</div>
+
+	<!--收藏的活动 begin-->
+	<div ng-show="collection.activePanel=='activity'">
+		<!--时间轴 begin-->
+		<div class="time-list-panner ng-hide" ng-show="collection.activityArray.length!='0'">
+			<ul>
+				<li class="time-item" ng-repeat="item in collection.activityArray">
+					<div class="time" ng-hide="collection.activityArray[$index].year_month == collection.activityArray[$index-1].year_month">
+						<div class="left-circle"><span></span></div>
+						<p>{{item.year_month}}</p>
+					</div>
+					<div class="content">
+						<div class="left-image background-cover hover-pointer" ng-style="{ 'background-image': 'url(' + item.image + '?imageslim)' }" ui-sref="activityDetail({'activityId':item.id})"></div>
+						<div class="right-content">
+							<h3 ui-sref="activityDetail({'activityId':item.id})">{{item.name}}</h3>
+							<p class="text">开始时间：
+								<span ng-bind="item.begin_time | toDate"></span>
+								<span class="overtime" ng-if="collection.setActivityStop(item.end_time)">已结束</span>
+								<span class="continue" ng-if="!collection.setActivityStop(item.end_time)">进行中</span>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<!--时间轴 begin-->
+		<div ng-show="collection.activityArray.length!='0'">
+			<page-bar page-change="collection.activityPageParams.pageChange()" page-count="collection.activityPageParams.page_count" current="collection.activityPageParams.current" show-page="{{collection.activityPageParams.showPage}}"></page-bar>
+		</div>
+		<!--无数据 begin-->
+		<div class="not-data ng-hide" ng-show="collection.activityArray.length=='0' && collection.loaded1">
+			<i class="iconfont">&#xe627;</i>
+			<div>您还未收藏过活动</div>
+			<div>
+				<button class="button button-36" ui-sref="activityList">去看看</button>
+			</div>
+		</div>
+		<!--无数据 begin-->
+	</div>
+	<!--收藏的活动 end-->
+
+	<!--收藏的众筹 begin-->
+	<div ng-show="collection.activePanel=='crowdFund'">
+		<!--时间轴 begin-->
+		<div class="time-list-panner ng-hide" ng-show="collection.crowdFundArray.length!='0'">
+			<ul>
+				<li class="time-item" ng-repeat="item in collection.crowdFundArray">
+					<!--<div class="time" ng-hide="collection.crowdFundArray[$index].year_month == collection.crowdFundArray[$index-1].year_month">
+					<div class="left-circle"><span></span></div>
+					<p>{{item.year_month}}</p>
+				</div>-->
+					<div class="content">
+						<div class="left-image background-cover hover-pointer" ng-style="{ 'background-image': 'url(' + item.image + '?imageslim)' }" ui-sref="crowdFundDetail({'crowdFundId':item.id})"></div>
+						<div class="right-content">
+							<h3 ui-sref="crowdFundDetail({'crowdFundId':item.id})">{{item.name}}</h3>
+							<p class="text">结束时间：<span ng-bind="(item.deal_days|| item.end_time) | toDate"></span>
+								<span class="overtime" ng-if="collection.setActivityStop(item.deal_days || item.end_time)">已结束</span>
+								<span class="continue" ng-if="!collection.setActivityStop(item.deal_days || item.end_time)">进行中</span>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--时间轴 begin-->
+		<div ng-show="collection.crowdFundArray.length!='0'">
+			<page-bar page-change="collection.crowdFundPageParams.pageChange()" page-count="collection.crowdFundPageParams.page_count" current="collection.crowdFundPageParams.current" show-page="{{collection.crowdFundPageParams.showPage}}"></page-bar>
+		</div>
+		<!--无数据 begin-->
+		<div class="not-data ng-hide" ng-show="collection.crowdFundArray.length=='0' && collection.loaded2">
+			<i class="iconfont">&#xe627;</i>
+			<div>您还未收藏过众筹</div>
+			<div>
+				<button class="button button-36" ui-sref="crowdFundList">去看看</button>
+			</div>
+		</div>
+		<!--无数据 begin-->
+	</div>
+	<!--收藏的众筹 begin-->
+</div>

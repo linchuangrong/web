@@ -1,0 +1,117 @@
+<div id="editReport" class="container add-active-panel big-page">
+	<h1 class="title">编辑报告<span ng-show="editReport.report_type=='0'">（电子报告）</span><span ng-show="editReport.report_type=='1'">（纸质报告）</span></h1>
+	<div class="green-line" style="margin-bottom:30px"></div>
+
+	<div class="input-box">
+		<label style="line-height: 30px;">编辑报告内容</label>
+		<div class="input-container right-input-container">
+			<div id="editText" ng-model="editReport.submitForm.report_content" contenteditable="true" style="height: 600px;"></div>
+			<div class="error-tip">
+				<div class="alert alert-danger ng-hide">不可为空</div>
+			</div>
+		</div>
+	</div>
+	<div class="bottom-box ng-hide" ng-show="editReport.report_type=='1'">
+		<div class="input-box">
+			<label>收货地址</label>
+			<div class="input-container right-input-container">
+				<div class="radio-box">
+					<div ng-repeat="item in editReport.addressArray">
+						<label>
+						<input class="hidden-radio" type="radio" name="address_id" ng-model="editReport.submitForm.address_id" value="{{item.id}}">
+						<span class="circle"><span></span></span>
+					</label>
+						<div class="address-desc">
+							<span class="username">{{item.consignee}}</span>
+							<span class="address-text" title="{{item.province}}省{{item.city}}市{{item.address}}">{{item.province}}省{{item.city}}市{{item.address}}</span>
+							<span class="post-code">{{item.zip}}</span>
+							<span class="phone">{{item.mobile}}</span>
+						</div>
+					</div>
+				</div>
+				<div>
+					<button type="button" class="button2 button2-32" style="vertical-align: middle;" ng-click="editReport.showEditDialog()">添加收货地址</button>
+					<span class="color-blue float-right hover-pointer" style="margin-right: 10px;" ui-sref="personal.address">查看所有地址</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-align-center">
+		<button type="button" class="button padding-left-right-30" ng-click="editReport.submitReport()">保存</button>
+	</div>
+
+	<!--编辑地址 begin-->
+	<div class="mask-div hideDom" id="edit_dialog_mask" ng-class="{'showDom':editReport.edit_dialog_mask,'hideDom':!editReport.edit_dialog_mask}"></div>
+	<form name="addAddressForm" novalidate="novalidate" ng-submit="editReport.addAddressSubmit()">
+		<div class="alert-dialog hideDom" id="edit_dialog" ng-class="{'showDom':editReport.edit_dialog,'hideDom':!editReport.edit_dialog}">
+			<div class="alert-dialog-panner">
+				<div class="dialog-title">
+					<span>添加地址</span>
+					<i class="iconfont" ng-click="editReport.editDialogCancel()">&#xe616;</i>
+				</div>
+				<div class="dialog-content">
+
+					<div class="input-box not-margin-bottom">
+						<label><span class="color-red">* </span><span>省市：</span></label>
+						<div class="input-container right-input-container">
+							<div class="select-box">
+								<select class="province" ng-model="editReport.addAddressForm.address.province" ng-options="item.name as item.name for item in editReport.provinceArray" ng-change="editReport.getCityList(editReport.addAddressForm.address.province,'cityArray')">
+									<option value="">请选择</option>
+								</select>
+								<span>省</span>
+								<select class="city" ng-model="editReport.addAddressForm.address.city" ng-options="item.name as item.name for item in editReport.cityArray">
+									<option value="">请选择</option>
+								</select>
+								<span>市</span>
+								<div class="error-tip">
+									<div class="alert alert-danger ng-hide">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label><span class="color-red">* </span><span>详细地址：</span></label>
+						<div class="input-container right-input-container">
+							<input type="text" class="input-text" name="location" ng-model="editReport.addAddressForm.address.location" required/>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="addAddressForm.location.$dirty && addAddressForm.location.$invalid">地址不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label><span>邮政编码：</span></label>
+						<div class="input-container right-input-container">
+							<input type="text" class="input-text" placeholder="000000" name="zip" ng-model="editReport.addAddressForm.zip" />
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label><span class="color-red">* </span><span>收货人姓名：</span></label>
+						<div class="input-container right-input-container">
+							<input type="text" class="input-text" name="consignee" ng-model="editReport.addAddressForm.consignee" required/>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide" ng-show="addAddressForm.consignee.$dirty && addAddressForm.consignee.$invalid">姓名不可为空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-box not-margin-bottom">
+						<label><span class="color-red">* </span><span>联系电话：</span></label>
+						<div class="input-container right-input-container">
+							<input type="tel" class="input-text" name="mobile" ng-model="editReport.addAddressForm.mobile" required/>
+							<div class="error-tip">
+								<div class="alert alert-danger" ng-show="addAddressForm.mobile.$dirty && addAddressForm.mobile.$invalid">联系电话不可为空</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dialog-footer has-two-button">
+					<button type="submit" class="button button-32 padding-left-right-20" ng-disabled="addAddressForm.$invalid">确定</button>
+					<button type="button" class="button2 button-32 padding-left-right-20" ng-click="editReport.editDialogCancel()">取消</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--编辑地址 end-->
+</div>

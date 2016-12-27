@@ -1,0 +1,93 @@
+#address {
+    .address-panner {}
+    //添加收货地址模块
+    .add-address-panner {
+        min-height: 50px;
+        background-color: #FAFAFA;
+        border: 1px solid @color-line-gray;
+        margin-bottom: 30px;
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 300px;
+        padding-bottom: 20px;
+    }
+    
+    //下拉框
+    .input-box {
+        font-size: 14px;
+        &>label{
+            width: 110px;
+        }
+        .right-input-container{
+            margin-left: 120px;
+        }
+        select {
+            display: inline-block;
+        }
+    }
+    
+    //地址列表
+    ul.address-list {
+        li.address-item {
+            width: 100%;
+            height: 42px;
+            line-height: 40px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            background-color: #FAFAFA;
+            border: 1px solid @color-line-gray;
+            color: #666666;
+            span {
+                display: block;
+                height: 100%;
+                line-height: 40px;
+                vertical-align: middle;
+                float: left;
+            }
+            .username {
+                width: 90px;
+                padding-left: 20px;
+                .overflow-ellipsis();
+            }
+            .address-text {
+                width: 400px;
+                .overflow-ellipsis();
+                padding-right: 10px;
+            }
+            .post-code {
+                width: 70px;
+            }
+            .phone {
+                width: 100px;
+            }
+            label {
+                float: left;
+                width: 170px;
+                vertical-align: middle;
+                display: block;
+                text-align: right;
+                a {
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    &.active {
+                        cursor: default;
+                    }
+                }
+            }
+            &:after {
+                .after();
+            }
+        }
+    }
+    //编辑地址
+    #edit_dialog{
+        top: 10%;
+        .alert-dialog-panner{
+            width: 540px;
+        }
+        .dialog-content{
+            padding-top: 20px;
+            padding-bottom: 0;
+        }
+    }
+}
