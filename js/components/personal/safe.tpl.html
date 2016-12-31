@@ -122,7 +122,7 @@
 	<!---->
 
 	<!--遮罩层 begin-->
-	<div class="mask-div hideDom" id="safe_mask_div" ng-class="{'showDom':safe.safe_mask_div,'hideDom':!safe.safe_mask_div}"></div>
+	<div class="mask-div" id="safe_mask_div" ng-class="{'showDom':safe.safe_mask_div,'hideDom':!safe.safe_mask_div}"></div>
 	<!--遮罩层 end-->
 	<!--登录密码 begin-->
 	<form name="setPasswordForm" novalidate="novalidate" ng-submit="safe.passwordConfirm()">
@@ -400,7 +400,7 @@
 	<!--实名认证 end-->
 	<!--企业认证 begin-->
 	<form name="setCompanyForm" novalidate="novalidate" ng-submit="safe.companyConfirm()">
-		<div class="alert-dialog small-dialog hideDom" id="set_company" ng-class="{'showDom':safe.set_company,'hideDom':!safe.set_company}">
+		<div class="alert-dialog small-dialog" id="set_company" ng-class="{'showDom':safe.set_company,'hideDom':!safe.set_company}">
 			<div class="alert-dialog-panner">
 				<div class="dialog-title">
 					<span>企业认证</span>
@@ -436,6 +436,20 @@
 						</div>
 					</div>
 					<!--营业执照照片 end-->
+					<div class="input-box">
+						<label>行业</label>
+						<div class="input-container right-input-container">
+							<div class="select-box">
+								<!--这里的行业，刚好是活动类型，在public时就已经加载了-->
+								<select ng-model="safe.setCompanyForm.cat_id" ng-options="item.name as item.name for item in public.activityTypeArray">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							<div class="error-tip">
+								<div class="alert alert-danger ng-hide">请选择活动类别</div>
+							</div>
+						</div>
+					</div>
 					<div class="input-box not-margin-bottom">
 						<label>地址</label>
 						<div class="input-container right-input-container">

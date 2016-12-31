@@ -23,7 +23,7 @@
 					<a class="float-right color-green" ng-show="item.review_status=='2'" ng-click="myReview.open(item.review_sn)">开评</a>
 					<a class="float-right color-green" ng-show="item.review_status=='3'" ng-click="myReview.closeDialog(item.review_sn)">结束评审</a>
 					<a class="float-right color-green" ui-sref="examineDetail({'order_sn':item.order_sn,'review_sn':item.review_sn,'review_template':item.review_template,'type':'0'})" ng-show="item.review_status=='3'">查看表单</a>
-					<a class="float-right color-green" ui-sref="examineResult({'review_id':item.id,'review_sn':item.review_sn,'type':'0'})" ng-show="item.review_status=='4'">查看结果</a>
+					<a class="float-right color-green" ui-sref="examineResult({'review_id':item.review_id,'review_sn':item.review_sn,'type':'0'})" ng-show="item.review_status=='4'">查看结果</a>
 				</div>
 			</div>
 			<div class="input-box not-margin-bottom link-box">

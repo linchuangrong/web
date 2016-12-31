@@ -24,7 +24,7 @@
 					<a class="float-right color-green" ng-show="item.review_status=='3'" ng-click="myEstimate.closeDialog(item.review_sn)">结束评审</a>
 					<a class="float-right color-green" ui-sref="examineDetail({'order_sn':item.order_sn,'review_sn':item.review_sn,'review_template':item.review_template,'type':'1'})" ng-show="item.review_status=='3'">查看表单</a>
 					<a class="float-right color-green" ng-show="item.review_status=='4'" ng-click="myEstimate.showDialog(item.review_sn)">申请报告</a>
-					<a class="float-right color-green" ui-sref="examineResult({'review_id':item.id,'review_sn':item.review_sn,'type':'1'})" ng-show="item.review_status=='4' || item.review_status=='5' || item.review_status=='6'">查看结果</a>
+					<a class="float-right color-green" ui-sref="examineResult({'review_id':item.review_id,'review_sn':item.review_sn,'type':'1'})" ng-show="item.review_status=='4' || item.review_status=='5' || item.review_status=='6'">查看结果</a>
 					<a class="float-right color-green" ui-sref="editReport({'review_sn':item.review_sn,'report_type':item.report_type})" ng-show="item.review_status=='5'">编辑报告</a>
 					<a class="float-right color-green" ng-show="item.review_status=='6'" target="_blank" href="/phalapi/public/yiapp/?service=ToWord.getWordDocument&user_id={{userInfo.id}}&review_sn={{item.review_sn}}">导出报告</a>
 

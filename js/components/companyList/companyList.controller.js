@@ -6,7 +6,7 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/companyList.service.js', 'companyList.service'); //引入“机构名录”接口服务
+	app.import('/app/Tpl/web/js/service/service_min/companyList.service.min.js', 'companyList.service'); //引入“机构名录”接口服务
 	app.import('/app/Tpl/web/js/directive/pagebar.directive.js', 'pagebar.directive'); //分页插件
 
 	app.addController("companyListController", companyListController);

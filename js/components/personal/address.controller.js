@@ -6,8 +6,8 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/public.service.js', 'public.service'); //引入“公共接口”服务
-	app.import('/app/Tpl/web/js/service/address.service.js', 'address.service'); //引入“地址”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/public.service.min.js', 'public.service'); //引入“公共接口”服务
+	app.import('/app/Tpl/web/js/service/service_min/address.service.min.js', 'address.service'); //引入“地址”接口 服务
 
 	app.addController("addressController", addressController);
 	addressController.$inject = ['$rootScope', 'publicService', 'personalService', '$state', '$timeout', 'addressService'];

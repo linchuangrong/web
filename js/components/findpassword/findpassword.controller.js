@@ -6,7 +6,7 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/login.service.js', 'login.service'); //引入“登录”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/login.service.min.js', 'login.service'); //引入“登录”接口 服务
 
 	app.addController("findpasswordController", findpasswordController);
 	findpasswordController.$inject = ['$rootScope', '$window', 'loginService', '$state'];

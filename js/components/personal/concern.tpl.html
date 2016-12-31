@@ -8,7 +8,7 @@
 	<!--列表  begin-->
 	<ul class="collection-list">
 		<li ng-repeat="item in concern.sponsorArray">
-			<div class="top-img background-cover" ng-style="{ 'background-image': 'url({{item.head_image}})' }"></div>
+			<div class="top-img background-cover  hover-pointer" ng-style="{ 'background-image': 'url({{item.head_image}})' }"  ui-sref="sponsorDetail({'sponsor_id':item.sponsor_id})"></div>
 			<div class="content">
 				<h3 class="sponsor-name">{{item.identify_bs_name}}</h3>
 				<div>
@@ -26,7 +26,7 @@
 		<i class="iconfont">&#xe627;</i>
 		<div>您还未关注过主办方</div>
 		<div>
-			<button class="button button-36" ui-sref="sponsorList">去关注</button>
+			<button class="button button-36" ui-sref="sponsorList({'keyword':''})">去关注</button>
 		</div>
 	</div>
 	<!--无数据 end-->

@@ -8,12 +8,12 @@
 
 	app.import('/app/Tpl/web/js/directive/backgroundLazyLoad.directive.js', 'backgroundLazyLoad.directive'); //懒加载背景图片插件
 	app.import('/app/Tpl/web/js/directive/pagebar.directive.js', 'pagebar.directive'); //分页插件
-	app.import('/app/Tpl/web/js/service/crowdFund.service.js', 'crowdFund.service'); //引入“个人中心”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/crowdFund.service.min.js', 'crowdFund.service'); //引入“个人中心”接口 服务
 
 	app.addController("crowdFundListController", crowdFundListController);
-	crowdFundListController.$inject = ['$rootScope', '$window', 'crowdFundService'];
+	crowdFundListController.$inject = ['$rootScope', '$window', 'crowdFundService', '$timeout', '$stateParams'];
 
-	function crowdFundListController($rootScope, $window, crowdFundService) {
+	function crowdFundListController($rootScope, $window, crowdFundService, $timeout, $stateParams) {
 		angular.element($window).scrollTop(0);
 		$rootScope.title = "众筹中心";
 		var vm = this;
@@ -43,6 +43,8 @@
 			pageChange: pageChangeFn //切换页面函数
 		}
 
+		vm.showList = true; //显示ul列表
+
 		/*****************变量 end****************/
 
 		/*****************函数 begin****************/
@@ -71,11 +73,11 @@
 		//
 		function getCrowdFundTypeListFn() {
 			crowdFundService.getCrowdFundTypeList().success(function(data) {
-				if(data.ret != 200) {
+				if (data.ret != 200) {
 					window.showAutoDialog(data.msg);
 					return false;
 				} else {
-					if(data.data.code == 20000) {
+					if (data.data.code == 20000) {
 						vm.crowdFundTypeArray = data.data.list;
 					} else {
 						window.showAutoDialog(data.data.msg);
@@ -97,26 +99,42 @@
 		//
 		function getCrowdFundListFn() {
 
+			vm.showList = false;
+
 			var params = {
-				deal_type: '3',
-				pageSize: vm.pageParams.pageSize,
-				current: vm.pageParams.current,
-				welfare_cate: vm.searchForm.welfare_cate, //众筹类型
-				process: vm.searchForm.process, //进度
-				sort: vm.searchForm.sort, //排序
-				orderBy: vm.searchForm.orderBy, //ASC,DESC
+				"deal_type": '3',
+				"pageSize": vm.pageParams.pageSize,
+				"current": vm.pageParams.current,
+				"welfare_cate": vm.searchForm.welfare_cate, //众筹类型
+				"process": vm.searchForm.process, //进度
+				"sort": vm.searchForm.sort, //排序
+				"orderBy": vm.searchForm.orderBy, //ASC,DESC
+				"keyword": ($stateParams.keyword && angular.element("#search-input").val()) ? $stateParams.keyword : '' //模糊搜索
 			}
 
+			$rootScope.$broadcast("public.show", ["loading_panel"]);
+
 			crowdFundService.getCrowdFundList(params).success(function(data) {
-				if(data.ret != 200) {
-					window.showAutoDialog(data.msg);
-					return false;
-				} else {
-					if(data.data.code == 20000) {
-						vm.crowdFundArray = data.data.list;
-						vm.pageParams.page_count = data.data.page_count;
+				try {
+					if (data.ret != 200) {
+						window.showAutoDialog(data.msg);
+						return false;
+					} else {
+						if (data.data.code == 20000) {
+							vm.crowdFundArray = data.data.list;
+							vm.pageParams.page_count = data.data.page_count;
+						}
 					}
+				} catch (e) {
+					//TODO handle the exception
+				} finally {
+					/* 这里加延迟，是为了让页面repeat结束，再显示ul，防止界面repeat太复杂导致闪烁 */
+					$timeout(function() {
+						vm.showList = true;
+						$rootScope.$broadcast("public.hide", ["loading_panel"]);
+					}, 500);
 				}
+
 			});
 		}
 		//
@@ -132,7 +150,7 @@
 		//
 		function pageChangeFn() {
 			return function(param) {
-				if(parseInt(param) > 0 && parseInt(param) <= vm.pageParams.page_count) {
+				if (parseInt(param) > 0 && parseInt(param) <= vm.pageParams.page_count) {
 					//修改页码
 					vm.pageParams.current = parseInt(param);
 					//获取数据
@@ -162,8 +180,8 @@
 
 			//设置排序
 			var iconfont = angular.element($event.target).find(".iconfont");
-			if(iconfont) {
-				if(iconfont.hasClass("up")) {
+			if (iconfont) {
+				if (iconfont.hasClass("up")) {
 					iconfont.removeClass("up");
 					vm.searchForm.orderBy = "DESC"; //从大到小排序
 				} else {

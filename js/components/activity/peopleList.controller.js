@@ -7,7 +7,7 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/activity.service.js', 'activity.service'); //引入“活动”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/activity.service.min.js', 'activity.service'); //引入“活动”接口 服务
 
 	app.addController("peopleListController", peopleListController);
 	peopleListController.$inject = ['$rootScope', '$window', 'activityService', '$stateParams'];

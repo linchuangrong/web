@@ -7,7 +7,7 @@
 	'use strict';
 
 	app.import('/app/Tpl/web/js/directive/pagebar.directive.js', 'pagebar.directive'); //分页插件
-	app.import('/app/Tpl/web/js/service/examine.service.js', 'examine.service'); //引入“评审评估”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/examine.service.min.js', 'examine.service'); //引入“评审评估”接口 服务
 	app.import('/app/Tpl/web/js/directive/repeatDone.directive.js', 'repeatDone.directive'); //引入“循环结束”
 
 	app.addController("myReviewController", myReviewController);

@@ -29,7 +29,7 @@
 						<a ng-class="{'active':crowdFundList.searchForm.process == '1'}" ng-click="crowdFundList.setSelectActive($event,'process','1')">将要结束</a>
 					</li>
 					<li class="select-item">
-						<a ng-class="{'active':crowdFundList.searchForm.process == '2'}" ng-click="crowdFundList.setSelectActive($event,'process','2')">成功结束</a>
+						<a ng-class="{'active':crowdFundList.searchForm.process == '2'}" ng-click="crowdFundList.setSelectActive($event,'process','2')">已成功</a>
 					</li>
 				</ul>
 			</div>
@@ -59,11 +59,14 @@
 		</div>
 		<!--活动列表 begin-->
 		<div class="crowdFundList-list-panner">
-			<ul class="crowdFundList-ul">
+			<ul class="crowdFundList-ul" ng-show="crowdFundList.showList">
 				<!-- 1个公益众筹 begin-->
-				<li ng-repeat="item in crowdFundList.crowdFundArray" background-lazy-load ui-sref="crowdFundDetail({'crowdFundId':item.deal_id})">
+				<!--<li ng-repeat="item in crowdFundList.crowdFundArray" background-lazy-load ui-sref="crowdFundDetail({'crowdFundId':item.deal_id})">-->
+				<!--<div class="top-img">-->
+				<!--<div class="transition-scale background-lazy-load" lazy-load-src="{{item.image+'?imageslim'}}"></div>-->
+				<li ng-repeat="item in crowdFundList.crowdFundArray track by item.deal_id" ui-sref="crowdFundDetail({'crowdFundId':item.deal_id})" ng-cloak>
 					<div class="top-img">
-						<div class="transition-scale background-lazy-load" lazy-load-src="{{item.image+'?imageslim'}}"></div>
+						<div class="background-cover" ng-style="{ 'background-image': 'url(' + item.image + '?imageslim)' }"></div>
 					</div>
 					<div class="content">
 						<h4 class="crowdfunding-title">{{item.name}}</h4>

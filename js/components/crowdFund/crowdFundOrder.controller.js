@@ -6,9 +6,9 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/crowdFund.service.js', 'crowdFund.service'); //引入“众筹”接口 服务
-	app.import('/app/Tpl/web/js/service/address.service.js', 'address.service'); //引入“地址”接口 服务
-	app.import('/app/Tpl/web/js/service/personal.service.js', 'personal.service'); //引入“个人中心”接口服务--收货地址列表
+	app.import('/app/Tpl/web/js/service/service_min/crowdFund.service.min.js', 'crowdFund.service'); //引入“众筹”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/address.service.min.js', 'address.service'); //引入“地址”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/personal.service.min.js', 'personal.service'); //引入“个人中心”接口服务--收货地址列表
 
 	app.addController("crowdFundOrderController", crowdFundOrderController);
 	crowdFundOrderController.$inject = ['$rootScope', '$window', '$timeout', '$stateParams', '$state', 'crowdFundService', 'addressService', 'personalService'];

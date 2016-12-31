@@ -48,7 +48,7 @@ function importFn(moduleAndPath, moduleName) {
 //animate动画
 //app.import('/app/Tpl/web/js/libs/angular/angular-animate.min.js', 'ngAnimate');
 //加入拦截器
-app.import('/app/Tpl/web/js/service/httpInterceptor.factory.js','httpInterceptor.factory');
+app.import('/app/Tpl/web/js/service/service_min/httpInterceptor.service.min.js','httpInterceptor.service');
 app.import('/app/Tpl/web/js/config.js', 'app.config');
 app.import('/app/Tpl/web/js/dao/app.dao.js', 'app.dao');
 app.import('/app/Tpl/web/js/filter/common.filter.js', 'common.filter');

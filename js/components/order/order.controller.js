@@ -6,8 +6,8 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/public.service.js', 'public.service'); //引入“公共”接口 服务
-	app.import('/app/Tpl/web/js/service/order.service.js', 'order.service'); //引入“预约”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/public.service.min.js', 'public.service'); //引入“公共”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/order.service.min.js', 'order.service'); //引入“预约”接口 服务
 	app.import('/app/Tpl/web/js/directive/limitSize.directive.js', 'limitSize.directive'); //限制输入范围
 	app.import('/app/Tpl/web/js/directive/integer.directive.js', 'integer.directive'); //只能输入整数
 

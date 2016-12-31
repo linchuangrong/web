@@ -22,6 +22,7 @@
 		vm.set_email = false; //绑定邮箱
 		vm.set_pay_password = false; //支付密码
 		vm.set_idCard = false; //实名认证
+		vm.set_company = false; //企业认证
 		vm.dialogArray = ['safe_mask_div', 'set_password', 'set_phone', 'set_email', 'set_pay_password', 'set_idCard', 'set_company'];
 		vm.mobileDialogTitle = "绑定手机";
 		vm.emailDialogTitle = "绑定邮箱";
@@ -56,6 +57,7 @@
 			"bs_name": "", //单位名称
 			"bs_licence": "", //营业执照号
 			"licence_img": "", //组织机构照片
+			"cat_id": "", //行业，这里虽然是写着id，但是传给后台是中文汉字
 			"bs_address": "", //执照地址
 			"bs_user": "", //企业法人
 			"verify_coder": "" //验证码
@@ -123,7 +125,7 @@
 			ctx_1.arc(canvas_1.width / 2, canvas_1.height / 2, canvas_1.width / 2 - ctx_1.lineWidth / 2, 0, Math.PI * 2, false);
 			ctx_1.closePath();
 			ctx_1.stroke();
-			if(percent < 0 || percent > 100) {
+			if (percent < 0 || percent > 100) {
 				throw new Error('percent must be between 0 and 100');
 				return
 			}
@@ -139,7 +141,7 @@
 				//百分比圆环
 				ctx_2.beginPath();
 				//圆环的颜色,如果超过50%，则显示绿色。否则显示橙色
-				if(parseInt((angle / 360) * 100) > 50) {
+				if (parseInt((angle / 360) * 100) > 50) {
 					ctx_2.strokeStyle = "#5cb85c"; //绿色
 				} else {
 					ctx_2.strokeStyle = "#f60"; //橙色
@@ -151,7 +153,7 @@
 
 				//但是如果叠加的最终数值，超过了参数，则改为参数值，并结束循环叠加
 				var percentAge = parseInt((angle / 360) * 100);
-				if(angle > (percent / 100 * 360)) {
+				if (angle > (percent / 100 * 360)) {
 					percentAge = percent;
 					clearTimeout(timer);
 					//window.cancelAnimationFrame(timer);
@@ -162,15 +164,15 @@
 				ctx_2.beginPath();
 				ctx_2.rotate(90 * Math.PI / 180)
 				ctx_2.font = '48px Arial';
-				if(percentAge > 50) {
+				if (percentAge > 50) {
 					ctx_2.fillStyle = "#5cb85c"; //绿色
 				} else {
 					ctx_2.fillStyle = "#f60"; //橙色
 				}
 				var text = percentAge + '%';
-				if(percentAge < 10) {
+				if (percentAge < 10) {
 					ctx_2.fillText(text, 75, -90);
-				} else if(percentAge < 100) {
+				} else if (percentAge < 100) {
 					ctx_2.fillText(text, 70, -90);
 				} else {
 					ctx_2.fillText(text, 55, -90);
@@ -197,10 +199,10 @@
 				"username": $rootScope.userInfo.user_name
 			}
 			personalService.getUserRealCenter(params).success(function(data) {
-				if(data.ret != 200) {
+				if (data.ret != 200) {
 					window.showAutoDialog(data.msg);
 				} else {
-					if(data.data.code == 20000) {
+					if (data.data.code == 20000) {
 						vm.companyInfo = data.data.company;
 						vm.idCardInfo = data.data.personal;
 					} else {
@@ -225,19 +227,19 @@
 			//肯定有登录密码的
 			var grade = 20;
 			//手机
-			if($rootScope.userInfo.mobile) {
+			if ($rootScope.userInfo.mobile) {
 				grade += 20;
 			}
 			//邮箱
-			if($rootScope.userInfo.email) {
+			if ($rootScope.userInfo.email) {
 				grade += 20;
 			}
 			//支付密码
-			if($rootScope.userInfo.paypassword) {
+			if ($rootScope.userInfo.paypassword) {
 				grade += 20;
 			}
 			//实名认证或企业认证
-			if($rootScope.userInfo.identify_status == 2 || $rootScope.userInfo.is_investor == 2) {
+			if ($rootScope.userInfo.identify_status == 2 || $rootScope.userInfo.is_investor == 2) {
 				grade += 20;
 			}
 			return grade;
@@ -255,8 +257,8 @@
 		//
 		function showDialogFn(param) {
 			//支付密码的弹框，需要验证是否已经绑定手机
-			if(param == "set_pay_password") {
-				if(!$rootScope.userInfo.mobile) {
+			if (param == "set_pay_password") {
+				if (!$rootScope.userInfo.mobile) {
 					window.showAutoDialog("请先绑定手机");
 					return false;
 				}
@@ -272,7 +274,7 @@
 		}
 
 		function closeAllDialogFn() {
-			for(var i = 0; i < vm.dialogArray.length; i++) {
+			for (var i = 0; i < vm.dialogArray.length; i++) {
 				vm[vm.dialogArray[i]] = false;
 			}
 		}
@@ -291,12 +293,12 @@
 		function passwordConfirmFn() {
 
 			//防止重复
-			if(vm.flag.passwordFlag == false) {
+			if (vm.flag.passwordFlag == false) {
 				return false;
 			}
 
 			//校验两个密码是否相同
-			if(vm.newLoginPassword1 != vm.newLoginPassword2) {
+			if (vm.newLoginPassword1 != vm.newLoginPassword2) {
 				window.showAlertTip("两次密码不一致");
 				return false;
 			}
@@ -314,11 +316,11 @@
 			//接口请求
 			personalService.updatePassword(params).success(function(data) {
 				try {
-					if(data.ret != 200) {
+					if (data.ret != 200) {
 						window.showAlertTip(data.msg);
 						return false;
 					} else {
-						if(data.data.code == 20000) {
+						if (data.data.code == 20000) {
 							//修改成功
 							window.showAlertTip(data.data.msg);
 							//vm.oldLoginPassword = "";
@@ -333,7 +335,7 @@
 							window.showAlertTip(data.data.msg);
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 
 				} finally {
 					//隐藏：加载动画
@@ -357,7 +359,7 @@
 		function phoneConfirmFn() {
 
 			//防止重复
-			if(vm.flag.phoneFlag == false) {
+			if (vm.flag.phoneFlag == false) {
 				return false;
 			}
 
@@ -375,11 +377,11 @@
 			//接口请求
 			personalService.updateMobile(params).success(function(data) {
 				try {
-					if(data.ret != 200) {
+					if (data.ret != 200) {
 						window.showAlertTip(data.msg);
 						return false;
 					} else {
-						if(data.data.code == 20000) {
+						if (data.data.code == 20000) {
 							//修改成功
 							window.showAlertTip(data.data.msg);
 							//关闭弹框
@@ -391,7 +393,7 @@
 							window.showAlertTip(data.data.msg);
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 
 				} finally {
 					//隐藏：加载动画
@@ -415,7 +417,7 @@
 		function emailConfirmFn() {
 
 			//防止重复
-			if(vm.flag.emailFlag == false) {
+			if (vm.flag.emailFlag == false) {
 				return false;
 			}
 
@@ -433,11 +435,11 @@
 			//接口请求
 			personalService.updateEmail(params).success(function(data) {
 				try {
-					if(data.ret != 200) {
+					if (data.ret != 200) {
 						window.showAlertTip(data.msg);
 						return false;
 					} else {
-						if(data.data.code == 20000) {
+						if (data.data.code == 20000) {
 							//修改成功
 							window.showAlertTip(data.data.msg);
 							//关闭弹框
@@ -449,7 +451,7 @@
 							window.showAlertTip(data.data.msg);
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 
 				} finally {
 					//隐藏：加载动画
@@ -473,12 +475,12 @@
 		function payPasswordConfirmFn() {
 
 			//防止重复
-			if(vm.flag.payPasswordFlag == false) {
+			if (vm.flag.payPasswordFlag == false) {
 				return false;
 			}
 
 			//校验两个密码是否相同
-			if(vm.setPayPasswordForm.payPassword1 != vm.setPayPasswordForm.payPassword2) {
+			if (vm.setPayPasswordForm.payPassword1 != vm.setPayPasswordForm.payPassword2) {
 				return false;
 			}
 
@@ -496,11 +498,11 @@
 			//接口请求
 			personalService.updatePayPassword(params).success(function(data) {
 				try {
-					if(data.ret != 200) {
+					if (data.ret != 200) {
 						window.showAlertTip(data.msg);
 						return false;
 					} else {
-						if(data.data.code == 20000) {
+						if (data.data.code == 20000) {
 							//修改成功
 							window.showAlertTip(data.data.msg);
 							//关闭弹框
@@ -517,7 +519,7 @@
 							window.showAlertTip(data.data.msg);
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 
 				} finally {
 					//隐藏：加载动画
@@ -541,18 +543,18 @@
 		function idCardConfirmFn() {
 
 			//防止重复
-			if(vm.flag.idCardFlag == false) {
+			if (vm.flag.idCardFlag == false) {
 				return false;
 			}
 
 			//身份证正面
-			if(!vm.setIdCardForm.id_frontimg) {
+			if (!vm.setIdCardForm.id_frontimg) {
 				window.showAlertTip("请上传身份证正面照");
 				return false;
 			}
 
 			//身份证反面
-			if(!vm.setIdCardForm.id_backimg) {
+			if (!vm.setIdCardForm.id_backimg) {
 				window.showAlertTip("请上传身份证反面照");
 				return false;
 			}
@@ -574,11 +576,11 @@
 			//接口请求
 			personalService.setIdCard(params).success(function(data) {
 				try {
-					if(data.ret != 200) {
+					if (data.ret != 200) {
 						window.showAlertTip(data.msg);
 						return false;
 					} else {
-						if(data.data.code == 20000) {
+						if (data.data.code == 20000) {
 							//修改成功
 							window.showAlertTip(data.data.msg);
 							//关闭弹框
@@ -595,7 +597,7 @@
 							window.showAlertTip(data.data.msg);
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 
 				} finally {
 					//隐藏：加载动画
@@ -618,13 +620,19 @@
 		//
 		function companyConfirmFn() {
 			//防止重复
-			if(vm.flag.companyFlag == false) {
+			if (vm.flag.companyFlag == false) {
 				return false;
 			}
 
 			//营业执照照片，组织机构照片
-			if(!vm.setCompanyForm.licence_img) {
+			if (!vm.setCompanyForm.licence_img) {
 				window.showAlertTip("请上传组织机构代码证（营业执照）");
+				return false;
+			}
+			
+			//行业
+			if(!vm.setCompanyForm.cat_id){
+				window.showAlertTip("请选择行业");
 				return false;
 			}
 
@@ -634,6 +642,7 @@
 				"bs_name": vm.setCompanyForm.bs_name, //单位名称
 				"bs_licence": vm.setCompanyForm.bs_licence, //营业执照号
 				"licence_img": vm.setCompanyForm.licence_img, //组织机构照片
+				"cat_id": vm.setCompanyForm.cat_id, //行业
 				"bs_address": vm.setCompanyForm.bs_address, //执照地址
 				"bs_user": vm.setCompanyForm.bs_user, //企业法人
 				"verify_coder": vm.setCompanyForm.verify_coder, //验证码
@@ -645,11 +654,11 @@
 			//接口请求
 			personalService.setCompany(params).success(function(data) {
 				try {
-					if(data.ret != 200) {
+					if (data.ret != 200) {
 						window.showAlertTip(data.msg);
 						return false;
 					} else {
-						if(data.data.code == 20000) {
+						if (data.data.code == 20000) {
 							//修改成功
 							window.showAlertTip(data.data.msg);
 							//关闭弹框
@@ -661,7 +670,7 @@
 							window.showAlertTip(data.data.msg);
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 
 				} finally {
 					//隐藏：加载动画

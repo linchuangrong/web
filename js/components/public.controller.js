@@ -3,15 +3,15 @@
  * 功能：定义全局变量
  * 		 导航条模块
  * 		$rootScope.userInfo  这里的userInfo的值只有user_name,id,nickname,identify_bs_name,identity_conditions
- * 时间：2016年9月12日
+ * 时间：2016年9月12日.
  */
 (function() {
 	'use strict';
 
 	app.import('/app/Tpl/web/js/directive/countDown.directive.js', 'countDown.directive'); //倒计时插件
 	app.import('/app/Tpl/web/js/directive/repeatDone.directive.js', 'repeatDone.directive'); //循环结束事件
-	app.import('/app/Tpl/web/js/service/public.service.js', 'public.service'); //引入“公共接口”服务
-	app.import('/app/Tpl/web/js/service/address.service.js', 'address.service'); //引入“地址”服务
+	app.import('/app/Tpl/web/js/service/service_min/public.service.min.js', 'public.service'); //引入“公共接口”服务
+	app.import('/app/Tpl/web/js/service/service_min/address.service.min.js', 'address.service'); //引入“地址”服务
 
 	app.controller("publicController", publicController);
 	publicController.$inject = ['$timeout', 'appConfig', '$scope', '$rootScope', '$state', 'publicService', 'addressService', '$http'];
@@ -85,6 +85,7 @@
 		vm.hideSearchType = hideSearchTypeFn; //显示搜索类型列表
 		vm.setSearchType = setSearchTypeFn; //设置搜索类型的赋值
 		vm.goToSearch = goToSearchFn; //模糊搜索
+		vm.keycode13 = keycode13Fn; //回车事件
 
 		//获取短信、邮箱验证码（不需要参数）
 		vm.getSmsEmailCode = getSmsEmailCodeFn;
@@ -160,8 +161,23 @@
 					"time": "",
 					"keyword": vm.keyword
 				});
+			} else if (vm.searchType == "众筹") {
+				$state.go("crowdFundList", {
+					"keyword": vm.keyword
+				});
+			}else if(vm.searchType == "主办方"){
+				$state.go("sponsorList", {
+					"keyword": vm.keyword
+				});
 			}
+		}
 
+		//回车事件搜索
+		function keycode13Fn(e) {
+			var keycode = window.event ? e.keyCode : e.which;
+			if (keycode == 13) {
+				vm.goToSearch();
+			}
 		}
 		//
 		//

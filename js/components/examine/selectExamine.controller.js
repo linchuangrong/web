@@ -6,7 +6,7 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/examine.service.js', 'examine.service'); //富文本编辑器，要求先引入wangEditor.min.js
+	app.import('/app/Tpl/web/js/service/service_min/examine.service.min.js', 'examine.service'); //富文本编辑器，要求先引入wangEditor.min.js
 
 	app.addController("selectExamineController", selectExamineController);
 	selectExamineController.$inject = ['$rootScope', '$window', 'examineService', '$state'];

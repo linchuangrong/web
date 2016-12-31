@@ -7,7 +7,7 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/pay.service.js', 'pay.service'); //引入“支付”接口服务
+	app.import('/app/Tpl/web/js/service/service_min/pay.service.min.js', 'pay.service'); //引入“支付”接口服务
 
 	app.addController("payMoneyController", payMoneyController);
 	payMoneyController.$inject = ['$rootScope', '$stateParams', 'payService', '$timeout'];

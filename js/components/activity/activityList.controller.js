@@ -6,10 +6,9 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/directive/backgroundLazyLoad.directive.js', 'backgroundLazyLoad.directive'); //懒加载背景图片插件
-	app.import('/app/Tpl/web/js/service/public.service.js', 'public.service'); //引入“公共接口”服务
+	app.import('/app/Tpl/web/js/service/service_min/public.service.min.js', 'public.service'); //引入“公共接口”服务
 	app.import('/app/Tpl/web/js/directive/pagebar.directive.js', 'pagebar.directive'); //分页插件
-	app.import('/app/Tpl/web/js/service/activity.service.js', 'activity.service'); //引入“众筹”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/activity.service.min.js', 'activity.service'); //引入“众筹”接口 服务
 
 	app.addController("activityListController", activityListController);
 	activityListController.$inject = ['$rootScope', '$window', 'activityService', 'publicService', '$stateParams'];
@@ -25,7 +24,6 @@
 			"address": "", //城市
 			"cate": "", //活动类型
 			"time": "", //时间
-			"keyword": "" //搜索关键字
 		}
 
 		//活动列表分页参数
@@ -58,7 +56,6 @@
 			vm.searchForm.address = $stateParams.address; //城市地址
 			vm.searchForm.cate = $stateParams.cate; //活动类型
 			vm.searchForm.time = $stateParams.time; //筛选时间
-			vm.searchForm.keyword = $stateParams.keyword; //搜索关键字
 
 			vm.getActivityList(); //活动数组
 
@@ -139,7 +136,7 @@
 				"current": vm.pageParams.current,
 				"address": vm.searchForm.address, //地点
 				"cate": vm.searchForm.cate, //类型
-				"keyword": vm.searchForm.keyword, //搜索关键字
+				"keyword": ($stateParams.keyword && angular.element("#search-input").val()) ? $stateParams.keyword : '', //搜索关键字
 				"start_time": publicService.getTimeStamp(vm.searchForm.time).startTimeStamp, //开始时间
 				"end_time": publicService.getTimeStamp(vm.searchForm.time).endTimeStamp, //结束时间
 			}

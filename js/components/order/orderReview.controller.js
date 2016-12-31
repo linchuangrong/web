@@ -6,8 +6,8 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/public.service.js', 'public.service'); //引入“公共”接口 服务
-	app.import('/app/Tpl/web/js/service/order.service.js', 'order.service'); //引入“预约”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/public.service.min.js', 'public.service'); //引入“公共”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/order.service.min.js', 'order.service'); //引入“预约”接口 服务
 
 	app.addController("orderReviewController", orderReviewController);
 	orderReviewController.$inject = ['$rootScope', '$stateParams', 'orderService', 'publicService', '$filter'];

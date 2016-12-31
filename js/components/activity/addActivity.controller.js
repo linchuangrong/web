@@ -8,10 +8,10 @@
 
 	app.import('/app/Tpl/web/js/directive/contenteditable.directive.js', 'contenteditable.directive'); //富文本编辑器，要求先引入wangEditor.min.js
 	app.import('/app/Tpl/web/js/directive/tooltip.directive.js', 'tooltip.directive'); //引入“tooltip”插件
-	app.import('/app/Tpl/web/js/service/public.service.js', 'public.service'); //引入“公共接口”服务
-	app.import('/app/Tpl/web/js/service/activity.service.js', 'activity.service'); //引入“活动”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/public.service.min.js', 'public.service'); //引入“公共接口”服务
+	app.import('/app/Tpl/web/js/service/service_min/activity.service.min.js', 'activity.service'); //引入“活动”接口 服务
 	app.import('/app/Tpl/web/js/directive/imgUpload.directive.js', 'imgUpload.directive'); //图片上传插件
-	app.import('/app/Tpl/web/js/service/address.service.js', 'address.service'); //引入“地址”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/address.service.min.js', 'address.service'); //引入“地址”接口 服务
 	app.import('/app/Tpl/web/js/directive/limitSize.directive.js', 'limitSize.directive'); //限制输入范围
 	app.import('/app/Tpl/web/js/directive/integer.directive.js', 'integer.directive'); //只能输入整数
 

@@ -1,34 +1,30 @@
 <div id="sponsorDetail" class="container">
 	<!--主办方基本数据信息 begin-->
 	<div class="sponsor-info">
-		<div class="left-img"></div>
+		<div class="left-img" ng-style="{'background-image': 'url(' + sponsorDetail.sponsorInfo.head_image + ')'}"></div>
 		<div class="right-content">
 			<p class="sponsor-name">{{sponsorDetail.sponsorInfo.identify_bs_name}}</p>
 			<p class="sponsor-desc">{{sponsorDetail.sponsorInfo.company_desc}}</p>
 			<p class="sponsor-fans">
-				<span class="color-green">{{sponsorDetail.sponsorInfo.build_count}}</span>
+				<span class="color-green">{{sponsorDetail.active_num}}</span>
 				<strong>活动</strong>
 				<strong>|&nbsp;</strong>
-				<span class="color-green">{{sponsorDetail.sponsorInfo.foucuser}}</span>
+				<span class="color-green">{{sponsorDetail.welfare_num}}</span>
+				<strong>众筹</strong>
+				<strong>|&nbsp;</strong>
+				<span class="color-green">{{sponsorDetail.sponsorInfo.fans}}</span>
 				<strong>粉丝</strong>
 			</p>
 			<div class="button-list">
-				<button type="button" class="button" style="width: 170px;" ng-click="sponsorDetail.focusSponsor(sponsorDetail.sponsorInfo.id)">关注&nbsp;<span>({{sponsorDetail.sponsorInfo.foucuser}})</span></button>
+				<button type="button" class="button" style="width: 170px;" ng-click="sponsorDetail.focusSponsor(sponsorDetail.sponsorInfo.id)" ng-show="!sponsorDetail.focusFlag">关注&nbsp;<span>({{sponsorDetail.sponsorInfo.fans}})</span></button>
+				<button type="button" class="button" style="width: 170px;" ng-click="sponsorDetail.focusSponsor(sponsorDetail.sponsorInfo.id)" ng-show="sponsorDetail.focusFlag">已关注&nbsp;<span>({{sponsorDetail.sponsorInfo.fans}})</span></button>
 				<div class="share-box">
 					<span>分享到</span>
-					<!--<a title="微信">
-						<img src="img/weixin.png">
-					</a>
-					<a title="微博">
-						<img src="img/weibo.png">
-					</a>
-					<a title="QQ空间">
-						<img src="img/qqzone.png">
-					</a>-->
 					<div class="bdsharebuttonbox">
 						<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
 						<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
 						<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+						<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
 					</div>
 				</div>
 			</div>
@@ -39,59 +35,72 @@
 	<!--主办方曾经发布的活动等.... begin-->
 	<div class="tab-container">
 		<ul class="menu-list">
-			<li class="menu-item active">发布的活动</li>
-			<li class="menu-item">发布的众筹</li>
+			<li class="menu-item" ng-class="{'active':sponsorDetail.activePanel=='activity'}" ng-click="sponsorDetail.activePanel='activity'">发布的活动</li>
+			<li class="menu-item" ng-class="{'active':sponsorDetail.activePanel=='crowdFund'}" ng-click="sponsorDetail.activePanel='crowdFund'">发布的众筹</li>
 		</ul>
-		<ul class="data-list">
-			<!--1个曾经的活动 begin-->
-			<li class="data-item going" ng-repeat="item in [1,2,3]">
-				<div class="left-img"></div>
-				<div class="right-content">
-					<p class="title color-green">名称活动名称活动名称活动名称活动名称</p>
-					<p class="time">时间：09月12日　周一　8:00-20:30</p>
-					<p class="address">地点：广东省广州市天河区中山大道中35号美好居3座1105美好居3座1105</p>
-					<p class="tags">标签：运动 摄影</p>
-					<div class="li-sponsor-info">
-						<div class="div-img">
-							<img src="img/example-slide-1.jpg" />
-						</div>
-						<span>我是猪猪侠</span>
-						<div class="li-sponsor-info-right">
-							<i class="iconfont" title="收藏数">&#xe60f;</i>
-							<span>125</span>&nbsp;|&nbsp;
-							<i class="iconfont" title="参与数">&#xe612;</i>
-							<span>25</span>
-							<button type="button" class="button2 button2-34 padding-left-right-20">查看详情</button>
+		<!--活动 begin-->
+		<div ng-show="sponsorDetail.activePanel=='activity'">
+			<ul class="data-list">
+				<li class="data-item" ng-repeat="item in sponsorDetail.activityArray" ng-class="{'going':!sponsorDetail.setActivityStop(item.end_time),'stop':sponsorDetail.setActivityStop(item.end_time)}">
+					<div class="left-img" ng-style="{'background-image': 'url(' + item.image + '?imageslim)'}"></div>
+					<div class="right-content">
+						<p class="title color-green" title="{{item.name}}">{{item.name}}</p>
+						<p class="time">时间：{{item.begin_time | toAutoTime}} 至 {{item.end_time | toAutoTime}}</p>
+						<p class="address">地点：{{item.province}}省{{item.city}}市{{item.address}}</p>
+						<p class="tags">标签：{{item.tags}}</p>
+						<div class="li-sponsor-info">
+							<div class="div-img">
+								<img ng-src="{{sponsorDetail.sponsorInfo.head_image}}" />
+							</div>
+							<span>{{sponsorDetail.sponsorInfo.identify_bs_name}}</span>
+							<div class="li-sponsor-info-right">
+								<i class="iconfont" title="收藏数">&#xe60f;</i>
+								<span>{{item.focus_count}}</span>&nbsp;|&nbsp;
+								<i class="iconfont" title="参与数">&#xe612;</i>
+								<span>{{item.support_count}}</span>
+								<button type="button" class="button2 button2-34 padding-left-right-20" ui-sref="activityDetail({'activityId':item.deal_id})">查看详情</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-			<!--1个曾经的活动 end-->
-			<li class="data-item stop" ng-repeat="item in [4,5,6]">
-				<div class="left-img"></div>
-				<div class="right-content">
-					<p class="title color-green">名称活动名称活动名称活动名称活动名称</p>
-					<p class="time">时间：09月12日　周一　8:00-20:30</p>
-					<p class="address">地点：广东省广州市天河区中山大道中35号美好居3座1105美好居3座1105</p>
-					<p class="tags">标签：运动 摄影</p>
-					<div class="li-sponsor-info">
-						<div class="div-img">
-							<img src="img/example-slide-1.jpg" />
-						</div>
-						<span>我是猪猪侠</span>
-						<div class="li-sponsor-info-right">
-							<i class="iconfont" title="收藏数">&#xe60f;</i>
-							<span>125</span>&nbsp;|&nbsp;
-							<i class="iconfont" title="参与数">&#xe612;</i>
-							<span>25</span>
-							<button type="button" class="button2 button2-34 padding-left-right-20">查看详情</button>
+				</li>
+			</ul>
+			<div style="padding-top: 20px;" class="ng-hide" ng-show="sponsorDetail.activityArray.length!='0'">
+				<page-bar page-change="sponsorDetail.pageParams1.pageChange()" page-count="sponsorDetail.pageParams1.page_count" current="sponsorDetail.pageParams1.current" show-page="{{sponsorDetail.pageParams1.showPage}}"></page-bar>
+			</div>
+		</div>
+		<!--活动 end-->
+
+		<!--众筹 begin-->
+		<div ng-show="sponsorDetail.activePanel=='crowdFund'">
+			<ul class="data-list">
+				<li class="data-item" ng-repeat="item in sponsorDetail.crowdFundArray" ng-class="{'going':!sponsorDetail.setActivityStop(item.end_time),'stop':sponsorDetail.setActivityStop(item.end_time)}">
+					<div class="left-img" ng-style="{'background-image': 'url(' + item.image + '?imageslim)'}"></div>
+					<div class="right-content">
+						<p class="title color-green" title="{{item.name}}">{{item.name}}</p>
+						<p class="time">时间： {{item.end_time | toAutoTime}}</p>
+						<p class="address">地点：{{item.province}}省{{item.city}}市{{item.address}}</p>
+						<p class="tags">标签：{{item.tags_match}}</p>
+						<div class="li-sponsor-info">
+							<div class="div-img">
+								<img ng-src="{{sponsorDetail.sponsorInfo.head_image}}" />
+							</div>
+							<span>{{sponsorDetail.sponsorInfo.identify_bs_name}}</span>
+							<div class="li-sponsor-info-right">
+								<i class="iconfont" title="收藏数">&#xe60f;</i>
+								<span>{{item.focus_count}}</span>&nbsp;|&nbsp;
+								<i class="iconfont" title="参与数">&#xe612;</i>
+								<span>{{item.support_count}}</span>
+								<button type="button" class="button2 button2-34 padding-left-right-20" ui-sref="crowdFundDetail({'crowdFundId':item.deal_id})">查看详情</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-		</ul>
-		<!--主办方曾经发布的活动等.... end-->
-		<div style="height: 20px;"></div>
-		<page-bar page-change="sponsorDetail.pageParams.pageChange()" page-count="sponsorDetail.pageParams.page_count" current="sponsorDetail.pageParams.current" show-page="{{sponsorDetail.pageParams.showPage}}"></page-bar>
+				</li>
+			</ul>
+			<!--主办方曾经发布的活动等.... end-->
+			<div style="padding-top: 20px;" class="ng-hide" ng-show="sponsorDetail.crowdFundArray.length!='0'">
+				<page-bar page-change="sponsorDetail.pageParams1.pageChange()" page-count="sponsorDetail.pageParams1.page_count" current="sponsorDetail.pageParams1.current" show-page="{{sponsorDetail.pageParams1.showPage}}"></page-bar>
+			</div>
+		</div>
+		<!--众筹 end-->
 	</div>
 </div>

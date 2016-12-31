@@ -64,9 +64,9 @@
 		<!--活动列表 begin-->
 		<div class="activity-list-panner">
 			<ul class="activity-list">
-				<li class="activity-item" ng-repeat="item in activityList.activityListArray" ui-sref="activityDetail({'activityId':item.deal_id})" background-lazy-load>
+				<li class="activity-item" ng-repeat="item in activityList.activityListArray track by item.deal_id" ui-sref="activityDetail({'activityId':item.deal_id})">
 					<div class="left-img">
-						<div class="background-cover background-lazy-load" lazy-load-src="{{item.image+'?imageslim'}}"></div>
+						<div class="background-cover" ng-style="{ 'background-image': 'url(' + item.image + '?imageslim)' }"></div>
 					</div>
 					<div class="right-content">
 						<h3 class="title">{{item.name}}</h3>
@@ -90,7 +90,7 @@
 			<button type="button" class="button width-100" ui-sref="addActivity"><i class="icon iconfont">&#xe662;</i> 发布活动</button>
 		</div>
 		<div style="margin-bottom: 20px;">
-			<button type="button" class="button width-100" ui-sref="sponsorList">主办方</button>
+			<button type="button" class="button width-100" ui-sref="sponsorList({'keyword':''})">主办方</button>
 		</div>
 		<div class="guanggao">
 			<!--<img src="./img/example-slide-4.jpg" />-->

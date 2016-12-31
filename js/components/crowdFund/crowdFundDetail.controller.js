@@ -6,8 +6,8 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/crowdFund.service.js', 'crowdFund.service'); //引入“众筹”接口 服务
-	app.import('/app/Tpl/web/js/service/comment.service.js', 'comment.service'); //引入“评论”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/crowdFund.service.min.js', 'crowdFund.service'); //引入“众筹”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/comment.service.min.js', 'comment.service'); //引入“评论”接口 服务
 	app.import('/app/Tpl/web/js/directive/pagebar.directive.js', 'pagebar.directive'); //分页插件
 	app.import('/app/Tpl/web/js/directive/imgUpload.directive.js', 'imgUpload.directive'); //图片上传插件
 

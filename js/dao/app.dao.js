@@ -173,6 +173,10 @@
 				getSponsorDetail: appConfig.newApiUrl + '?service=SponsorDetail.getSponsorDetail',
 				//关注主办方
 				getSponsorFocus: appConfig.newApiUrl + '?service=SponsorDetail.getSponsorFocus',
+				//判断用户是否关注了主办方
+				getUserFocusFlag: appConfig.newApiUrl + '?service=User.getUserFocusSponsor',
+				//主办方发布的活动、众筹
+				getSponsorDetailList: appConfig.newApiUrl + '?service=List.getSponsorDealList',
 			},
 			pay: {
 				//获取订单的付款链接

@@ -5,8 +5,9 @@
 			</div>
 			<div class="right-content">
 				<h3>{{activityDetail.activityInfo.name}}
-					<span class="button-text gray" ng-if="activityDetail.activityInfo.is_success=='1'">已结束</span>
-					<span class="button-text green" ng-if="activityDetail.activityInfo.is_success=='0'">进行中</span>
+					<span class="button-text gray" ng-if="activityDetail.activityInfo.is_success=='1' && activityDetail.activityInfo.is_effect=='1'">已结束</span>
+					<span class="button-text green" ng-if="activityDetail.activityInfo.is_success=='0' && activityDetail.activityInfo.is_effect=='1'">进行中</span>
+					<span class="button-text orange" ng-if="activityDetail.activityInfo.is_effect=='0'">审核中</span>
 				</h3>
 				<p><strong>时间：</strong><span>{{activityDetail.activityInfo.begin_time | toAutoTime }}&nbsp;&nbsp;至&nbsp;&nbsp;{{activityDetail.activityInfo.end_time | toAutoTime}}</span></p>
 				<p><strong>地点：</strong><span>{{activityDetail.activityInfo.province}}省{{activityDetail.activityInfo.city}}市{{activityDetail.activityInfo.address}}</span></p>

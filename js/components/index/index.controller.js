@@ -6,7 +6,7 @@
 (function() {
 	'use strict';
 
-	//app.import('/app/Tpl/web/js/service/index.service.js', 'index.service'); //引入“首页indexService”数据接口服务
+	//app.import('/app/Tpl/web/js/service/service_min/index.service.min.js', 'index.service'); //引入“首页indexService”数据接口服务
 
 	app.addController("indexController", indexController);
 	indexController.$inject = ['$rootScope', '$interval', '$window', '$scope'];

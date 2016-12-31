@@ -15,6 +15,8 @@
 		this.getSponsorList = getSponsorListFn; //主办方列表
 		this.getSponsorDetail = getSponsorDetailFn; //主办方详情
 		this.getSponsorFocus = getSponsorFocusFn; //主办方详情
+		this.getUserFocusFlag = getUserFocusFlagFn; //判断用户是否关注了主办方
+		this.getSponsorDetailList = getSponsorDetailListFn; //主办方发布的活动、众筹
 
 		//主办方列表
 		function getSponsorListFn(params) {
@@ -34,5 +36,16 @@
 			return appApiDao.postData(url, params);
 		}
 
+		//判断用户是否关注了主办方
+		function getUserFocusFlagFn(params) {
+			var url = appApiDao.url.sponsor.getUserFocusFlag;
+			return appApiDao.postData(url, params);
+		}
+
+		//主办方发布的活动、众筹
+		function getSponsorDetailListFn(params) {
+			var url = appApiDao.url.sponsor.getSponsorDetailList;
+			return appApiDao.getData(url, params);
+		}
 	}
 })();

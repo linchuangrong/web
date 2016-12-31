@@ -6,7 +6,7 @@
 (function() {
 	'use strict';
 
-	app.import('/app/Tpl/web/js/service/examine.service.js', 'examine.service'); //引入“评审评估”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/examine.service.min.js', 'examine.service'); //引入“评审评估”接口 服务
 
 	app.addController("finalScoreController", finalScoreController);
 	finalScoreController.$inject = ['$rootScope', '$window', 'examineService', '$stateParams', '$state', '$timeout'];

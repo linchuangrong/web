@@ -1,13 +1,13 @@
 /**
  * 作者：林创荣
  * 功能：添加评审
- * 时间：2016年12月5日
+ * 时间：2016年12月5日.
  */
 (function() {
 	'use strict';
 
 	app.import('/app/Tpl/web/js/directive/contenteditable.directive.js', 'contenteditable.directive'); //富文本编辑器，要求先引入wangEditor.min.js
-	app.import('/app/Tpl/web/js/service/examine.service.js', 'examine.service'); //引入“评审评估”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/examine.service.min.js', 'examine.service'); //引入“评审评估”接口 服务
 
 	app.addController("addExamineController", addExamineController);
 	addExamineController.$inject = ['$rootScope', '$window', '$timeout', 'examineService', '$stateParams', '$state'];
@@ -24,17 +24,17 @@
 			vm.title = "设计评审表单";
 		} else if ($stateParams.type == '1') {
 			vm.title = "设计评估表单";
-		}else{
+		} else {
 			vm.title = "设计表单";
 		}
 
-		vm.projectNameArray = [""];//项目名称数组，默认为""
+		vm.projectNameArray = [""]; //项目名称数组，默认为""
 
 		vm.submitForm = {
-			"score_title": "2015年度最佳组织评测", //评分标题
-			"project_number": "142-4487GRF698", //项目编号
-			"review_title": "2015年度最佳组织评测指引", //指引标题
-			"review_content": "2015年度最佳组织评测指引2015年度最佳组织评测指引2015年度最佳组织评测指引2015年度最佳组织评测指引", //指引内容
+			"score_title": "", //评分标题
+			"project_number": "", //项目编号
+			"review_title": "", //指引标题
+			"review_content": "", //指引内容
 		}
 
 		vm.flag = {
@@ -97,7 +97,8 @@
 
 		vm.keycode13 = keycode13Fn; //回车键
 
-		vm.submitReviewForm = submitReviewFormFn; //提交表单
+		vm.showAlertDialog = showAlertDialogFn; //提交：显示弹框
+		vm.alertDialogConfirm = alertDialogConfirmFn; //提交：确定
 
 		/*****************函数 end****************/
 
@@ -473,18 +474,42 @@
 		//
 		//
 		//
+		//----------------------------显示弹框------------------------------------------
+		//
+		//
+		//
+		//
+		//
+		function showAlertDialogFn() {
+			//对话框内容
+			var alertDialogObj = {
+				alertDialogTitle: "确定提交吗？提交之后不可修改，请谨慎操作！",
+				alertDialogConfirm: vm.alertDialogConfirm,
+				alertDialogCancel: null, //无值，则使用默认的取消事件
+				alertDialogCancelButton: true //显示取消按钮
+			}
+			$rootScope.$broadcast("public.showAlertDialog", alertDialogObj);
+		}
+		//
+		//
+		//
+		//
+		//
 		//----------------------------提交------------------------------------------
 		//
 		//
 		//
 		//
 		//
-		function submitReviewFormFn() {
+		function alertDialogConfirmFn() {
 
 			//防止重复点击
 			if (!vm.flag.submitReviewFormFlag) {
 				return false;
 			}
+			
+			//隐藏掉所有的弹框
+			$rootScope.$broadcast("public.hide", []);
 
 			//检查项目名称
 			for (var i = 0; i < vm.projectNameArray.length; i++) {
@@ -584,13 +609,13 @@
 					} else {
 						if (data.data.code == 20000) {
 							window.showAutoDialog(data.data.msg);
-							
-							if($stateParams.type=="0"){
+
+							if ($stateParams.type == "0") {
 								$state.go("personal.myReview");
-							}else{
+							} else {
 								$state.go("personal.myEstimate");
 							}
-							
+
 						} else {
 							window.showAutoDialog(data.data.msg);
 						}

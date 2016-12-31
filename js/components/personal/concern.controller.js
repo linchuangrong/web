@@ -7,7 +7,7 @@
 	'use strict';
 
 	app.import('/app/Tpl/web/js/directive/pagebar.directive.js', 'pagebar.directive'); //分页插件
-	app.import('/app/Tpl/web/js/service/sponsor.service.js', 'sponsor.service'); //引入“主办方”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/sponsor.service.min.js', 'sponsor.service'); //引入“主办方”接口 服务
 
 	app.addController("concernController", concernController);
 	concernController.$inject = ['$rootScope', 'personalService', '$window', 'sponsorService', '$state'];

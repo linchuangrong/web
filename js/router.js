@@ -8,7 +8,7 @@
 	"use strict";
 	//引入ui-router
 	app.import('/app/Tpl/web/js/libs/angular/angular-ui-router.min.js', 'ui.router');
-	app.import('/app/Tpl/web/js/service/loadFile.service.js', 'load.file');
+	app.import('/app/Tpl/web/js/service/service_min/loadFile.service.min.js', 'load.file');
 
 	app.config(webRouter);
 	webRouter.$inject = ['$httpProvider', '$stateProvider', '$urlRouterProvider', '$controllerProvider', 'appConfig', 'loadFileProvider', 'httpInterceptorProvider'];
@@ -88,7 +88,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/index/index.tpl.html",
 				controller: 'indexController as index',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/index/index.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/index.controller.min.js")
 				}
 			}
 		}
@@ -116,7 +116,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/login/login.tpl.html",
 				controller: 'loginController as login',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/login/login.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/login.controller.min.js")
 				}
 			}
 		}
@@ -128,7 +128,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/findpassword/findpassword.tpl.html",
 				controller: 'findpasswordController as findpassword',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/findpassword/findpassword.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/findpassword.controller.min.js")
 				}
 			}
 		}
@@ -140,7 +140,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/activity/activityList.tpl.html",
 				controller: 'activityListController as activityList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/activity/activityList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/activityList.controller.min.js")
 				}
 			}
 		}
@@ -152,7 +152,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/activity/activityDetail.tpl.html",
 				controller: 'activityDetailController as activityDetail',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/activity/activityDetail.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/activityDetail.controller.min.js")
 				}
 			}
 		}
@@ -164,7 +164,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/personal.tpl.html",
 				controller: 'personalController as personal',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/personal.controller.js"),
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/personal.controller.min.js"),
 					//获取个人基本信息，然后才加载页面
 					getUserIndex: function(appApiDao, $q, $rootScope, $state) {
 						var defer = $q.defer();
@@ -199,7 +199,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/personalHome.tpl.html",
 				controller: 'personalHomeController as personalHome',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/personalHome.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/personalHome.controller.min.js")
 				}
 			}
 		}
@@ -211,7 +211,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/myActivity.tpl.html",
 				controller: 'myActivityController as myActivity',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/myActivity.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/myActivity.controller.min.js")
 				}
 			}
 		}
@@ -223,7 +223,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/myCrowdFund.tpl.html",
 				controller: 'myCrowdFundController as myCrowdFund',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/myCrowdFund.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/myCrowdFund.controller.min.js")
 				}
 			}
 		}
@@ -235,7 +235,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/myReview.tpl.html",
 				controller: 'myReviewController as myReview',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/myReview.controller.js"),
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/myReview.controller.min.js"),
 					loadZeroClipboard: loadFileProvider.$get().load(appConfig.baseUrl + "js/libs/ZeroClipboard/ZeroClipboard.min.js"),
 				}
 			}
@@ -248,7 +248,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/myEstimate.tpl.html",
 				controller: 'myEstimateController as myEstimate',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/myEstimate.controller.js"),
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/myEstimate.controller.min.js"),
 					loadZeroClipboard: loadFileProvider.$get().load(appConfig.baseUrl + "js/libs/ZeroClipboard/ZeroClipboard.min.js"),
 				}
 			}
@@ -261,7 +261,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/joinActivity.tpl.html",
 				controller: 'joinActivityController as joinActivity',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/joinActivity.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/joinActivity.controller.min.js")
 				}
 			}
 		}
@@ -273,7 +273,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/joinCrowdFund.tpl.html",
 				controller: 'joinCrowdFundController as joinCrowdFund',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/joinCrowdFund.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/joinCrowdFund.controller.min.js")
 				}
 			}
 		}
@@ -285,7 +285,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/collection.tpl.html",
 				controller: 'collectionController as collection',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/collection.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/collection.controller.min.js")
 				}
 			}
 		}
@@ -297,7 +297,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/concern.tpl.html",
 				controller: 'concernController as concern',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/concern.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/concern.controller.min.js")
 				}
 			}
 		}
@@ -309,7 +309,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/dataSet.tpl.html",
 				controller: 'dataSetController as dataSet',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/dataSet.controller.js"),
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/dataSet.controller.min.js"),
 				}
 			}
 		}
@@ -321,7 +321,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/safe.tpl.html",
 				controller: 'safeController as safe',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/safe.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/safe.controller.min.js")
 				}
 			}
 		}
@@ -333,7 +333,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/sponsor.tpl.html",
 				controller: 'sponsorController as sponsor',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/sponsor.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/sponsor.controller.min.js")
 				}
 			}
 		}
@@ -345,7 +345,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/invoice.tpl.html",
 				controller: 'invoiceController as invoice',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/invoice.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/invoice.controller.min.js")
 				}
 			}
 		}
@@ -357,7 +357,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/moneyAccount.tpl.html",
 				controller: 'moneyAccountController as moneyAccount',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/moneyAccount.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/moneyAccount.controller.min.js")
 				}
 			}
 		}
@@ -369,7 +369,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/addMoneyAccount.tpl.html",
 				controller: 'addMoneyAccountController as addMoneyAccount',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/addMoneyAccount.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addMoneyAccount.controller.min.js")
 				}
 			}
 		}
@@ -381,7 +381,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/addBank.tpl.html",
 				controller: 'addBankController as addBank',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/addBank.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addBank.controller.min.js")
 				}
 			}
 		}
@@ -393,7 +393,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/myBankCard.tpl.html",
 				controller: 'myBankCardController as myBankCard',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/myBankCard.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/myBankCard.controller.min.js")
 				}
 			}
 		}
@@ -405,7 +405,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/personal/address.tpl.html",
 				controller: 'addressController as address',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/personal/address.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/address.controller.min.js")
 				}
 			}
 		}
@@ -417,7 +417,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/crowdFund/addCrowdFund.tpl.html",
 				controller: 'addCrowdFundController as addCrowdFund',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/crowdFund/addCrowdFund.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addCrowdFund.controller.min.js")
 				}
 			}
 		}
@@ -429,7 +429,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/crowdFund/updateCrowdFund.tpl.html",
 				controller: 'updateCrowdFundController as updateCrowdFund',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/crowdFund/updateCrowdFund.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/updateCrowdFund.controller.min.js")
 				}
 			}
 		}
@@ -441,7 +441,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/activity/addActivity.tpl.html",
 				controller: 'addActivityController as addActivity',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/activity/addActivity.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addActivity.controller.min.js")
 				}
 			}
 		}
@@ -453,7 +453,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/activity/updateActivity.tpl.html",
 				controller: 'updateActivityController as updateActivity',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/activity/updateActivity.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/updateActivity.controller.min.js")
 				}
 			}
 		}
@@ -465,7 +465,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/activity/peopleList.tpl.html",
 				controller: 'peopleListController as peopleList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/activity/peopleList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/peopleList.controller.min.js")
 				}
 			}
 		}
@@ -477,7 +477,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/crowdFund/crowdFund.tpl.html",
 				controller: 'crowdFundController as crowdFund',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/crowdFund/crowdFund.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/crowdFund.controller.min.js")
 				}
 			}
 		}
@@ -485,11 +485,11 @@
 		//众筹中心
 		function crowdFundList() {
 			return {
-				url: '/crowdFundList',
+				url: '/crowdFundList/:keyword',
 				templateUrl: appConfig.baseUrl + "js/components/crowdFund/crowdFundList.tpl.html",
 				controller: 'crowdFundListController as crowdFundList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/crowdFund/crowdFundList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/crowdFundList.controller.min.js")
 				}
 			}
 		}
@@ -501,7 +501,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/crowdFund/crowdFundDetail.tpl.html",
 				controller: 'crowdFundDetailController as crowdFundDetail',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/crowdFund/crowdFundDetail.controller.js"),
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/crowdFundDetail.controller.min.js"),
 				}
 			}
 		}
@@ -513,7 +513,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/crowdFund/crowdFundOrder.tpl.html",
 				controller: 'crowdFundOrderController as crowdFundOrder',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/crowdFund/crowdFundOrder.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/crowdFundOrder.controller.min.js")
 				}
 			}
 		}
@@ -525,7 +525,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/addForm/addForm.tpl.html",
 				controller: 'addFormController as addForm',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/addForm/addForm.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addForm.controller.min.js")
 				}
 			}
 		}
@@ -537,7 +537,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/selectExamine.tpl.html",
 				controller: 'selectExamineController as selectExamine',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/selectExamine.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/selectExamine.controller.min.js")
 				}
 			}
 		}
@@ -549,7 +549,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/addExamine3.tpl.html",
 				controller: 'addExamineController as addExamine',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/addExamine.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addExamine.controller.min.js")
 				}
 			}
 		}
@@ -561,7 +561,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/addExamine2.tpl.html",
 				controller: 'addExamineController as addExamine',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/addExamine.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addExamine.controller.min.js")
 				}
 			}
 		}
@@ -573,7 +573,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/addExamine1.tpl.html",
 				controller: 'addExamineController as addExamine',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/addExamine.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/addExamine.controller.min.js")
 				}
 			}
 		}
@@ -585,7 +585,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/examineList.tpl.html",
 				controller: 'examineListController as examineList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/examineList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/examineList.controller.min.js")
 				}
 			}
 		}
@@ -597,7 +597,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/examineDetail.tpl.html",
 				controller: 'examineDetailController as examineDetail',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/examineDetail.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/examineDetail.controller.min.js")
 				}
 			}
 		}
@@ -609,7 +609,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/examineResult.tpl.html",
 				controller: 'examineResultController as examineResult',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/examineResult.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/examineResult.controller.min.js")
 				}
 			}
 		}
@@ -621,7 +621,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/finalScore.tpl.html",
 				controller: 'finalScoreController as finalScore',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/finalScore.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/finalScore.controller.min.js")
 				}
 			}
 		}
@@ -633,7 +633,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/editReport.tpl.html",
 				controller: 'editReportController as editReport',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/editReport.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/editReport.controller.min.js")
 				}
 			}
 		}
@@ -641,11 +641,11 @@
 		//主办方列表
 		function sponsorList() {
 			return {
-				url: '/sponsorList',
+				url: '/sponsorList/:keyword',
 				templateUrl: appConfig.baseUrl + "js/components/sponsor/sponsorList.tpl.html",
 				controller: 'sponsorListController as sponsorList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/sponsor/sponsorList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/sponsorList.controller.min.js")
 				}
 			}
 		}
@@ -653,11 +653,11 @@
 		//主办方详情
 		function sponsorDetail() {
 			return {
-				url: '/sponsorDetail/:id',
+				url: '/sponsorDetail/:sponsor_id',
 				templateUrl: appConfig.baseUrl + "js/components/sponsor/sponsorDetail.tpl.html",
 				controller: 'sponsorDetailController as sponsorDetail',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/sponsor/sponsorDetail.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/sponsorDetail.controller.min.js")
 				}
 			}
 		}
@@ -669,7 +669,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/payMoney/payMoney.tpl.html",
 				controller: 'payMoneyController as payMoney',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/payMoney/payMoney.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/payMoney.controller.min.js")
 				}
 			}
 		}
@@ -681,7 +681,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/order/appointment.tpl.html",
 				controller: 'appointmentController as appointment',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/order/appointment.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/appointment.controller.min.js")
 				}
 			}
 		}
@@ -693,7 +693,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/order/orderReview.tpl.html",
 				controller: 'orderReviewController as orderReview',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/order/orderReview.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/orderReview.controller.min.js")
 				}
 			}
 		}
@@ -705,7 +705,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/order/orderEstimate.tpl.html",
 				controller: 'orderEstimateController as orderEstimate',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/order/orderEstimate.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/orderEstimate.controller.min.js")
 				}
 			}
 		}
@@ -717,7 +717,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/companyList/companyList.tpl.html",
 				controller: 'companyListController as companyList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/companyList/companyList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/companyList.controller.min.js")
 				}
 			}
 		}
@@ -729,7 +729,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/companyList/joinList.tpl.html",
 				controller: 'joinListController as joinList',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/companyList/joinList.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/joinList.controller.min.js")
 				}
 			}
 		}
@@ -741,7 +741,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/examine/examineHome.tpl.html",
 				controller: 'examineHomeController as examineHome',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/examine/examineHome.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/examineHome.controller.min.js")
 				}
 			}
 		}
@@ -753,7 +753,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/software/software.tpl.html",
 				controller: 'softwareController as software',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/software/software.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/software.controller.min.js")
 				}
 			}
 		}
@@ -765,7 +765,7 @@
 				templateUrl: appConfig.baseUrl + "js/components/order/order.tpl.html",
 				controller: 'orderController as order',
 				resolve: {
-					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/components/order/order.controller.js")
+					loadMyCtrl: loadFileProvider.$get().load(appConfig.baseUrl + "js/js_min/order.controller.min.js")
 				}
 			}
 		}
@@ -811,6 +811,10 @@
 			$rootScope.currentRouter = toState.name; //当前路由名
 			$rootScope.fromState = fromState; //上一个路由名
 			$rootScope.fromParams = fromParams; //上一个路由参数
+		});
+		
+		$rootScope.$on('$destroy', function() {
+			console.log("12");
 		});
 	}
 

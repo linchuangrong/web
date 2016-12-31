@@ -7,7 +7,7 @@
 	'use strict';
 
 	app.import('/app/Tpl/web/js/directive/mouseover.directive.js', 'ngMouseOver.directive'); //鼠标经过评分事件
-	app.import('/app/Tpl/web/js/service/examine.service.js', 'examine.service'); //引入“评审评估”接口 服务
+	app.import('/app/Tpl/web/js/service/service_min/examine.service.min.js', 'examine.service'); //引入“评审评估”接口 服务
 
 	app.addController("examineDetailController", examineDetailController);
 	examineDetailController.$inject = ['$rootScope', '$window', '$stateParams', 'examineService', '$state'];

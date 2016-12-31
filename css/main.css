@@ -2624,7 +2624,6 @@ div.page-bar .page-count-box {
   height: 80px;
 }
 #activityDetail .right-panner .download-app-box .app-panner .app-desc ul {
-  width: ;
   height: 30px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -6491,6 +6490,13 @@ div.page-bar .page-count-box {
   color: #FFFFFF;
   background-color: rgba(41, 181, 59, 0.98);
 }
+#sponsorList .sponsorList-panner .select-panner .select-panner-item ul.select-list .select-item a.active .up {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  top: 0;
+}
 #sponsorList .sponsorList-panner .select-panner .select-panner-item ul.select-list .select-item .jiantou {
   font-size: 14px;
   top: 1px;
@@ -6532,17 +6538,17 @@ div.page-bar .page-count-box {
   float: left;
   width: 192px;
   height: 192px;
-  background-color: #00625A;
   margin-right: 20px;
   margin-bottom: 20px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
-#sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul li img {
+#sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul li .img {
   width: 100%;
   height: 100%;
   display: block;
+  background-image: url('https://image.eitty.cn/head_image.jpg');
 }
 #sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul li .sponsor-message {
   position: relative;
@@ -6552,7 +6558,7 @@ div.page-bar .page-count-box {
   -ms-transform: translate(0px, 0px);
   transform: translate(0px, 0px);
   background: rgba(0, 0, 0, 0.6);
-  height: 90px;
+  height: 70px;
   color: #FFFFFF;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -6560,18 +6566,21 @@ div.page-bar .page-count-box {
   transition: all 0.3s;
 }
 #sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul li .sponsor-message p {
-  line-height: 40px;
+  line-height: 30px;
   font-size: 14px;
-  height: 40px;
+  height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+#sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul li .sponsor-message div {
+  line-height: 30px;
+}
 #sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul li:hover .sponsor-message {
-  -webkit-transform: translate(0px, -90px);
-  -moz-transform: translate(0px, -90px);
-  -ms-transform: translate(0px, -90px);
-  transform: translate(0px, -90px);
+  -webkit-transform: translate(0px, -70px);
+  -moz-transform: translate(0px, -70px);
+  -ms-transform: translate(0px, -70px);
+  transform: translate(0px, -70px);
 }
 #sponsorList .sponsorList-panner .sponsorList-list-panner .sponsorList-ul:after {
   clear: both;
@@ -6597,7 +6606,7 @@ div.page-bar .page-count-box {
   float: left;
   width: 260px;
   height: 260px;
-  background-image: url("../img/example-slide-4.jpg");
+  background-image: url("../img/auto.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -6713,6 +6722,11 @@ div.page-bar .page-count-box {
   margin-left: 200px;
   color: #666666;
   font-size: 14px;
+}
+#sponsorDetail ul.data-list li.data-item .right-content > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #sponsorDetail ul.data-list li.data-item .right-content .title {
   line-height: 40px;
